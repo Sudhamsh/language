@@ -1,4 +1,4 @@
-const FLASHCARD_DATA = {
+window.FLASHCARD_DATA = {
   "levels": [
     {
       "id": 1,

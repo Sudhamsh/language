@@ -1,0 +1,255 @@
+// Spanish Flashcard Data
+window.FLASHCARD_DATA = {
+    levels: [
+        {
+            id: 1,
+            name: "Level 1 - Basics",
+            description: "Essential Spanish vocabulary for beginners",
+            flashcards: [
+                // Greetings (1-10)
+                { id: 1, spanish: "Hola", romanization: "OH-lah", english: "Hello", category: "Greetings" },
+                { id: 2, spanish: "Adiós", romanization: "ah-dee-OHS", english: "Goodbye", category: "Greetings" },
+                { id: 3, spanish: "Buenos días", romanization: "BWEH-nos DEE-as", english: "Good morning", category: "Greetings" },
+                { id: 4, spanish: "Buenas tardes", romanization: "BWEH-nas TAR-des", english: "Good afternoon", category: "Greetings" },
+                { id: 5, spanish: "Buenas noches", romanization: "BWEH-nas NO-ches", english: "Good evening/night", category: "Greetings" },
+                { id: 6, spanish: "Por favor", romanization: "por fah-VOR", english: "Please", category: "Greetings" },
+                { id: 7, spanish: "Gracias", romanization: "GRAH-see-as", english: "Thank you", category: "Greetings" },
+                { id: 8, spanish: "De nada", romanization: "deh NAH-dah", english: "You're welcome", category: "Greetings" },
+                { id: 9, spanish: "Perdón", romanization: "pehr-DOHN", english: "Excuse me/Sorry", category: "Greetings" },
+                { id: 10, spanish: "Disculpe", romanization: "dees-KOOL-peh", english: "Excuse me (formal)", category: "Greetings" },
+
+                // Numbers 1-10 (11-20)
+                { id: 11, spanish: "Uno", romanization: "OO-no", english: "One", category: "Numbers" },
+                { id: 12, spanish: "Dos", romanization: "dohs", english: "Two", category: "Numbers" },
+                { id: 13, spanish: "Tres", romanization: "trehs", english: "Three", category: "Numbers" },
+                { id: 14, spanish: "Cuatro", romanization: "KWAH-tro", english: "Four", category: "Numbers" },
+                { id: 15, spanish: "Cinco", romanization: "SEEN-koh", english: "Five", category: "Numbers" },
+                { id: 16, spanish: "Seis", romanization: "says", english: "Six", category: "Numbers" },
+                { id: 17, spanish: "Siete", romanization: "see-EH-teh", english: "Seven", category: "Numbers" },
+                { id: 18, spanish: "Ocho", romanization: "OH-cho", english: "Eight", category: "Numbers" },
+                { id: 19, spanish: "Nueve", romanization: "NWEH-veh", english: "Nine", category: "Numbers" },
+                { id: 20, spanish: "Diez", romanization: "dee-EHS", english: "Ten", category: "Numbers" },
+
+                // Family (21-30)
+                { id: 21, spanish: "Familia", romanization: "fah-MEE-lee-ah", english: "Family", category: "Family" },
+                { id: 22, spanish: "Padre", romanization: "PAH-dreh", english: "Father", category: "Family" },
+                { id: 23, spanish: "Madre", romanization: "MAH-dreh", english: "Mother", category: "Family" },
+                { id: 24, spanish: "Hijo", romanization: "EE-ho", english: "Son", category: "Family" },
+                { id: 25, spanish: "Hija", romanization: "EE-hah", english: "Daughter", category: "Family" },
+                { id: 26, spanish: "Hermano", romanization: "ehr-MAH-no", english: "Brother", category: "Family" },
+                { id: 27, spanish: "Hermana", romanization: "ehr-MAH-nah", english: "Sister", category: "Family" },
+                { id: 28, spanish: "Abuelo", romanization: "ah-BWEH-lo", english: "Grandfather", category: "Family" },
+                { id: 29, spanish: "Abuela", romanization: "ah-BWEH-lah", english: "Grandmother", category: "Family" },
+                { id: 30, spanish: "Esposo/Esposa", romanization: "ehs-POH-so/ehs-POH-sah", english: "Husband/Wife", category: "Family" },
+
+                // Pronouns (31-36)
+                { id: 31, spanish: "Yo", romanization: "yoh", english: "I", category: "Pronouns" },
+                { id: 32, spanish: "Tú", romanization: "too", english: "You (informal)", category: "Pronouns" },
+                { id: 33, spanish: "Él", romanization: "el", english: "He", category: "Pronouns" },
+                { id: 34, spanish: "Ella", romanization: "EH-yah", english: "She", category: "Pronouns" },
+                { id: 35, spanish: "Nosotros", romanization: "noh-SOH-trohs", english: "We", category: "Pronouns" },
+                { id: 36, spanish: "Ellos/Ellas", romanization: "EH-yohs/EH-yas", english: "They", category: "Pronouns" },
+
+                // Common Verbs (37-50)
+                { id: 37, spanish: "Ser/Estar", romanization: "sehr/ehs-TAR", english: "To be", category: "Verbs" },
+                { id: 38, spanish: "Tener", romanization: "teh-NEHR", english: "To have", category: "Verbs" },
+                { id: 39, spanish: "Hacer", romanization: "ah-SEHR", english: "To do/make", category: "Verbs" },
+                { id: 40, spanish: "Ir", romanization: "eer", english: "To go", category: "Verbs" },
+                { id: 41, spanish: "Venir", romanization: "veh-NEER", english: "To come", category: "Verbs" },
+                { id: 42, spanish: "Hablar", romanization: "ah-BLAR", english: "To speak", category: "Verbs" },
+                { id: 43, spanish: "Comer", romanization: "koh-MEHR", english: "To eat", category: "Verbs" },
+                { id: 44, spanish: "Beber", romanization: "beh-BEHR", english: "To drink", category: "Verbs" },
+                { id: 45, spanish: "Ver", romanization: "vehr", english: "To see", category: "Verbs" },
+                { id: 46, spanish: "Dar", romanization: "dar", english: "To give", category: "Verbs" },
+                { id: 47, spanish: "Saber", romanization: "sah-BEHR", english: "To know (facts)", category: "Verbs" },
+                { id: 48, spanish: "Poder", romanization: "poh-DEHR", english: "To be able to/can", category: "Verbs" },
+                { id: 49, spanish: "Querer", romanization: "keh-REHR", english: "To want", category: "Verbs" },
+                { id: 50, spanish: "Decir", romanization: "deh-SEER", english: "To say/tell", category: "Verbs" },
+
+                // Colors (51-60)
+                { id: 51, spanish: "Rojo", romanization: "ROH-ho", english: "Red", category: "Colors" },
+                { id: 52, spanish: "Azul", romanization: "ah-SOOL", english: "Blue", category: "Colors" },
+                { id: 53, spanish: "Verde", romanization: "VEHR-deh", english: "Green", category: "Colors" },
+                { id: 54, spanish: "Amarillo", romanization: "ah-mah-REE-yo", english: "Yellow", category: "Colors" },
+                { id: 55, spanish: "Negro", romanization: "NEH-gro", english: "Black", category: "Colors" },
+                { id: 56, spanish: "Blanco", romanization: "BLAN-ko", english: "White", category: "Colors" },
+                { id: 57, spanish: "Naranja", romanization: "nah-RAHN-hah", english: "Orange", category: "Colors" },
+                { id: 58, spanish: "Morado", romanization: "moh-RAH-do", english: "Purple", category: "Colors" },
+                { id: 59, spanish: "Marrón", romanization: "mah-RONE", english: "Brown", category: "Colors" },
+                { id: 60, spanish: "Gris", romanization: "grees", english: "Gray", category: "Colors" },
+
+                // Common Words (61-75)
+                { id: 61, spanish: "Sí", romanization: "see", english: "Yes", category: "Common Words" },
+                { id: 62, spanish: "No", romanization: "no", english: "No", category: "Common Words" },
+                { id: 63, spanish: "Bien", romanization: "bee-EHN", english: "Good/Well", category: "Common Words" },
+                { id: 64, spanish: "Mal", romanization: "mahl", english: "Bad", category: "Common Words" },
+                { id: 65, spanish: "Mucho", romanization: "MOO-cho", english: "Much/A lot", category: "Common Words" },
+                { id: 66, spanish: "Poco", romanization: "POH-ko", english: "Little/Few", category: "Common Words" },
+                { id: 67, spanish: "Todo", romanization: "TOH-do", english: "All/Everything", category: "Common Words" },
+                { id: 68, spanish: "Nada", romanization: "NAH-dah", english: "Nothing", category: "Common Words" },
+                { id: 69, spanish: "Algo", romanization: "AHL-go", english: "Something", category: "Common Words" },
+                { id: 70, spanish: "Aquí", romanization: "ah-KEE", english: "Here", category: "Common Words" },
+                { id: 71, spanish: "Allí", romanization: "ah-YEE", english: "There", category: "Common Words" },
+                { id: 72, spanish: "Ahora", romanization: "ah-OH-rah", english: "Now", category: "Common Words" },
+                { id: 73, spanish: "Después", romanization: "dehs-PWES", english: "After/Later", category: "Common Words" },
+                { id: 74, spanish: "Antes", romanization: "AHN-tes", english: "Before", category: "Common Words" },
+                { id: 75, spanish: "Siempre", romanization: "see-EHM-preh", english: "Always", category: "Common Words" },
+
+                // Questions (76-82)
+                { id: 76, spanish: "¿Qué?", romanization: "keh", english: "What?", category: "Questions" },
+                { id: 77, spanish: "¿Quién?", romanization: "kee-EHN", english: "Who?", category: "Questions" },
+                { id: 78, spanish: "¿Dónde?", romanization: "DOHN-deh", english: "Where?", category: "Questions" },
+                { id: 79, spanish: "¿Cuándo?", romanization: "KWAHN-do", english: "When?", category: "Questions" },
+                { id: 80, spanish: "¿Por qué?", romanization: "por KEH", english: "Why?", category: "Questions" },
+                { id: 81, spanish: "¿Cómo?", romanization: "KOH-mo", english: "How?", category: "Questions" },
+                { id: 82, spanish: "¿Cuánto?", romanization: "KWAHN-to", english: "How much?", category: "Questions" },
+
+                // Adjectives (83-92)
+                { id: 83, spanish: "Grande", romanization: "GRAHN-deh", english: "Big/Large", category: "Adjectives" },
+                { id: 84, spanish: "Pequeño", romanization: "peh-KEH-nyo", english: "Small", category: "Adjectives" },
+                { id: 85, spanish: "Nuevo", romanization: "NWEH-vo", english: "New", category: "Adjectives" },
+                { id: 86, spanish: "Viejo", romanization: "vee-EH-ho", english: "Old", category: "Adjectives" },
+                { id: 87, spanish: "Bueno", romanization: "BWEH-no", english: "Good", category: "Adjectives" },
+                { id: 88, spanish: "Malo", romanization: "MAH-lo", english: "Bad", category: "Adjectives" },
+                { id: 89, spanish: "Bonito", romanization: "boh-NEE-to", english: "Pretty/Beautiful", category: "Adjectives" },
+                { id: 90, spanish: "Feo", romanization: "FEH-o", english: "Ugly", category: "Adjectives" },
+                { id: 91, spanish: "Feliz", romanization: "feh-LEES", english: "Happy", category: "Adjectives" },
+                { id: 92, spanish: "Triste", romanization: "TREES-teh", english: "Sad", category: "Adjectives" },
+
+                // Time & Days (93-100)
+                { id: 93, spanish: "Hoy", romanization: "oy", english: "Today", category: "Time" },
+                { id: 94, spanish: "Mañana", romanization: "mah-NYAH-nah", english: "Tomorrow", category: "Time" },
+                { id: 95, spanish: "Ayer", romanization: "ah-YEHR", english: "Yesterday", category: "Time" },
+                { id: 96, spanish: "Día", romanization: "DEE-ah", english: "Day", category: "Time" },
+                { id: 97, spanish: "Noche", romanization: "NOH-cheh", english: "Night", category: "Time" },
+                { id: 98, spanish: "Hora", romanization: "OH-rah", english: "Hour/Time", category: "Time" },
+                { id: 99, spanish: "Semana", romanization: "seh-MAH-nah", english: "Week", category: "Time" },
+                { id: 100, spanish: "Año", romanization: "AH-nyo", english: "Year", category: "Time" }
+            ]
+        },
+        {
+            id: 2,
+            name: "Level 2 - Intermediate",
+            description: "Intermediate Spanish vocabulary",
+            flashcards: [
+                // Numbers 11-20, larger numbers (101-115)
+                { id: 101, spanish: "Once", romanization: "OHN-seh", english: "Eleven", category: "Numbers" },
+                { id: 102, spanish: "Doce", romanization: "DOH-seh", english: "Twelve", category: "Numbers" },
+                { id: 103, spanish: "Trece", romanization: "TREH-seh", english: "Thirteen", category: "Numbers" },
+                { id: 104, spanish: "Catorce", romanization: "kah-TOR-seh", english: "Fourteen", category: "Numbers" },
+                { id: 105, spanish: "Quince", romanization: "KEEN-seh", english: "Fifteen", category: "Numbers" },
+                { id: 106, spanish: "Veinte", romanization: "VAYN-teh", english: "Twenty", category: "Numbers" },
+                { id: 107, spanish: "Treinta", romanization: "TRAYN-tah", english: "Thirty", category: "Numbers" },
+                { id: 108, spanish: "Cuarenta", romanization: "kwah-REHN-tah", english: "Forty", category: "Numbers" },
+                { id: 109, spanish: "Cincuenta", romanization: "seen-KWEHN-tah", english: "Fifty", category: "Numbers" },
+                { id: 110, spanish: "Cien", romanization: "see-EHN", english: "One hundred", category: "Numbers" },
+                { id: 111, spanish: "Mil", romanization: "meel", english: "One thousand", category: "Numbers" },
+                { id: 112, spanish: "Primero", romanization: "pree-MEH-ro", english: "First", category: "Numbers" },
+                { id: 113, spanish: "Segundo", romanization: "seh-GOON-do", english: "Second", category: "Numbers" },
+                { id: 114, spanish: "Tercero", romanization: "tehr-SEH-ro", english: "Third", category: "Numbers" },
+                { id: 115, spanish: "Último", romanization: "OOL-tee-mo", english: "Last", category: "Numbers" },
+
+                // Days of the Week (116-122)
+                { id: 116, spanish: "Lunes", romanization: "LOO-nes", english: "Monday", category: "Time" },
+                { id: 117, spanish: "Martes", romanization: "MAR-tes", english: "Tuesday", category: "Time" },
+                { id: 118, spanish: "Miércoles", romanization: "mee-EHR-koh-les", english: "Wednesday", category: "Time" },
+                { id: 119, spanish: "Jueves", romanization: "HWEH-ves", english: "Thursday", category: "Time" },
+                { id: 120, spanish: "Viernes", romanization: "vee-EHR-nes", english: "Friday", category: "Time" },
+                { id: 121, spanish: "Sábado", romanization: "SAH-bah-do", english: "Saturday", category: "Time" },
+                { id: 122, spanish: "Domingo", romanization: "doh-MEEN-go", english: "Sunday", category: "Time" },
+
+                // More Verbs (123-137)
+                { id: 123, spanish: "Vivir", romanization: "vee-VEER", english: "To live", category: "Verbs" },
+                { id: 124, spanish: "Trabajar", romanization: "trah-bah-HAR", english: "To work", category: "Verbs" },
+                { id: 125, spanish: "Estudiar", romanization: "ehs-too-dee-AR", english: "To study", category: "Verbs" },
+                { id: 126, spanish: "Leer", romanization: "leh-EHR", english: "To read", category: "Verbs" },
+                { id: 127, spanish: "Escribir", romanization: "ehs-kree-BEER", english: "To write", category: "Verbs" },
+                { id: 128, spanish: "Escuchar", romanization: "ehs-koo-CHAR", english: "To listen", category: "Verbs" },
+                { id: 129, spanish: "Mirar", romanization: "mee-RAR", english: "To look/watch", category: "Verbs" },
+                { id: 130, spanish: "Comprar", romanization: "kohm-PRAR", english: "To buy", category: "Verbs" },
+                { id: 131, spanish: "Vender", romanization: "vehn-DEHR", english: "To sell", category: "Verbs" },
+                { id: 132, spanish: "Abrir", romanization: "ah-BREER", english: "To open", category: "Verbs" },
+                { id: 133, spanish: "Cerrar", romanization: "seh-RRAR", english: "To close", category: "Verbs" },
+                { id: 134, spanish: "Dormir", romanization: "dor-MEER", english: "To sleep", category: "Verbs" },
+                { id: 135, spanish: "Despertar", romanization: "dehs-pehr-TAR", english: "To wake up", category: "Verbs" },
+                { id: 136, spanish: "Pensar", romanization: "pehn-SAR", english: "To think", category: "Verbs" },
+                { id: 137, spanish: "Sentir", romanization: "sehn-TEER", english: "To feel", category: "Verbs" },
+
+                // Food (138-152)
+                { id: 138, spanish: "Comida", romanization: "koh-MEE-dah", english: "Food", category: "Food" },
+                { id: 139, spanish: "Pan", romanization: "pahn", english: "Bread", category: "Food" },
+                { id: 140, spanish: "Agua", romanization: "AH-gwah", english: "Water", category: "Food" },
+                { id: 141, spanish: "Leche", romanization: "LEH-cheh", english: "Milk", category: "Food" },
+                { id: 142, spanish: "Café", romanization: "kah-FEH", english: "Coffee", category: "Food" },
+                { id: 143, spanish: "Té", romanization: "teh", english: "Tea", category: "Food" },
+                { id: 144, spanish: "Carne", romanization: "KAR-neh", english: "Meat", category: "Food" },
+                { id: 145, spanish: "Pollo", romanization: "POH-yo", english: "Chicken", category: "Food" },
+                { id: 146, spanish: "Pescado", romanization: "pehs-KAH-do", english: "Fish", category: "Food" },
+                { id: 147, spanish: "Arroz", romanization: "ah-RROS", english: "Rice", category: "Food" },
+                { id: 148, spanish: "Fruta", romanization: "FROO-tah", english: "Fruit", category: "Food" },
+                { id: 149, spanish: "Verdura", romanization: "vehr-DOO-rah", english: "Vegetable", category: "Food" },
+                { id: 150, spanish: "Huevo", romanization: "WEH-vo", english: "Egg", category: "Food" },
+                { id: 151, spanish: "Queso", romanization: "KEH-so", english: "Cheese", category: "Food" },
+                { id: 152, spanish: "Sal", romanization: "sahl", english: "Salt", category: "Food" },
+
+                // Clothing (153-162)
+                { id: 153, spanish: "Ropa", romanization: "ROH-pah", english: "Clothing", category: "Clothing" },
+                { id: 154, spanish: "Camisa", romanization: "kah-MEE-sah", english: "Shirt", category: "Clothing" },
+                { id: 155, spanish: "Pantalón", romanization: "pahn-tah-LOHN", english: "Pants", category: "Clothing" },
+                { id: 156, spanish: "Vestido", romanization: "vehs-TEE-do", english: "Dress", category: "Clothing" },
+                { id: 157, spanish: "Zapatos", romanization: "sah-PAH-tohs", english: "Shoes", category: "Clothing" },
+                { id: 158, spanish: "Sombrero", romanization: "sohm-BREH-ro", english: "Hat", category: "Clothing" },
+                { id: 159, spanish: "Falda", romanization: "FAHL-dah", english: "Skirt", category: "Clothing" },
+                { id: 160, spanish: "Chaqueta", romanization: "chah-KEH-tah", english: "Jacket", category: "Clothing" },
+                { id: 161, spanish: "Calcetines", romanization: "kahl-seh-TEE-nes", english: "Socks", category: "Clothing" },
+                { id: 162, spanish: "Abrigo", romanization: "ah-BREE-go", english: "Coat", category: "Clothing" },
+
+                // Body Parts (163-172)
+                { id: 163, spanish: "Cuerpo", romanization: "KWEHR-po", english: "Body", category: "Body Parts" },
+                { id: 164, spanish: "Cabeza", romanization: "kah-BEH-sah", english: "Head", category: "Body Parts" },
+                { id: 165, spanish: "Ojo", romanization: "OH-ho", english: "Eye", category: "Body Parts" },
+                { id: 166, spanish: "Oreja", romanization: "oh-REH-hah", english: "Ear", category: "Body Parts" },
+                { id: 167, spanish: "Nariz", romanization: "nah-REES", english: "Nose", category: "Body Parts" },
+                { id: 168, spanish: "Boca", romanization: "BOH-kah", english: "Mouth", category: "Body Parts" },
+                { id: 169, spanish: "Mano", romanization: "MAH-no", english: "Hand", category: "Body Parts" },
+                { id: 170, spanish: "Pie", romanization: "pee-EH", english: "Foot", category: "Body Parts" },
+                { id: 171, spanish: "Brazo", romanization: "BRAH-so", english: "Arm", category: "Body Parts" },
+                { id: 172, spanish: "Pierna", romanization: "pee-EHR-nah", english: "Leg", category: "Body Parts" },
+
+                // Places (173-182)
+                { id: 173, spanish: "Casa", romanization: "KAH-sah", english: "House", category: "Places" },
+                { id: 174, spanish: "Escuela", romanization: "ehs-KWEH-lah", english: "School", category: "Places" },
+                { id: 175, spanish: "Tienda", romanization: "tee-EHN-dah", english: "Store", category: "Places" },
+                { id: 176, spanish: "Restaurante", romanization: "rehs-tow-RAHN-teh", english: "Restaurant", category: "Places" },
+                { id: 177, spanish: "Hospital", romanization: "ohs-pee-TAHL", english: "Hospital", category: "Places" },
+                { id: 178, spanish: "Banco", romanization: "BAHN-ko", english: "Bank", category: "Places" },
+                { id: 179, spanish: "Parque", romanization: "PAR-keh", english: "Park", category: "Places" },
+                { id: 180, spanish: "Calle", romanization: "KAH-yeh", english: "Street", category: "Places" },
+                { id: 181, spanish: "Ciudad", romanization: "see-oo-DAHD", english: "City", category: "Places" },
+                { id: 182, spanish: "País", romanization: "pah-EES", english: "Country", category: "Places" },
+
+                // More Adjectives (183-192)
+                { id: 183, spanish: "Alto", romanization: "AHL-to", english: "Tall/High", category: "Adjectives" },
+                { id: 184, spanish: "Bajo", romanization: "BAH-ho", english: "Short/Low", category: "Adjectives" },
+                { id: 185, spanish: "Gordo", romanization: "GOR-do", english: "Fat", category: "Adjectives" },
+                { id: 186, spanish: "Delgado", romanization: "del-GAH-do", english: "Thin", category: "Adjectives" },
+                { id: 187, spanish: "Joven", romanization: "HOH-ven", english: "Young", category: "Adjectives" },
+                { id: 188, spanish: "Rápido", romanization: "RAH-pee-do", english: "Fast", category: "Adjectives" },
+                { id: 189, spanish: "Lento", romanization: "LEHN-to", english: "Slow", category: "Adjectives" },
+                { id: 190, spanish: "Fácil", romanization: "FAH-seel", english: "Easy", category: "Adjectives" },
+                { id: 191, spanish: "Difícil", romanization: "dee-FEE-seel", english: "Difficult", category: "Adjectives" },
+                { id: 192, spanish: "Importante", romanization: "eem-por-TAHN-teh", english: "Important", category: "Adjectives" },
+
+                // Occupations & Misc (193-200)
+                { id: 193, spanish: "Trabajo", romanization: "trah-BAH-ho", english: "Work/Job", category: "Common Words" },
+                { id: 194, spanish: "Médico", romanization: "MEH-dee-ko", english: "Doctor", category: "Common Words" },
+                { id: 195, spanish: "Maestro", romanization: "mah-EHS-tro", english: "Teacher", category: "Common Words" },
+                { id: 196, spanish: "Estudiante", romanization: "ehs-too-dee-AHN-teh", english: "Student", category: "Common Words" },
+                { id: 197, spanish: "Amigo", romanization: "ah-MEE-go", english: "Friend", category: "Common Words" },
+                { id: 198, spanish: "Dinero", romanization: "dee-NEH-ro", english: "Money", category: "Common Words" },
+                { id: 199, spanish: "Tiempo", romanization: "tee-EHM-po", english: "Time/Weather", category: "Common Words" },
+                { id: 200, spanish: "Nombre", romanization: "NOHM-breh", english: "Name", category: "Common Words" }
+            ]
+        }
+    ]
+};

@@ -3,16 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telugu Flashcards - Learn Telugu</title>
+    <title>Language Flashcards - Learn Telugu, Spanish & French</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <!-- Header -->
         <header class="header">
-            <h1>🇮🇳 Telugu Flashcards</h1>
-            <p class="subtitle">Master Telugu vocabulary with interactive flashcards</p>
+            <h1 id="app-title">📚 Language Flashcards</h1>
+            <p class="subtitle" id="app-subtitle">Master vocabulary with interactive flashcards</p>
         </header>
+
+        <!-- Language Selector -->
+        <div class="language-selector">
+            <button class="language-btn active" data-language="telugu">🇮🇳 Telugu</button>
+            <button class="language-btn" data-language="spanish">🇪🇸 Spanish</button>
+            <button class="language-btn" data-language="french">🇫🇷 French</button>
+        </div>
 
         <!-- Level Selector -->
         <div class="level-selector">
@@ -72,16 +79,15 @@
         <!-- Control Buttons -->
         <div class="control-buttons">
             <button class="control-btn" id="btn-shuffle">🔀 Shuffle</button>
-            <a href="quiz.html" class="control-btn">📝 Take Quiz</a>
+            <a href="quiz.html" class="control-btn" id="quiz-link">📝 Take Quiz</a>
         </div>
 
         <!-- Footer -->
         <footer class="footer">
-            <p>Practice regularly to master Telugu! Use categories to focus on specific topics.</p>
+            <p id="footer-text">Practice regularly to master your language! Use categories to focus on specific topics.</p>
         </footer>
     </div>
 
-    <script src="telugu/telugu-data.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

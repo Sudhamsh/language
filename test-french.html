@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>French Flashcards - Test Suite</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        #console {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            max-height: 600px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .test-pass {
+            color: #4ec9b0;
+        }
+
+        .test-fail {
+            color: #f48771;
+        }
+
+        .test-summary {
+            color: #dcdcaa;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            margin: 0 10px;
+        }
+
+        button:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .status {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .status.running {
+            color: #dcdcaa;
+        }
+
+        .status.passed {
+            color: #4ec9b0;
+        }
+
+        .status.failed {
+            color: #f48771;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 French Test Suite</h1>
+        <p class="subtitle">French Flashcard Application Tests</p>
+
+        <div class="controls">
+            <button onclick="runTests()">▶ Run Tests</button>
+            <button onclick="clearConsole()">🗑 Clear Console</button>
+        </div>
+
+        <div class="status" id="status">Ready to run tests</div>
+
+        <div id="console"></div>
+    </div>
+
+    <script src="french/french-data.js"></script>
+    <script src="app.test.js"></script>
+    <script>
+        const consoleDiv = document.getElementById('console');
+        const statusDiv = document.getElementById('status');
+
+        // Override console methods to display in the page
+        const originalLog = console.log;
+        const originalError = console.error;
+
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            const message = args.join(' ');
+            const line = document.createElement('div');
+
+            if (message.includes('✓')) {
+                line.className = 'test-pass';
+            } else if (message.includes('📊')) {
+                line.className = 'test-summary';
+            }
+
+            line.textContent = message;
+            consoleDiv.appendChild(line);
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        };
+
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            const message = args.join(' ');
+            const line = document.createElement('div');
+            line.className = 'test-fail';
+            line.textContent = message;
+            consoleDiv.appendChild(line);
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        };
+
+        // Custom test runner for French
+        class FrenchTestRunner {
+            constructor() {
+                this.tests = [];
+                this.passed = 0;
+                this.failed = 0;
+            }
+
+            test(description, testFn) {
+                this.tests.push({ description, testFn });
+            }
+
+            async run() {
+                console.log('🧪 Running French Flashcard Tests...\n');
+
+                for (const { description, testFn } of this.tests) {
+                    try {
+                        await testFn();
+                        this.passed++;
+                        console.log(`✓ ${description}`);
+                    } catch (error) {
+                        this.failed++;
+                        console.error(`✗ ${description}`);
+                        console.error(`  Error: ${error.message}`);
+                    }
+                }
+
+                console.log(`\n📊 Test Results: ${this.passed} passed, ${this.failed} failed, ${this.tests.length} total`);
+                return this.failed === 0;
+            }
+        }
+
+        const frenchRunner = new FrenchTestRunner();
+
+        // French Data Tests
+        frenchRunner.test('French FLASHCARD_DATA should be defined', () => {
+            if (typeof FLASHCARD_DATA === 'undefined') {
+                throw new Error('FLASHCARD_DATA is not defined');
+            }
+        });
+
+        frenchRunner.test('French should have 2 levels', () => {
+            const levels = FLASHCARD_DATA.levels;
+            if (levels.length !== 2) {
+                throw new Error(`Expected 2 levels, got ${levels.length}`);
+            }
+        });
+
+        frenchRunner.test('French Level 1 should have 100 flashcards', () => {
+            const level1 = FLASHCARD_DATA.levels.find(l => l.id === 1);
+            if (!level1) {
+                throw new Error('Level 1 not found');
+            }
+            if (level1.flashcards.length !== 100) {
+                throw new Error(`Expected 100 flashcards, got ${level1.flashcards.length}`);
+            }
+        });
+
+        frenchRunner.test('French Level 2 should have 100 flashcards', () => {
+            const level2 = FLASHCARD_DATA.levels.find(l => l.id === 2);
+            if (!level2) {
+                throw new Error('Level 2 not found');
+            }
+            if (level2.flashcards.length !== 100) {
+                throw new Error(`Expected 100 flashcards, got ${level2.flashcards.length}`);
+            }
+        });
+
+        frenchRunner.test('French Level 1 IDs should be 1-100', () => {
+            const level1 = FLASHCARD_DATA.levels.find(l => l.id === 1);
+            if (level1.flashcards[0].id !== 1) {
+                throw new Error(`First card should have ID 1, got ${level1.flashcards[0].id}`);
+            }
+            if (level1.flashcards[99].id !== 100) {
+                throw new Error(`Last card should have ID 100, got ${level1.flashcards[99].id}`);
+            }
+        });
+
+        frenchRunner.test('French Level 2 IDs should be 101-200', () => {
+            const level2 = FLASHCARD_DATA.levels.find(l => l.id === 2);
+            if (level2.flashcards[0].id !== 101) {
+                throw new Error(`First card should have ID 101, got ${level2.flashcards[0].id}`);
+            }
+            if (level2.flashcards[99].id !== 200) {
+                throw new Error(`Last card should have ID 200, got ${level2.flashcards[99].id}`);
+            }
+        });
+
+        frenchRunner.test('All French flashcards should have required fields', () => {
+            const allCards = FLASHCARD_DATA.levels.flatMap(level => level.flashcards);
+            allCards.forEach((card, index) => {
+                if (card.id === undefined) throw new Error(`Card ${index} missing id`);
+                if (card.french === undefined) throw new Error(`Card ${index} missing french text`);
+                if (card.romanization === undefined) throw new Error(`Card ${index} missing romanization`);
+                if (card.english === undefined) throw new Error(`Card ${index} missing english translation`);
+                if (card.category === undefined) throw new Error(`Card ${index} missing category`);
+            });
+        });
+
+        frenchRunner.test('French IDs should be unique in Level 1', () => {
+            const level1 = FLASHCARD_DATA.levels.find(l => l.id === 1);
+            const ids = level1.flashcards.map(card => card.id);
+            const uniqueIds = new Set(ids);
+            if (ids.length !== uniqueIds.size) {
+                throw new Error('Duplicate IDs found in Level 1');
+            }
+        });
+
+        frenchRunner.test('French IDs should be unique in Level 2', () => {
+            const level2 = FLASHCARD_DATA.levels.find(l => l.id === 2);
+            const ids = level2.flashcards.map(card => card.id);
+            const uniqueIds = new Set(ids);
+            if (ids.length !== uniqueIds.size) {
+                throw new Error('Duplicate IDs found in Level 2');
+            }
+        });
+
+        frenchRunner.test('No duplicate French words within Level 1', () => {
+            const level1 = FLASHCARD_DATA.levels.find(l => l.id === 1);
+            const words = level1.flashcards.map(c => c.french);
+            const uniqueWords = new Set(words);
+            if (words.length !== uniqueWords.size) {
+                const duplicates = words.filter((word, index) => words.indexOf(word) !== index);
+                throw new Error(`Duplicate French words in Level 1: ${duplicates.join(', ')}`);
+            }
+        });
+
+        frenchRunner.test('No duplicate French words within Level 2', () => {
+            const level2 = FLASHCARD_DATA.levels.find(l => l.id === 2);
+            const words = level2.flashcards.map(c => c.french);
+            const uniqueWords = new Set(words);
+            if (words.length !== uniqueWords.size) {
+                const duplicates = words.filter((word, index) => words.indexOf(word) !== index);
+                throw new Error(`Duplicate French words in Level 2: ${duplicates.join(', ')}`);
+            }
+        });
+
+        frenchRunner.test('No duplicate French words between levels', () => {
+            const level1 = FLASHCARD_DATA.levels.find(l => l.id === 1);
+            const level2 = FLASHCARD_DATA.levels.find(l => l.id === 2);
+            const level1Words = new Set(level1.flashcards.map(c => c.french));
+            const level2Words = level2.flashcards.map(c => c.french);
+            const duplicates = level2Words.filter(word => level1Words.has(word));
+            if (duplicates.length > 0) {
+                throw new Error(`Duplicate French words between levels: ${duplicates.join(', ')}`);
+            }
+        });
+
+        frenchRunner.test('French categories should be valid', () => {
+            const validCategories = [
+                'Greetings', 'Numbers', 'Family', 'Verbs',
+                'Common Words', 'Pronouns', 'Adjectives', 'Colors',
+                'Body Parts', 'Places', 'Time', 'Questions', 'Food', 'Clothing'
+            ];
+            const allCards = FLASHCARD_DATA.levels.flatMap(level => level.flashcards);
+            allCards.forEach(card => {
+                if (!validCategories.includes(card.category)) {
+                    throw new Error(`Invalid category: ${card.category} for card "${card.english}"`);
+                }
+            });
+        });
+
+        async function runTests() {
+            clearConsole();
+            statusDiv.textContent = 'Running tests...';
+            statusDiv.className = 'status running';
+
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            const success = await frenchRunner.run();
+
+            if (success) {
+                statusDiv.textContent = '✅ All tests passed!';
+                statusDiv.className = 'status passed';
+            } else {
+                statusDiv.textContent = '❌ Some tests failed';
+                statusDiv.className = 'status failed';
+            }
+        }
+
+        function clearConsole() {
+            consoleDiv.innerHTML = '';
+            statusDiv.textContent = 'Ready to run tests';
+            statusDiv.className = 'status';
+        }
+
+        // Auto-run tests on load
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(runTests, 500);
+        });
+    </script>
+</body>
+</html>

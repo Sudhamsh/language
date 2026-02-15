@@ -3,6 +3,12 @@ class FlashcardApp {
     constructor() {
         this.levels = [];
         this.currentLevel = 1;
+
+        // Check URL parameter for language
+        const urlParams = new URLSearchParams(window.location.search);
+        const langParam = urlParams.get('lang');
+        this.currentLanguage = (langParam === 'spanish' || langParam === 'telugu' || langParam === 'french') ? langParam : 'telugu';
+
         this.flashcards = [];
         this.filteredCards = [];
         this.currentIndex = 0;
@@ -13,30 +19,118 @@ class FlashcardApp {
     }
 
     async init() {
-        console.log('Initializing Telugu Flashcard App...');
+        console.log('Initializing Language Flashcard App...');
+        console.log(`Language from URL: ${this.currentLanguage}`);
+
+        // Set active language button based on URL parameter
+        this.setActiveLanguageButton();
+
+        // Update quiz link with current language
+        this.updateQuizLink();
+
         await this.loadFlashcards();
         console.log('✓ Flashcards loaded');
         this.setupEventListeners();
         console.log('✓ Event listeners set up');
+        this.updateUI();
         this.displayCard();
         console.log('✓ First card displayed');
         console.log('App ready!');
     }
 
-    // Load flashcards from embedded data
+    // Set active language button
+    setActiveLanguageButton() {
+        document.querySelectorAll('.language-btn').forEach(btn => {
+            if (btn.dataset.language === this.currentLanguage) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    }
+
+    // Dynamically load language data
     async loadFlashcards() {
         try {
-            // Use embedded FLASHCARD_DATA constant (loaded from flashcards-data.js)
-            if (typeof FLASHCARD_DATA === 'undefined') {
-                throw new Error('FLASHCARD_DATA not found. Make sure flashcards-data.js is loaded.');
+            // IMPORTANT: Clear the old FLASHCARD_DATA to ensure fresh load
+            if (typeof window.FLASHCARD_DATA !== 'undefined') {
+                delete window.FLASHCARD_DATA;
             }
+
+            // Remove ALL existing language data scripts
+            document.querySelectorAll('script[src*="-data.js"]').forEach(script => {
+                script.remove();
+            });
+
+            // Add cache-busting timestamp to force reload
+            const timestamp = new Date().getTime();
+            const dataPath = `${this.currentLanguage}/${this.currentLanguage}-data.js?t=${timestamp}`;
+
+            console.log(`Loading ${dataPath}...`);
+
+            // Load the script dynamically
+            await new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = dataPath;
+                script.onload = () => {
+                    console.log(`Script loaded: ${dataPath}`);
+                    // Small delay to ensure script is fully executed
+                    setTimeout(() => resolve(), 100);
+                };
+                script.onerror = () => reject(new Error(`Failed to load ${dataPath}`));
+                document.body.appendChild(script);
+            });
+
+            if (typeof FLASHCARD_DATA === 'undefined') {
+                throw new Error('FLASHCARD_DATA not found after loading script.');
+            }
+
+            console.log(`FLASHCARD_DATA loaded with ${FLASHCARD_DATA.levels[0].flashcards[0].telugu || FLASHCARD_DATA.levels[0].flashcards[0].spanish}`);
+
             this.levels = FLASHCARD_DATA.levels;
             this.switchLevel(this.currentLevel);
-            console.log(`✓ Loaded ${this.levels.length} levels successfully`);
+            console.log(`✓ Loaded ${this.levels.length} levels for ${this.currentLanguage}`);
         } catch (error) {
             console.error('Error loading flashcards:', error);
-            alert('Failed to load flashcards. Please make sure flashcards-data.js is included before app.js in index.html');
+            alert(`Failed to load ${this.currentLanguage} flashcards. Please check the data file.`);
         }
+    }
+
+    // Update UI text based on selected language
+    updateUI() {
+        const languageConfig = {
+            telugu: {
+                title: '🇮🇳 Telugu Flashcards',
+                subtitle: 'Master Telugu vocabulary with interactive flashcards',
+                footer: 'Practice regularly to master Telugu! Use categories to focus on specific topics.',
+                fieldName: 'telugu'
+            },
+            spanish: {
+                title: '🇪🇸 Spanish Flashcards',
+                subtitle: 'Master Spanish vocabulary with interactive flashcards',
+                footer: 'Practice regularly to master Spanish! Use categories to focus on specific topics.',
+                fieldName: 'spanish'
+            },
+            french: {
+                title: '🇫🇷 French Flashcards',
+                subtitle: 'Master French vocabulary with interactive flashcards',
+                footer: 'Practice regularly to master French! Use categories to focus on specific topics.',
+                fieldName: 'french'
+            }
+        };
+
+        const config = languageConfig[this.currentLanguage];
+        document.getElementById('app-title').textContent = config.title;
+        document.getElementById('app-subtitle').textContent = config.subtitle;
+        document.getElementById('footer-text').textContent = config.footer;
+    }
+
+    // Get the native language field name
+    getNativeField() {
+        if (this.currentLanguage === 'telugu') return 'telugu';
+        if (this.currentLanguage === 'spanish') return 'spanish';
+        if (this.currentLanguage === 'french') return 'french';
+        return 'telugu';
     }
 
     // Setup event listeners
@@ -51,6 +145,19 @@ class FlashcardApp {
 
         // Control buttons
         document.getElementById('btn-shuffle').addEventListener('click', () => this.shuffleCards());
+
+        // Language selector buttons
+        const languageButtons = document.querySelectorAll('.language-btn');
+        languageButtons.forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                const language = e.target.dataset.language;
+                if (language !== this.currentLanguage) {
+                    languageButtons.forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    await this.switchLanguage(language);
+                }
+            });
+        });
 
         // Level selector buttons
         const levelButtons = document.querySelectorAll('.level-btn');
@@ -77,6 +184,38 @@ class FlashcardApp {
         document.addEventListener('keydown', (e) => this.handleKeyboard(e));
     }
 
+    // Switch language
+    async switchLanguage(language) {
+        console.log(`Switching language to: ${language}`);
+        this.currentLanguage = language;
+        this.currentIndex = 0; // Reset to first card
+
+        // Update URL parameter for deep linking
+        const url = new URL(window.location);
+        url.searchParams.set('lang', language);
+        window.history.pushState({}, '', url);
+
+        // Update quiz link to preserve language
+        this.updateQuizLink();
+
+        await this.loadFlashcards();
+        this.updateUI();
+
+        // Force display update
+        console.log(`Forcing display update for ${language}`);
+        this.displayCard();
+
+        console.log(`✓ Switched to ${language}`);
+    }
+
+    // Update quiz link to include current language
+    updateQuizLink() {
+        const quizLink = document.getElementById('quiz-link');
+        if (quizLink) {
+            quizLink.href = `quiz.html?lang=${this.currentLanguage}`;
+        }
+    }
+
     // Display current card
     displayCard() {
         if (this.filteredCards.length === 0) {
@@ -90,18 +229,22 @@ class FlashcardApp {
         }
 
         const card = this.filteredCards[this.currentIndex];
+        const nativeField = this.getNativeField();
+
+        console.log(`Displaying card - Language: ${this.currentLanguage}, Field: ${nativeField}, Card:`, card);
+        console.log(`Native text: ${card[nativeField]}`);
 
         // Reset flip state
         const flashcard = document.getElementById('flashcard');
         flashcard.classList.remove('flipped');
         this.isFlipped = false;
 
-        // Update front of card
+        // Update front of card (native language)
         document.getElementById('card-category').textContent = card.category;
-        document.getElementById('card-telugu').textContent = card.telugu;
+        document.getElementById('card-telugu').textContent = card[nativeField];
         document.getElementById('card-romanization').textContent = card.romanization;
 
-        // Update back of card
+        // Update back of card (English)
         document.getElementById('card-category-back').textContent = card.category;
         document.getElementById('card-english').textContent = card.english;
         document.getElementById('card-romanization-back').textContent = card.romanization;
@@ -228,7 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Make app globally accessible for debugging
     window.flashcardApp = app;
 
-    console.log('Telugu Flashcard App initialized!');
+    console.log('Language Flashcard App initialized!');
     console.log('Keyboard shortcuts:');
     console.log('  Space/Enter: Flip card');
     console.log('  Left/Right Arrow: Navigate');

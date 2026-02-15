@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telugu Quiz - Test Your Knowledge</title>
+    <title>Language Quiz - Test Your Knowledge</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="quiz-style.css">
 </head>
@@ -11,9 +11,16 @@
     <div class="container">
         <!-- Header -->
         <header class="header">
-            <h1>📝 Telugu Quiz</h1>
-            <p class="subtitle">Test your Telugu vocabulary knowledge</p>
+            <h1 id="quiz-title">📝 Language Quiz</h1>
+            <p class="subtitle" id="quiz-subtitle">Test your vocabulary knowledge</p>
         </header>
+
+        <!-- Language Selector -->
+        <div class="language-selector">
+            <button class="language-btn active" data-language="telugu">🇮🇳 Telugu</button>
+            <button class="language-btn" data-language="spanish">🇪🇸 Spanish</button>
+            <button class="language-btn" data-language="french">🇫🇷 French</button>
+        </div>
 
         <!-- Start Screen -->
         <div id="start-screen" class="screen active">
@@ -49,7 +56,7 @@
                 </div>
 
                 <button class="btn-primary" id="btn-start">Start Quiz</button>
-                <a href="index.html" class="btn-secondary">Back to Flashcards</a>
+                <a href="index.html" class="btn-secondary flashcards-link">Back to Flashcards</a>
             </div>
         </div>
 
@@ -131,13 +138,12 @@
 
                 <div class="quiz-actions">
                     <button class="btn-primary" id="btn-retry">Try Again</button>
-                    <a href="index.html" class="btn-secondary">Back to Flashcards</a>
+                    <a href="index.html" class="btn-secondary flashcards-link">Back to Flashcards</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="telugu/telugu-data.js"></script>
     <script src="quiz.js"></script>
 </body>
 </html>

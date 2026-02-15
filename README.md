@@ -1,23 +1,30 @@
-# Telugu Flashcards - Interactive Learning App
+# Language Flashcards - Interactive Learning App
 
-A professional, interactive web application for learning Telugu vocabulary through flashcards. Perfect for English speakers learning Telugu!
+A professional, interactive web application for learning Telugu and Spanish vocabulary through flashcards. Perfect for English speakers learning new languages!
 
 ## Features
 
+### 🌍 Multi-Language Support
+- **Telugu**: 200 words across 2 levels (🇮🇳 Telugu script with romanization)
+- **Spanish**: 200 words across 2 levels (🇪🇸 Spanish with pronunciation guide)
+- Easy language switching with one click
+
 ### 🎴 Interactive Flashcards
-- Click or tap to flip between Telugu and English
+- Click or tap to flip between native language and English
 - Beautiful card flip animations
-- 200 Telugu words across 2 levels with romanization
+- Pronunciation guides (romanization for Telugu, phonetics for Spanish)
 
 ### 📝 Quiz Mode
 - Test your knowledge with multiple-choice questions
+- Choose your language (Telugu or Spanish)
 - Choose between Level 1 (Basics) or Level 2 (Intermediate)
 - Configurable question count (5, 10, 15, or 20 questions)
-- Two question types: Telugu → English and English → Telugu
+- Two question types: Native Language → English and English → Native Language
 - Real-time score tracking
 - Detailed results with performance feedback
 
 ### 🎯 Smart Learning Features
+- **Two Languages**: Telugu and Spanish, both with 200 words each
 - **Two Levels**: Level 1 (100 basic words) and Level 2 (100 intermediate words)
 - **Category Filters**: Filter by Greetings, Numbers, Family, Verbs, and more
 - **Shuffle Mode**: Randomize cards for better learning
@@ -38,18 +45,21 @@ A professional, interactive web application for learning Telugu vocabulary throu
 
 ### Flashcard Mode
 1. Open `index.html` in your web browser
-2. Select a level (Level 1: Basics or Level 2: Intermediate)
-3. Click on a card to flip between Telugu and English
-4. Use Previous/Next buttons or arrow keys to navigate
+2. **Select your language** (🇮🇳 Telugu or 🇪🇸 Spanish)
+3. Select a level (Level 1: Basics or Level 2: Intermediate)
+4. Click on a card to flip between native language and English
+5. Use Previous/Next buttons or arrow keys to navigate
+6. Switch languages anytime by clicking the language selector
 
 ### Quiz Mode
 1. Open `quiz.html` in your web browser
-2. Select a level (1 or 2)
-3. Choose number of questions (5, 10, 15, or 20)
-4. Click **Start Quiz**
-5. Read the question and select your answer from 4 options
-6. Click **Submit Answer** to check if you're correct
-7. View your results at the end with detailed statistics
+2. **Select your language** (🇮🇳 Telugu or 🇪🇸 Spanish)
+3. Select a level (1 or 2)
+4. Choose number of questions (5, 10, 15, or 20)
+5. Click **Start Quiz**
+6. Read the question and select your answer from 4 options
+7. Click **Submit Answer** to check if you're correct
+8. View your results at the end with detailed statistics
 
 ### Keyboard Shortcuts (Flashcard Mode)
 - **Space/Enter**: Flip the current card
@@ -66,17 +76,20 @@ A professional, interactive web application for learning Telugu vocabulary throu
 
 ```
 language/
-├── index.html              # Flashcard interface
+├── index.html              # Flashcard interface (multi-language)
 ├── style.css               # Flashcard styling and animations
-├── app.js                  # Flashcard application logic
-├── quiz.html               # Quiz interface
+├── app.js                  # Flashcard application logic (multi-language)
+├── quiz.html               # Quiz interface (multi-language)
 ├── quiz-style.css          # Quiz styling
-├── quiz.js                 # Quiz application logic
+├── quiz.js                 # Quiz application logic (multi-language)
 ├── app.test.js             # Comprehensive test suite
-├── test.html               # Test runner UI
+├── test.html               # Telugu test runner UI
+├── test-spanish.html       # Spanish test runner UI
 ├── README.md               # This file
-└── telugu/
-    └── telugu-data.js      # Telugu vocabulary data (Levels 1 & 2, 200 words total)
+├── telugu/
+│   └── telugu-data.js      # Telugu vocabulary data (Levels 1 & 2, 200 words total)
+└── spanish/
+    └── spanish-data.js     # Spanish vocabulary data (Levels 1 & 2, 200 words total)
 ```
 
 ## Extending the Flashcards
@@ -129,14 +142,19 @@ The flashcard data is stored in `flashcards-data.json` in an extensible format. 
 
 ## Testing
 
-The application includes a comprehensive test suite to ensure reliability.
+The application includes comprehensive test suites for both languages to ensure reliability.
 
 ### Running Tests
 
-**In Browser:**
+**Telugu Tests:**
 1. Open [test.html](test.html) in your web browser
 2. Tests will run automatically and display results
-3. Click "Run Tests" to re-run
+3. Tests validate Telugu data structure, duplicates, and integrity
+
+**Spanish Tests:**
+1. Open [test-spanish.html](test-spanish.html) in your web browser
+2. Tests will run automatically and display results
+3. Tests validate Spanish data structure, duplicates, and integrity
 
 **Via Console:**
 ```bash

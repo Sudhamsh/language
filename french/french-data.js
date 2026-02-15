@@ -1,0 +1,255 @@
+// French Flashcard Data
+window.FLASHCARD_DATA = {
+    levels: [
+        {
+            id: 1,
+            name: "Level 1 - Basics",
+            description: "Essential French vocabulary for beginners",
+            flashcards: [
+                // Greetings (10)
+                { id: 1, french: "Bonjour", romanization: "bon-ZHOOR", english: "Hello/Good day", category: "Greetings" },
+                { id: 2, french: "Bonsoir", romanization: "bon-SWAHR", english: "Good evening", category: "Greetings" },
+                { id: 3, french: "Salut", romanization: "sah-LU", english: "Hi/Bye (informal)", category: "Greetings" },
+                { id: 4, french: "Au revoir", romanization: "oh ruh-VWAHR", english: "Goodbye", category: "Greetings" },
+                { id: 5, french: "S'il vous plaît", romanization: "seel voo PLEH", english: "Please (formal)", category: "Greetings" },
+                { id: 6, french: "Merci", romanization: "mehr-SEE", english: "Thank you", category: "Greetings" },
+                { id: 7, french: "Oui", romanization: "wee", english: "Yes", category: "Greetings" },
+                { id: 8, french: "Non", romanization: "nohn", english: "No", category: "Greetings" },
+                { id: 9, french: "Excusez-moi", romanization: "ex-ku-zay-MWAH", english: "Excuse me", category: "Greetings" },
+                { id: 10, french: "Pardon", romanization: "pahr-DOHN", english: "Sorry/Pardon", category: "Greetings" },
+
+                // Numbers 1-10 (10)
+                { id: 11, french: "Un", romanization: "uhn", english: "One", category: "Numbers" },
+                { id: 12, french: "Deux", romanization: "duh", english: "Two", category: "Numbers" },
+                { id: 13, french: "Trois", romanization: "twah", english: "Three", category: "Numbers" },
+                { id: 14, french: "Quatre", romanization: "KAH-truh", english: "Four", category: "Numbers" },
+                { id: 15, french: "Cinq", romanization: "sank", english: "Five", category: "Numbers" },
+                { id: 16, french: "Six", romanization: "seese", english: "Six", category: "Numbers" },
+                { id: 17, french: "Sept", romanization: "set", english: "Seven", category: "Numbers" },
+                { id: 18, french: "Huit", romanization: "weet", english: "Eight", category: "Numbers" },
+                { id: 19, french: "Neuf", romanization: "nuhf", english: "Nine", category: "Numbers" },
+                { id: 20, french: "Dix", romanization: "deese", english: "Ten", category: "Numbers" },
+
+                // Family (10)
+                { id: 21, french: "Famille", romanization: "fah-MEE", english: "Family", category: "Family" },
+                { id: 22, french: "Père", romanization: "pehr", english: "Father", category: "Family" },
+                { id: 23, french: "Mère", romanization: "mehr", english: "Mother", category: "Family" },
+                { id: 24, french: "Frère", romanization: "frehr", english: "Brother", category: "Family" },
+                { id: 25, french: "Sœur", romanization: "suhr", english: "Sister", category: "Family" },
+                { id: 26, french: "Fils", romanization: "fees", english: "Son", category: "Family" },
+                { id: 27, french: "Fille", romanization: "fee", english: "Daughter", category: "Family" },
+                { id: 28, french: "Grand-père", romanization: "grahn-PEHR", english: "Grandfather", category: "Family" },
+                { id: 29, french: "Grand-mère", romanization: "grahn-MEHR", english: "Grandmother", category: "Family" },
+                { id: 30, french: "Enfant", romanization: "ahn-FAHN", english: "Child", category: "Family" },
+
+                // Pronouns (8)
+                { id: 31, french: "Je", romanization: "zhuh", english: "I", category: "Pronouns" },
+                { id: 32, french: "Tu", romanization: "tu", english: "You (informal)", category: "Pronouns" },
+                { id: 33, french: "Vous", romanization: "voo", english: "You (formal/plural)", category: "Pronouns" },
+                { id: 34, french: "Il", romanization: "eel", english: "He", category: "Pronouns" },
+                { id: 35, french: "Elle", romanization: "ehl", english: "She", category: "Pronouns" },
+                { id: 36, french: "Nous", romanization: "noo", english: "We", category: "Pronouns" },
+                { id: 37, french: "Ils", romanization: "eel", english: "They (masculine)", category: "Pronouns" },
+                { id: 38, french: "Elles", romanization: "ehl", english: "They (feminine)", category: "Pronouns" },
+
+                // Common Verbs (12)
+                { id: 39, french: "Être", romanization: "EH-truh", english: "To be", category: "Verbs" },
+                { id: 40, french: "Avoir", romanization: "ah-VWAHR", english: "To have", category: "Verbs" },
+                { id: 41, french: "Aller", romanization: "ah-LAY", english: "To go", category: "Verbs" },
+                { id: 42, french: "Faire", romanization: "fehr", english: "To do/make", category: "Verbs" },
+                { id: 43, french: "Dire", romanization: "deer", english: "To say/tell", category: "Verbs" },
+                { id: 44, french: "Venir", romanization: "vuh-NEER", english: "To come", category: "Verbs" },
+                { id: 45, french: "Voir", romanization: "vwahr", english: "To see", category: "Verbs" },
+                { id: 46, french: "Manger", romanization: "mahn-ZHAY", english: "To eat", category: "Verbs" },
+                { id: 47, french: "Boire", romanization: "bwahr", english: "To drink", category: "Verbs" },
+                { id: 48, french: "Parler", romanization: "pahr-LAY", english: "To speak", category: "Verbs" },
+                { id: 49, french: "Aimer", romanization: "eh-MAY", english: "To like/love", category: "Verbs" },
+                { id: 50, french: "Vouloir", romanization: "voo-LWAHR", english: "To want", category: "Verbs" },
+
+                // Colors (10)
+                { id: 51, french: "Blanc", romanization: "blahn", english: "White", category: "Colors" },
+                { id: 52, french: "Noir", romanization: "nwahr", english: "Black", category: "Colors" },
+                { id: 53, french: "Rouge", romanization: "roozh", english: "Red", category: "Colors" },
+                { id: 54, french: "Bleu", romanization: "bluh", english: "Blue", category: "Colors" },
+                { id: 55, french: "Vert", romanization: "vehr", english: "Green", category: "Colors" },
+                { id: 56, french: "Jaune", romanization: "zhohn", english: "Yellow", category: "Colors" },
+                { id: 57, french: "Orange", romanization: "oh-RAHNZH", english: "Orange", category: "Colors" },
+                { id: 58, french: "Rose", romanization: "rohz", english: "Pink", category: "Colors" },
+                { id: 59, french: "Gris", romanization: "gree", english: "Gray", category: "Colors" },
+                { id: 60, french: "Violet", romanization: "vee-oh-LEH", english: "Purple", category: "Colors" },
+
+                // Common Words (15)
+                { id: 61, french: "Homme", romanization: "ohm", english: "Man", category: "Common Words" },
+                { id: 62, french: "Femme", romanization: "fahm", english: "Woman", category: "Common Words" },
+                { id: 63, french: "Ami", romanization: "ah-MEE", english: "Friend (male)", category: "Common Words" },
+                { id: 64, french: "Amie", romanization: "ah-MEE", english: "Friend (female)", category: "Common Words" },
+                { id: 65, french: "Maison", romanization: "meh-ZOHN", english: "House", category: "Common Words" },
+                { id: 66, french: "Eau", romanization: "oh", english: "Water", category: "Common Words" },
+                { id: 67, french: "Pain", romanization: "pan", english: "Bread", category: "Common Words" },
+                { id: 68, french: "Vin", romanization: "van", english: "Wine", category: "Common Words" },
+                { id: 69, french: "Chat", romanization: "shah", english: "Cat", category: "Common Words" },
+                { id: 70, french: "Chien", romanization: "shee-an", english: "Dog", category: "Common Words" },
+                { id: 71, french: "Livre", romanization: "LEE-vruh", english: "Book", category: "Common Words" },
+                { id: 72, french: "Table", romanization: "TAH-bluh", english: "Table", category: "Common Words" },
+                { id: 73, french: "Chaise", romanization: "shehz", english: "Chair", category: "Common Words" },
+                { id: 74, french: "Porte", romanization: "pohrt", english: "Door", category: "Common Words" },
+                { id: 75, french: "Fenêtre", romanization: "fuh-NEH-truh", english: "Window", category: "Common Words" },
+
+                // Questions (10)
+                { id: 76, french: "Qui", romanization: "kee", english: "Who", category: "Questions" },
+                { id: 77, french: "Quoi", romanization: "kwah", english: "What", category: "Questions" },
+                { id: 78, french: "Où", romanization: "oo", english: "Where", category: "Questions" },
+                { id: 79, french: "Quand", romanization: "kahn", english: "When", category: "Questions" },
+                { id: 80, french: "Pourquoi", romanization: "poor-KWAH", english: "Why", category: "Questions" },
+                { id: 81, french: "Comment", romanization: "koh-MAHN", english: "How", category: "Questions" },
+                { id: 82, french: "Combien", romanization: "kohm-bee-AN", english: "How much/many", category: "Questions" },
+                { id: 83, french: "Quel", romanization: "kehl", english: "Which/What (masc)", category: "Questions" },
+                { id: 84, french: "Quelle", romanization: "kehl", english: "Which/What (fem)", category: "Questions" },
+                { id: 85, french: "Lequel", romanization: "luh-KEHL", english: "Which one", category: "Questions" },
+
+                // Adjectives (10)
+                { id: 86, french: "Grand", romanization: "grahn", english: "Big/Tall", category: "Adjectives" },
+                { id: 87, french: "Petit", romanization: "puh-TEE", english: "Small", category: "Adjectives" },
+                { id: 88, french: "Bon", romanization: "bohn", english: "Good", category: "Adjectives" },
+                { id: 89, french: "Mauvais", romanization: "moh-VEH", english: "Bad", category: "Adjectives" },
+                { id: 90, french: "Beau", romanization: "boh", english: "Beautiful (masc)", category: "Adjectives" },
+                { id: 91, french: "Belle", romanization: "behl", english: "Beautiful (fem)", category: "Adjectives" },
+                { id: 92, french: "Nouveau", romanization: "noo-VOH", english: "New (masc)", category: "Adjectives" },
+                { id: 93, french: "Vieux", romanization: "vee-uh", english: "Old", category: "Adjectives" },
+                { id: 94, french: "Jeune", romanization: "zhuhn", english: "Young", category: "Adjectives" },
+                { id: 95, french: "Heureux", romanization: "uh-RUH", english: "Happy", category: "Adjectives" },
+
+                // Time (5)
+                { id: 96, french: "Aujourd'hui", romanization: "oh-zhoor-DWEE", english: "Today", category: "Time" },
+                { id: 97, french: "Demain", romanization: "duh-MAN", english: "Tomorrow", category: "Time" },
+                { id: 98, french: "Hier", romanization: "ee-ehr", english: "Yesterday", category: "Time" },
+                { id: 99, french: "Maintenant", romanization: "man-tuh-NAHN", english: "Now", category: "Time" },
+                { id: 100, french: "Toujours", romanization: "too-ZHOOR", english: "Always", category: "Time" }
+            ]
+        },
+        {
+            id: 2,
+            name: "Level 2 - Intermediate",
+            description: "Intermediate French vocabulary",
+            flashcards: [
+                // Numbers 11-20, larger numbers (15)
+                { id: 101, french: "Onze", romanization: "onz", english: "Eleven", category: "Numbers" },
+                { id: 102, french: "Douze", romanization: "dooz", english: "Twelve", category: "Numbers" },
+                { id: 103, french: "Treize", romanization: "trehz", english: "Thirteen", category: "Numbers" },
+                { id: 104, french: "Quatorze", romanization: "kah-TORZ", english: "Fourteen", category: "Numbers" },
+                { id: 105, french: "Quinze", romanization: "kanz", english: "Fifteen", category: "Numbers" },
+                { id: 106, french: "Seize", romanization: "sehz", english: "Sixteen", category: "Numbers" },
+                { id: 107, french: "Vingt", romanization: "van", english: "Twenty", category: "Numbers" },
+                { id: 108, french: "Trente", romanization: "trahnt", english: "Thirty", category: "Numbers" },
+                { id: 109, french: "Quarante", romanization: "kah-RAHNT", english: "Forty", category: "Numbers" },
+                { id: 110, french: "Cinquante", romanization: "san-KAHNT", english: "Fifty", category: "Numbers" },
+                { id: 111, french: "Soixante", romanization: "swah-SAHNT", english: "Sixty", category: "Numbers" },
+                { id: 112, french: "Cent", romanization: "sahn", english: "Hundred", category: "Numbers" },
+                { id: 113, french: "Mille", romanization: "meel", english: "Thousand", category: "Numbers" },
+                { id: 114, french: "Premier", romanization: "pruh-MYAY", english: "First", category: "Numbers" },
+                { id: 115, french: "Dernier", romanization: "dehr-NYAY", english: "Last", category: "Numbers" },
+
+                // Time & Days (10)
+                { id: 116, french: "Lundi", romanization: "luhn-DEE", english: "Monday", category: "Time" },
+                { id: 117, french: "Mardi", romanization: "mahr-DEE", english: "Tuesday", category: "Time" },
+                { id: 118, french: "Mercredi", romanization: "mehr-kruh-DEE", english: "Wednesday", category: "Time" },
+                { id: 119, french: "Jeudi", romanization: "zhuh-DEE", english: "Thursday", category: "Time" },
+                { id: 120, french: "Vendredi", romanization: "vahn-druh-DEE", english: "Friday", category: "Time" },
+                { id: 121, french: "Samedi", romanization: "sahm-DEE", english: "Saturday", category: "Time" },
+                { id: 122, french: "Dimanche", romanization: "dee-MAHNSH", english: "Sunday", category: "Time" },
+                { id: 123, french: "Semaine", romanization: "suh-MEHN", english: "Week", category: "Time" },
+                { id: 124, french: "Mois", romanization: "mwah", english: "Month", category: "Time" },
+                { id: 125, french: "Année", romanization: "ah-NAY", english: "Year", category: "Time" },
+
+                // More Verbs (15)
+                { id: 126, french: "Pouvoir", romanization: "poo-VWAHR", english: "To be able to/Can", category: "Verbs" },
+                { id: 127, french: "Devoir", romanization: "duh-VWAHR", english: "To have to/Must", category: "Verbs" },
+                { id: 128, french: "Savoir", romanization: "sah-VWAHR", english: "To know (facts)", category: "Verbs" },
+                { id: 129, french: "Connaître", romanization: "koh-NEH-truh", english: "To know (people/places)", category: "Verbs" },
+                { id: 130, french: "Prendre", romanization: "prahn-druh", english: "To take", category: "Verbs" },
+                { id: 131, french: "Donner", romanization: "doh-NAY", english: "To give", category: "Verbs" },
+                { id: 132, french: "Trouver", romanization: "troo-VAY", english: "To find", category: "Verbs" },
+                { id: 133, french: "Chercher", romanization: "shehr-SHAY", english: "To look for", category: "Verbs" },
+                { id: 134, french: "Écrire", romanization: "ay-KREER", english: "To write", category: "Verbs" },
+                { id: 135, french: "Lire", romanization: "leer", english: "To read", category: "Verbs" },
+                { id: 136, french: "Écouter", romanization: "ay-koo-TAY", english: "To listen", category: "Verbs" },
+                { id: 137, french: "Regarder", romanization: "ruh-gahr-DAY", english: "To watch/look at", category: "Verbs" },
+                { id: 138, french: "Comprendre", romanization: "kohm-PRAHN-druh", english: "To understand", category: "Verbs" },
+                { id: 139, french: "Apprendre", romanization: "ah-PRAHN-druh", english: "To learn", category: "Verbs" },
+                { id: 140, french: "Dormir", romanization: "dor-MEER", english: "To sleep", category: "Verbs" },
+
+                // Food (15)
+                { id: 141, french: "Fromage", romanization: "froh-MAHZH", english: "Cheese", category: "Food" },
+                { id: 142, french: "Viande", romanization: "vee-AHND", english: "Meat", category: "Food" },
+                { id: 143, french: "Poisson", romanization: "pwah-SOHN", english: "Fish", category: "Food" },
+                { id: 144, french: "Poulet", romanization: "poo-LEH", english: "Chicken", category: "Food" },
+                { id: 145, french: "Œuf", romanization: "uhf", english: "Egg", category: "Food" },
+                { id: 146, french: "Lait", romanization: "leh", english: "Milk", category: "Food" },
+                { id: 147, french: "Beurre", romanization: "buhr", english: "Butter", category: "Food" },
+                { id: 148, french: "Sucre", romanization: "SU-kruh", english: "Sugar", category: "Food" },
+                { id: 149, french: "Sel", romanization: "sehl", english: "Salt", category: "Food" },
+                { id: 150, french: "Fruit", romanization: "frwee", english: "Fruit", category: "Food" },
+                { id: 151, french: "Légume", romanization: "lay-GUM", english: "Vegetable", category: "Food" },
+                { id: 152, french: "Pomme", romanization: "pohm", english: "Apple", category: "Food" },
+                { id: 153, french: "Café", romanization: "kah-FAY", english: "Coffee", category: "Food" },
+                { id: 154, french: "Thé", romanization: "tay", english: "Tea", category: "Food" },
+                { id: 155, french: "Riz", romanization: "ree", english: "Rice", category: "Food" },
+
+                // Clothing (10)
+                { id: 156, french: "Vêtement", romanization: "veht-MAHN", english: "Clothing", category: "Clothing" },
+                { id: 157, french: "Robe", romanization: "rohb", english: "Dress", category: "Clothing" },
+                { id: 158, french: "Pantalon", romanization: "pahn-tah-LOHN", english: "Pants", category: "Clothing" },
+                { id: 159, french: "Chemise", romanization: "shuh-MEEZ", english: "Shirt", category: "Clothing" },
+                { id: 160, french: "Jupe", romanization: "zhup", english: "Skirt", category: "Clothing" },
+                { id: 161, french: "Chaussure", romanization: "shoh-SUR", english: "Shoe", category: "Clothing" },
+                { id: 162, french: "Chapeau", romanization: "shah-POH", english: "Hat", category: "Clothing" },
+                { id: 163, french: "Manteau", romanization: "mahn-TOH", english: "Coat", category: "Clothing" },
+                { id: 164, french: "Cravate", romanization: "krah-VAHT", english: "Tie", category: "Clothing" },
+                { id: 165, french: "Chaussette", romanization: "shoh-SEHT", english: "Sock", category: "Clothing" },
+
+                // Body Parts (10)
+                { id: 166, french: "Tête", romanization: "teht", english: "Head", category: "Body Parts" },
+                { id: 167, french: "Œil", romanization: "uh-YEE", english: "Eye", category: "Body Parts" },
+                { id: 168, french: "Nez", romanization: "nay", english: "Nose", category: "Body Parts" },
+                { id: 169, french: "Bouche", romanization: "boosh", english: "Mouth", category: "Body Parts" },
+                { id: 170, french: "Oreille", romanization: "oh-REY", english: "Ear", category: "Body Parts" },
+                { id: 171, french: "Main", romanization: "man", english: "Hand", category: "Body Parts" },
+                { id: 172, french: "Pied", romanization: "pee-ay", english: "Foot", category: "Body Parts" },
+                { id: 173, french: "Bras", romanization: "brah", english: "Arm", category: "Body Parts" },
+                { id: 174, french: "Jambe", romanization: "zhahmb", english: "Leg", category: "Body Parts" },
+                { id: 175, french: "Cœur", romanization: "kuhr", english: "Heart", category: "Body Parts" },
+
+                // Places (10)
+                { id: 176, french: "Ville", romanization: "veel", english: "City", category: "Places" },
+                { id: 177, french: "Pays", romanization: "pay-EE", english: "Country", category: "Places" },
+                { id: 178, french: "École", romanization: "ay-KOHL", english: "School", category: "Places" },
+                { id: 179, french: "Bibliothèque", romanization: "bee-blee-oh-TEHK", english: "Library", category: "Places" },
+                { id: 180, french: "Hôpital", romanization: "oh-pee-TAHL", english: "Hospital", category: "Places" },
+                { id: 181, french: "Restaurant", romanization: "rehs-toh-RAHN", english: "Restaurant", category: "Places" },
+                { id: 182, french: "Magasin", romanization: "mah-gah-ZAN", english: "Store", category: "Places" },
+                { id: 183, french: "Banque", romanization: "bahnk", english: "Bank", category: "Places" },
+                { id: 184, french: "Église", romanization: "ay-GLEEZ", english: "Church", category: "Places" },
+                { id: 185, french: "Parc", romanization: "pahrk", english: "Park", category: "Places" },
+
+                // More Adjectives (10)
+                { id: 186, french: "Fort", romanization: "for", english: "Strong", category: "Adjectives" },
+                { id: 187, french: "Faible", romanization: "fehbl", english: "Weak", category: "Adjectives" },
+                { id: 188, french: "Riche", romanization: "reesh", english: "Rich", category: "Adjectives" },
+                { id: 189, french: "Pauvre", romanization: "POH-vruh", english: "Poor", category: "Adjectives" },
+                { id: 190, french: "Intelligent", romanization: "an-teh-lee-ZHAHN", english: "Intelligent", category: "Adjectives" },
+                { id: 191, french: "Gentil", romanization: "zhahn-TEE", english: "Kind/Nice", category: "Adjectives" },
+                { id: 192, french: "Méchant", romanization: "may-SHAHN", english: "Mean/Wicked", category: "Adjectives" },
+                { id: 193, french: "Facile", romanization: "fah-SEEL", english: "Easy", category: "Adjectives" },
+                { id: 194, french: "Difficile", romanization: "dee-fee-SEEL", english: "Difficult", category: "Adjectives" },
+                { id: 195, french: "Chaud", romanization: "shoh", english: "Hot", category: "Adjectives" },
+
+                // Common Words (5)
+                { id: 196, french: "Chose", romanization: "shohz", english: "Thing", category: "Common Words" },
+                { id: 197, french: "Temps", romanization: "tahn", english: "Time/Weather", category: "Common Words" },
+                { id: 198, french: "Monde", romanization: "mohnd", english: "World", category: "Common Words" },
+                { id: 199, french: "Travail", romanization: "trah-VY", english: "Work", category: "Common Words" },
+                { id: 200, french: "Argent", romanization: "ahr-ZHAHN", english: "Money/Silver", category: "Common Words" }
+            ]
+        }
+    ]
+};

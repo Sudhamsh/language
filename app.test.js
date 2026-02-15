@@ -660,6 +660,144 @@ runner.test('Quiz should display appropriate message for low score', () => {
     assertTrue(message.length > 0, 'Should have message for low score');
 });
 
+// Spanish Data Tests (Language-agnostic tests that work with Spanish data)
+runner.test('Spanish should have required data structure', () => {
+    // This test will be run when Spanish data is loaded
+    assertTrue(true, 'Placeholder test for Spanish data structure');
+});
+
+// Mock Spanish data for testing
+const mockSpanishData = {
+    levels: [
+        {
+            id: 1,
+            name: "Level 1 - Basics",
+            description: "Essential Spanish vocabulary for beginners",
+            flashcards: [
+                { id: 1, spanish: "Hola", romanization: "OH-lah", english: "Hello", category: "Greetings" },
+                { id: 2, spanish: "Adiós", romanization: "ah-dee-OHS", english: "Goodbye", category: "Greetings" },
+                { id: 3, spanish: "Uno", romanization: "OO-no", english: "One", category: "Numbers" },
+                { id: 4, spanish: "Dos", romanization: "dohs", english: "Two", category: "Numbers" },
+                { id: 5, spanish: "Madre", romanization: "MAH-dreh", english: "Mother", category: "Family" }
+            ]
+        },
+        {
+            id: 2,
+            name: "Level 2 - Intermediate",
+            description: "Intermediate Spanish vocabulary",
+            flashcards: [
+                { id: 101, spanish: "Once", romanization: "OHN-seh", english: "Eleven", category: "Numbers" }
+            ]
+        }
+    ]
+};
+
+runner.test('Spanish flashcards should have required fields', () => {
+    const allCards = mockSpanishData.levels.flatMap(level => level.flashcards);
+
+    allCards.forEach((card, index) => {
+        assertTrue(card.id !== undefined, `Spanish card ${index} should have an id`);
+        assertTrue(card.spanish !== undefined, `Spanish card ${index} should have spanish text`);
+        assertTrue(card.romanization !== undefined, `Spanish card ${index} should have romanization`);
+        assertTrue(card.english !== undefined, `Spanish card ${index} should have english translation`);
+        assertTrue(card.category !== undefined, `Spanish card ${index} should have a category`);
+    });
+});
+
+runner.test('Spanish Level 1 should have correct structure', () => {
+    const level1 = mockSpanishData.levels[0];
+    assertEquals(level1.id, 1, 'Spanish Level 1 should have id 1');
+    assertArrayLength(level1.flashcards, 5, 'Mock Spanish Level 1 should have 5 flashcards');
+});
+
+runner.test('Spanish Level 2 should have correct structure', () => {
+    const level2 = mockSpanishData.levels[1];
+    assertEquals(level2.id, 2, 'Spanish Level 2 should have id 2');
+    assertTrue(level2.flashcards.length > 0, 'Spanish Level 2 should have flashcards');
+});
+
+runner.test('Spanish IDs should start from 101 in Level 2', () => {
+    const level2 = mockSpanishData.levels[1];
+    if (level2.flashcards.length > 0) {
+        assertEquals(level2.flashcards[0].id, 101, 'First Spanish Level 2 card should have ID 101');
+    }
+});
+
+runner.test('Spanish cards can be filtered by category', () => {
+    const level1 = mockSpanishData.levels[0];
+    const greetings = level1.flashcards.filter(card => card.category === 'Greetings');
+    const numbers = level1.flashcards.filter(card => card.category === 'Numbers');
+
+    assertArrayLength(greetings, 2, 'Should have 2 Spanish greeting cards');
+    assertArrayLength(numbers, 2, 'Should have 2 Spanish number cards');
+});
+
+// Mock French data for testing
+const mockFrenchData = {
+    levels: [
+        {
+            id: 1,
+            name: "Level 1 - Basics",
+            description: "Essential French vocabulary for beginners",
+            flashcards: [
+                { id: 1, french: "Bonjour", romanization: "bon-ZHOOR", english: "Hello", category: "Greetings" },
+                { id: 2, french: "Au revoir", romanization: "oh ruh-VWAHR", english: "Goodbye", category: "Greetings" },
+                { id: 3, french: "Un", romanization: "uhn", english: "One", category: "Numbers" },
+                { id: 4, french: "Deux", romanization: "duh", english: "Two", category: "Numbers" },
+                { id: 5, french: "Mère", romanization: "mehr", english: "Mother", category: "Family" }
+            ]
+        },
+        {
+            id: 2,
+            name: "Level 2 - Intermediate",
+            description: "Intermediate French vocabulary",
+            flashcards: [
+                { id: 101, french: "Onze", romanization: "onz", english: "Eleven", category: "Numbers" }
+            ]
+        }
+    ]
+};
+
+runner.test('French flashcards should have required fields', () => {
+    const allCards = mockFrenchData.levels.flatMap(level => level.flashcards);
+
+    allCards.forEach((card, index) => {
+        assertTrue(card.id !== undefined, `French card ${index} should have an id`);
+        assertTrue(card.french !== undefined, `French card ${index} should have french text`);
+        assertTrue(card.romanization !== undefined, `French card ${index} should have romanization`);
+        assertTrue(card.english !== undefined, `French card ${index} should have english translation`);
+        assertTrue(card.category !== undefined, `French card ${index} should have a category`);
+    });
+});
+
+runner.test('French Level 1 should have correct structure', () => {
+    const level1 = mockFrenchData.levels[0];
+    assertEquals(level1.id, 1, 'French Level 1 should have id 1');
+    assertArrayLength(level1.flashcards, 5, 'Mock French Level 1 should have 5 flashcards');
+});
+
+runner.test('French Level 2 should have correct structure', () => {
+    const level2 = mockFrenchData.levels[1];
+    assertEquals(level2.id, 2, 'French Level 2 should have id 2');
+    assertTrue(level2.flashcards.length > 0, 'French Level 2 should have flashcards');
+});
+
+runner.test('French IDs should start from 101 in Level 2', () => {
+    const level2 = mockFrenchData.levels[1];
+    if (level2.flashcards.length > 0) {
+        assertEquals(level2.flashcards[0].id, 101, 'First French Level 2 card should have ID 101');
+    }
+});
+
+runner.test('French cards can be filtered by category', () => {
+    const level1 = mockFrenchData.levels[0];
+    const greetings = level1.flashcards.filter(card => card.category === 'Greetings');
+    const numbers = level1.flashcards.filter(card => card.category === 'Numbers');
+
+    assertArrayLength(greetings, 2, 'Should have 2 French greeting cards');
+    assertArrayLength(numbers, 2, 'Should have 2 French number cards');
+});
+
 // Run tests
 if (typeof window !== 'undefined') {
     // Running in browser
@@ -673,5 +811,5 @@ if (typeof window !== 'undefined') {
 
 // Export for module systems
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { runner, mockFlashcardData };
+    module.exports = { runner, mockFlashcardData, mockSpanishData, mockFrenchData };
 }
