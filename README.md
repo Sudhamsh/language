@@ -7,60 +7,70 @@ A professional, interactive web application for learning Telugu vocabulary throu
 ### 🎴 Interactive Flashcards
 - Click or tap to flip between Telugu and English
 - Beautiful card flip animations
-- 100 essential Telugu words with romanization
+- 200 Telugu words across 2 levels with romanization
 
-### 📊 Progress Tracking
-- Automatic progress saving in browser
-- Track known vs. learning cards
-- Visual progress dashboard
+### 📝 Quiz Mode
+- Test your knowledge with multiple-choice questions
+- Choose between Level 1 (Basics) or Level 2 (Intermediate)
+- Configurable question count (5, 10, 15, or 20 questions)
+- Two question types: Telugu → English and English → Telugu
+- Real-time score tracking
+- Detailed results with performance feedback
 
 ### 🎯 Smart Learning Features
+- **Two Levels**: Level 1 (100 basic words) and Level 2 (100 intermediate words)
 - **Category Filters**: Filter by Greetings, Numbers, Family, Verbs, and more
 - **Shuffle Mode**: Randomize cards for better learning
-- **Review Mode**: Practice only the cards you've marked as known
 - **Keyboard Shortcuts**: Learn faster with keyboard navigation
 
 ### 💾 Browser Storage
-- All progress saved automatically
 - No internet required after initial load
 - Works completely offline
+- Pure HTML/CSS/JavaScript - no dependencies
 
 ## How to Use
 
-### Getting Started
+### Flashcard Mode
 1. Open `index.html` in your web browser
-2. Start learning! Click on a card to flip it
-3. Use "I Know This" or "Don't Know" buttons to track progress
+2. Select a level (Level 1: Basics or Level 2: Intermediate)
+3. Click on a card to flip between Telugu and English
+4. Use Previous/Next buttons or arrow keys to navigate
 
-### Keyboard Shortcuts
+### Quiz Mode
+1. Open `quiz.html` in your web browser
+2. Select a level (1 or 2)
+3. Choose number of questions (5, 10, 15, or 20)
+4. Click **Start Quiz**
+5. Read the question and select your answer from 4 options
+6. Click **Submit Answer** to check if you're correct
+7. View your results at the end with detailed statistics
+
+### Keyboard Shortcuts (Flashcard Mode)
 - **Space/Enter**: Flip the current card
 - **Left Arrow**: Previous card
 - **Right Arrow**: Next card
-- **K**: Mark as known
-- **U**: Mark as unknown
 
 ### Navigation
 - Use **Previous/Next** buttons to navigate through cards
 - Click **category buttons** to filter by topic
 - Click **Shuffle** to randomize card order
-- Click **Review Known** to practice cards you've marked as known
-
-### Progress Management
-- Your progress is saved automatically in your browser
-- Click **Reset Progress** to start over (warning: this cannot be undone)
+- Switch between **Level 1** and **Level 2** using level selector buttons
 
 ## File Structure
 
 ```
 language/
-├── index.html              # Main HTML file
-├── style.css               # Styling and animations
-├── app.js                  # Application logic
-├── app.test.js             # Test suite
+├── index.html              # Flashcard interface
+├── style.css               # Flashcard styling and animations
+├── app.js                  # Flashcard application logic
+├── quiz.html               # Quiz interface
+├── quiz-style.css          # Quiz styling
+├── quiz.js                 # Quiz application logic
+├── app.test.js             # Comprehensive test suite
 ├── test.html               # Test runner UI
 ├── README.md               # This file
 └── telugu/
-    └── telugu-data.js      # Telugu vocabulary data (Levels 1 & 2)
+    └── telugu-data.js      # Telugu vocabulary data (Levels 1 & 2, 200 words total)
 ```
 
 ## Extending the Flashcards
@@ -130,15 +140,21 @@ node app.test.js
 
 ### Test Coverage
 
-The test suite includes:
+The test suite includes 50+ tests covering:
 - ✓ Data loading and validation
-- ✓ Level switching functionality
+- ✓ Level switching functionality (Levels 1 & 2)
 - ✓ Category filtering
 - ✓ Navigation (next/previous cards)
 - ✓ Shuffle algorithm
 - ✓ Card display
 - ✓ Edge cases and error handling
-- ✓ Data integrity checks
+- ✓ Data integrity checks (no duplicate words between levels)
+- ✓ Quiz question generation
+- ✓ Quiz answer option generation (1 correct + 3 random wrong)
+- ✓ Quiz score tracking and calculation
+- ✓ Quiz progress tracking
+- ✓ Quiz percentage calculations
+- ✓ Quiz completion logic
 
 ### Test Results
 

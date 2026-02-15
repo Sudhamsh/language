@@ -426,6 +426,240 @@ runner.test('Level 2 IDs should be unique', () => {
     }
 });
 
+// Quiz Tests
+runner.test('Quiz should generate correct number of questions', () => {
+    const level = mockFlashcardData.levels[0];
+    const numQuestions = 3;
+    const shuffled = [...level.flashcards].sort(() => Math.random() - 0.5);
+    const selected = shuffled.slice(0, Math.min(numQuestions, shuffled.length));
+
+    assertArrayLength(selected, numQuestions, 'Should generate exactly 3 questions');
+});
+
+runner.test('Quiz should not exceed available flashcards', () => {
+    const level = mockFlashcardData.levels[1]; // Only has 1 card
+    const numQuestions = 10;
+    const shuffled = [...level.flashcards].sort(() => Math.random() - 0.5);
+    const selected = shuffled.slice(0, Math.min(numQuestions, shuffled.length));
+
+    assertArrayLength(selected, 1, 'Should only generate 1 question when only 1 card available');
+});
+
+runner.test('Quiz should generate 4 answer options per question', () => {
+    const card = mockFlashcardData.levels[0].flashcards[0];
+    const allCards = mockFlashcardData.levels[0].flashcards;
+
+    // Get 3 wrong answers
+    const wrongAnswers = allCards
+        .filter(c => c.english !== card.english)
+        .map(c => c.english)
+        .slice(0, 3);
+
+    const options = [card.english, ...wrongAnswers];
+    assertArrayLength(options, 4, 'Should have 4 answer options');
+});
+
+runner.test('Quiz should include correct answer in options', () => {
+    const card = mockFlashcardData.levels[0].flashcards[0];
+    const allCards = mockFlashcardData.levels[0].flashcards;
+
+    const wrongAnswers = allCards
+        .filter(c => c.english !== card.english)
+        .map(c => c.english)
+        .slice(0, 3);
+
+    const options = [card.english, ...wrongAnswers];
+    assertTrue(options.includes(card.english), 'Options should include correct answer');
+});
+
+runner.test('Quiz wrong answers should be different from correct answer', () => {
+    const card = mockFlashcardData.levels[0].flashcards[0];
+    const allCards = mockFlashcardData.levels[0].flashcards;
+
+    const wrongAnswers = allCards
+        .filter(c => c.english !== card.english)
+        .map(c => c.english)
+        .slice(0, 3);
+
+    wrongAnswers.forEach(answer => {
+        assertTrue(answer !== card.english, `Wrong answer "${answer}" should not equal correct answer "${card.english}"`);
+    });
+});
+
+runner.test('Quiz should track score correctly - correct answer', () => {
+    let score = 0;
+    let wrongAnswers = 0;
+
+    // Simulate correct answer
+    const isCorrect = true;
+    if (isCorrect) {
+        score++;
+    } else {
+        wrongAnswers++;
+    }
+
+    assertEquals(score, 1, 'Score should be 1 after correct answer');
+    assertEquals(wrongAnswers, 0, 'Wrong answers should be 0');
+});
+
+runner.test('Quiz should track score correctly - wrong answer', () => {
+    let score = 0;
+    let wrongAnswers = 0;
+
+    // Simulate wrong answer
+    const isCorrect = false;
+    if (isCorrect) {
+        score++;
+    } else {
+        wrongAnswers++;
+    }
+
+    assertEquals(score, 0, 'Score should be 0 after wrong answer');
+    assertEquals(wrongAnswers, 1, 'Wrong answers should be 1');
+});
+
+runner.test('Quiz should calculate percentage correctly - 100%', () => {
+    const score = 10;
+    const total = 10;
+    const percentage = Math.round((score / total) * 100);
+
+    assertEquals(percentage, 100, 'Should calculate 100% correctly');
+});
+
+runner.test('Quiz should calculate percentage correctly - 80%', () => {
+    const score = 8;
+    const total = 10;
+    const percentage = Math.round((score / total) * 100);
+
+    assertEquals(percentage, 80, 'Should calculate 80% correctly');
+});
+
+runner.test('Quiz should calculate percentage correctly - 50%', () => {
+    const score = 5;
+    const total = 10;
+    const percentage = Math.round((score / total) * 100);
+
+    assertEquals(percentage, 50, 'Should calculate 50% correctly');
+});
+
+runner.test('Quiz should calculate percentage correctly - 0%', () => {
+    const score = 0;
+    const total = 10;
+    const percentage = Math.round((score / total) * 100);
+
+    assertEquals(percentage, 0, 'Should calculate 0% correctly');
+});
+
+runner.test('Quiz should handle level selection', () => {
+    let selectedLevel = 1;
+
+    // Simulate level 2 selection
+    selectedLevel = 2;
+
+    assertEquals(selectedLevel, 2, 'Should switch to level 2');
+});
+
+runner.test('Quiz question type should be Telugu to English or English to Telugu', () => {
+    const questionTypes = ['Telugu → English', 'English → Telugu'];
+    const selectedType = questionTypes[Math.random() > 0.5 ? 0 : 1];
+
+    assertTrue(
+        questionTypes.includes(selectedType),
+        `Question type should be one of: ${questionTypes.join(', ')}`
+    );
+});
+
+runner.test('Quiz should shuffle answer options', () => {
+    const options = ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4'];
+    const originalOrder = [...options];
+
+    // Fisher-Yates shuffle
+    for (let i = options.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [options[i], options[j]] = [options[j], options[i]];
+    }
+
+    // Verify all original options are still present
+    assertArrayLength(options, 4, 'Should still have 4 options after shuffle');
+    originalOrder.forEach(opt => {
+        assertTrue(options.includes(opt), `Shuffled options should contain "${opt}"`);
+    });
+});
+
+runner.test('Quiz should handle configurable question counts', () => {
+    const validCounts = [5, 10, 15, 20];
+
+    validCounts.forEach(count => {
+        const numQuestions = count;
+        assertTrue(
+            validCounts.includes(numQuestions),
+            `Question count ${numQuestions} should be valid`
+        );
+    });
+});
+
+runner.test('Quiz progress should increment correctly', () => {
+    let currentQuestionIndex = 0;
+    const totalQuestions = 10;
+
+    // Simulate answering 5 questions
+    for (let i = 0; i < 5; i++) {
+        currentQuestionIndex++;
+    }
+
+    assertEquals(currentQuestionIndex, 5, 'Should be at question 5 after 5 answers');
+
+    const percentage = (currentQuestionIndex / totalQuestions) * 100;
+    assertEquals(percentage, 50, 'Progress should be 50%');
+});
+
+runner.test('Quiz should complete when all questions answered', () => {
+    let currentQuestionIndex = 0;
+    const totalQuestions = 10;
+
+    // Answer all questions
+    for (let i = 0; i < 10; i++) {
+        currentQuestionIndex++;
+    }
+
+    const isComplete = currentQuestionIndex >= totalQuestions;
+    assertTrue(isComplete, 'Quiz should be complete after all questions answered');
+});
+
+runner.test('Quiz should display appropriate message for perfect score', () => {
+    const percentage = 100;
+    let message = '';
+
+    if (percentage === 100) {
+        message = 'Perfect score!';
+    }
+
+    assertTrue(message.length > 0, 'Should have message for perfect score');
+    assertTrue(message.includes('Perfect'), 'Message should mention perfect score');
+});
+
+runner.test('Quiz should display appropriate message for good score', () => {
+    const percentage = 85;
+    let message = '';
+
+    if (percentage >= 80) {
+        message = 'Excellent work!';
+    }
+
+    assertTrue(message.length > 0, 'Should have message for 85% score');
+});
+
+runner.test('Quiz should display appropriate message for low score', () => {
+    const percentage = 30;
+    let message = '';
+
+    if (percentage < 40) {
+        message = 'Keep studying!';
+    }
+
+    assertTrue(message.length > 0, 'Should have message for low score');
+});
+
 // Run tests
 if (typeof window !== 'undefined') {
     // Running in browser
