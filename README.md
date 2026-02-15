@@ -28,6 +28,12 @@ A professional, interactive web application for learning Telugu vocabulary throu
 - Works completely offline
 - Pure HTML/CSS/JavaScript - no dependencies
 
+### 📱 Mobile-Friendly
+- Fully responsive design for all screen sizes
+- Optimized for tablets (768px) and phones (480px)
+- Touch-friendly buttons and interface
+- Works seamlessly on iOS and Android devices
+
 ## How to Use
 
 ### Flashcard Mode
