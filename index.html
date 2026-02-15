@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telugu Flashcards - Learn Telugu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🇮🇳 Telugu Flashcards</h1>
+            <p class="subtitle">Master Telugu vocabulary with interactive flashcards</p>
+        </header>
+
+        <!-- Stats Dashboard -->
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-value" id="progress-count">0/100</div>
+                <div class="stat-label">Progress</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="known-count">0</div>
+                <div class="stat-label">Known</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="learning-count">100</div>
+                <div class="stat-label">Learning</div>
+            </div>
+        </div>
+
+        <!-- Category Filter -->
+        <div class="category-filter">
+            <button class="category-btn active" data-category="all">All</button>
+            <button class="category-btn" data-category="Greetings">Greetings</button>
+            <button class="category-btn" data-category="Numbers">Numbers</button>
+            <button class="category-btn" data-category="Family">Family</button>
+            <button class="category-btn" data-category="Verbs">Verbs</button>
+            <button class="category-btn" data-category="Common Words">Common</button>
+            <button class="category-btn" data-category="Pronouns">Pronouns</button>
+            <button class="category-btn" data-category="Adjectives">Adjectives</button>
+            <button class="category-btn" data-category="Colors">Colors</button>
+            <button class="category-btn" data-category="Body Parts">Body</button>
+            <button class="category-btn" data-category="Places">Places</button>
+            <button class="category-btn" data-category="Time">Time</button>
+            <button class="category-btn" data-category="Questions">Questions</button>
+        </div>
+
+        <!-- Flashcard Container -->
+        <div class="flashcard-wrapper">
+            <div class="flashcard" id="flashcard">
+                <div class="flashcard-inner">
+                    <!-- Front (Telugu) -->
+                    <div class="flashcard-front">
+                        <div class="card-category" id="card-category">Category</div>
+                        <div class="card-telugu" id="card-telugu">తెలుగు</div>
+                        <div class="card-romanization" id="card-romanization">Telugu</div>
+                        <div class="tap-hint">Tap to reveal</div>
+                    </div>
+
+                    <!-- Back (English) -->
+                    <div class="flashcard-back">
+                        <div class="card-category" id="card-category-back">Category</div>
+                        <div class="card-english" id="card-english">English</div>
+                        <div class="card-romanization-back" id="card-romanization-back">Romanization</div>
+                        <div class="tap-hint">Tap to flip back</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="action-btn btn-dont-know" id="btn-dont-know">
+                <span class="btn-icon">❌</span>
+                <span>Don't Know</span>
+            </button>
+            <button class="action-btn btn-know" id="btn-know">
+                <span class="btn-icon">✓</span>
+                <span>I Know This</span>
+            </button>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="navigation-buttons">
+            <button class="nav-btn" id="btn-prev">← Previous</button>
+            <div class="card-counter">
+                <span id="current-card">1</span> / <span id="total-cards">100</span>
+            </div>
+            <button class="nav-btn" id="btn-next">Next →</button>
+        </div>
+
+        <!-- Control Buttons -->
+        <div class="control-buttons">
+            <button class="control-btn" id="btn-shuffle">🔀 Shuffle</button>
+            <button class="control-btn" id="btn-reset">↺ Reset Progress</button>
+            <button class="control-btn" id="btn-review">📝 Review Known</button>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Practice regularly to master Telugu! Your progress is saved automatically.</p>
+        </footer>
+    </div>
+
+    <script src="flashcards-data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
