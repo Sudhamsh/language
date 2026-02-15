@@ -5,7 +5,6 @@ class FlashcardApp {
         this.filteredCards = [];
         this.currentIndex = 0;
         this.currentCategory = 'all';
-        this.knownCards = new Set();
         this.isFlipped = false;
 
         this.init();
@@ -15,14 +14,10 @@ class FlashcardApp {
         console.log('Initializing Telugu Flashcard App...');
         await this.loadFlashcards();
         console.log('✓ Flashcards loaded');
-        this.loadProgress();
-        console.log('✓ Progress loaded');
         this.setupEventListeners();
         console.log('✓ Event listeners set up');
         this.displayCard();
         console.log('✓ First card displayed');
-        this.updateStats();
-        console.log('✓ Stats updated');
         console.log('App ready!');
     }
 
@@ -42,27 +37,6 @@ class FlashcardApp {
         }
     }
 
-    // Load user progress from localStorage
-    loadProgress() {
-        const saved = localStorage.getItem('teluguFlashcardsProgress');
-        if (saved) {
-            const progress = JSON.parse(saved);
-            this.knownCards = new Set(progress.knownCards || []);
-            this.currentIndex = progress.currentIndex || 0;
-            console.log(`Loaded progress: ${this.knownCards.size} cards known`);
-        }
-    }
-
-    // Save user progress to localStorage
-    saveProgress() {
-        const progress = {
-            knownCards: Array.from(this.knownCards),
-            currentIndex: this.currentIndex,
-            lastUpdated: new Date().toISOString()
-        };
-        localStorage.setItem('teluguFlashcardsProgress', JSON.stringify(progress));
-    }
-
     // Setup event listeners
     setupEventListeners() {
         // Flashcard flip
@@ -73,14 +47,8 @@ class FlashcardApp {
         document.getElementById('btn-prev').addEventListener('click', () => this.previousCard());
         document.getElementById('btn-next').addEventListener('click', () => this.nextCard());
 
-        // Action buttons
-        document.getElementById('btn-know').addEventListener('click', () => this.markAsKnown());
-        document.getElementById('btn-dont-know').addEventListener('click', () => this.markAsUnknown());
-
         // Control buttons
         document.getElementById('btn-shuffle').addEventListener('click', () => this.shuffleCards());
-        document.getElementById('btn-reset').addEventListener('click', () => this.resetProgress());
-        document.getElementById('btn-review').addEventListener('click', () => this.reviewKnown());
 
         // Category filter buttons
         const categoryButtons = document.querySelectorAll('.category-btn');
@@ -132,19 +100,6 @@ class FlashcardApp {
         // Update navigation button states
         document.getElementById('btn-prev').disabled = this.currentIndex === 0;
         document.getElementById('btn-next').disabled = this.currentIndex === this.filteredCards.length - 1;
-
-        // Highlight if known
-        this.updateCardStyle(card.id);
-    }
-
-    // Update card style based on known status
-    updateCardStyle(cardId) {
-        const flashcard = document.getElementById('flashcard');
-        if (this.knownCards.has(cardId)) {
-            flashcard.style.borderColor = 'var(--success-color)';
-        } else {
-            flashcard.style.borderColor = 'transparent';
-        }
     }
 
     // Flip card
@@ -159,7 +114,6 @@ class FlashcardApp {
         if (this.currentIndex > 0) {
             this.currentIndex--;
             this.displayCard();
-            this.saveProgress();
         }
     }
 
@@ -170,53 +124,9 @@ class FlashcardApp {
             this.currentIndex++;
             console.log(`Moving to card ${this.currentIndex + 1}`);
             this.displayCard();
-            this.saveProgress();
         } else {
             console.log('Already at last card');
         }
-    }
-
-    // Mark current card as known
-    markAsKnown() {
-        const card = this.filteredCards[this.currentIndex];
-        this.knownCards.add(card.id);
-        this.updateStats();
-        this.saveProgress();
-        this.updateCardStyle(card.id);
-
-        // Auto-advance to next card
-        setTimeout(() => {
-            if (this.currentIndex < this.filteredCards.length - 1) {
-                this.nextCard();
-            }
-        }, 300);
-    }
-
-    // Mark current card as unknown
-    markAsUnknown() {
-        const card = this.filteredCards[this.currentIndex];
-        this.knownCards.delete(card.id);
-        this.updateStats();
-        this.saveProgress();
-        this.updateCardStyle(card.id);
-
-        // Auto-advance to next card
-        setTimeout(() => {
-            if (this.currentIndex < this.filteredCards.length - 1) {
-                this.nextCard();
-            }
-        }, 300);
-    }
-
-    // Update statistics display
-    updateStats() {
-        const known = this.knownCards.size;
-        const total = this.flashcards.length;
-        const learning = total - known;
-
-        document.getElementById('progress-count').textContent = `${known}/${total}`;
-        document.getElementById('known-count').textContent = known;
-        document.getElementById('learning-count').textContent = learning;
     }
 
     // Filter cards by category
@@ -231,7 +141,6 @@ class FlashcardApp {
 
         this.currentIndex = 0;
         this.displayCard();
-        this.updateStats();
     }
 
     // Shuffle cards
@@ -245,36 +154,6 @@ class FlashcardApp {
             this.currentIndex = 0;
             this.displayCard();
         }
-    }
-
-    // Reset all progress
-    resetProgress() {
-        if (confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
-            this.knownCards.clear();
-            this.currentIndex = 0;
-            localStorage.removeItem('teluguFlashcardsProgress');
-            this.updateStats();
-            this.displayCard();
-            alert('Progress has been reset!');
-        }
-    }
-
-    // Review only known cards
-    reviewKnown() {
-        if (this.knownCards.size === 0) {
-            alert('You haven\'t marked any cards as known yet. Keep learning!');
-            return;
-        }
-
-        const knownCardIds = Array.from(this.knownCards);
-        this.filteredCards = this.flashcards.filter(card => knownCardIds.includes(card.id));
-        this.currentIndex = 0;
-
-        // Update category buttons
-        document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-
-        this.displayCard();
-        alert(`Reviewing ${this.knownCards.size} cards you've marked as known.`);
     }
 
     // Handle keyboard shortcuts
@@ -293,16 +172,6 @@ class FlashcardApp {
                 e.preventDefault();
                 this.nextCard();
                 break;
-            case 'k':
-            case 'K':
-                e.preventDefault();
-                this.markAsKnown();
-                break;
-            case 'u':
-            case 'U':
-                e.preventDefault();
-                this.markAsUnknown();
-                break;
         }
     }
 }
@@ -318,6 +187,4 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Keyboard shortcuts:');
     console.log('  Space/Enter: Flip card');
     console.log('  Left/Right Arrow: Navigate');
-    console.log('  K: Mark as known');
-    console.log('  U: Mark as unknown');
 });
