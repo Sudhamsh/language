@@ -1,6 +1,8 @@
 // Flashcard App - Main Application Logic
 class FlashcardApp {
     constructor() {
+        this.levels = [];
+        this.currentLevel = 1;
         this.flashcards = [];
         this.filteredCards = [];
         this.currentIndex = 0;
@@ -28,9 +30,9 @@ class FlashcardApp {
             if (typeof FLASHCARD_DATA === 'undefined') {
                 throw new Error('FLASHCARD_DATA not found. Make sure flashcards-data.js is loaded.');
             }
-            this.flashcards = FLASHCARD_DATA.flashcards;
-            this.filteredCards = [...this.flashcards];
-            console.log(`✓ Loaded ${this.flashcards.length} flashcards successfully`);
+            this.levels = FLASHCARD_DATA.levels;
+            this.switchLevel(this.currentLevel);
+            console.log(`✓ Loaded ${this.levels.length} levels successfully`);
         } catch (error) {
             console.error('Error loading flashcards:', error);
             alert('Failed to load flashcards. Please make sure flashcards-data.js is included before app.js in index.html');
@@ -49,6 +51,17 @@ class FlashcardApp {
 
         // Control buttons
         document.getElementById('btn-shuffle').addEventListener('click', () => this.shuffleCards());
+
+        // Level selector buttons
+        const levelButtons = document.querySelectorAll('.level-btn');
+        levelButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const level = parseInt(e.target.dataset.level);
+                levelButtons.forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                this.switchLevel(level);
+            });
+        });
 
         // Category filter buttons
         const categoryButtons = document.querySelectorAll('.category-btn');
@@ -127,6 +140,38 @@ class FlashcardApp {
         } else {
             console.log('Already at last card');
         }
+    }
+
+    // Switch to a different level
+    switchLevel(levelId) {
+        const level = this.levels.find(l => l.id === levelId);
+        if (!level) {
+            console.error(`Level ${levelId} not found`);
+            return;
+        }
+
+        if (level.flashcards.length === 0) {
+            alert(`${level.name} has no flashcards yet. Please add flashcards to this level.`);
+            return;
+        }
+
+        this.currentLevel = levelId;
+        this.flashcards = level.flashcards;
+        this.filteredCards = [...this.flashcards];
+        this.currentIndex = 0;
+        this.currentCategory = 'all';
+
+        // Reset category filter to "All"
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            if (btn.dataset.category === 'all') {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+
+        console.log(`✓ Switched to ${level.name} (${this.flashcards.length} cards)`);
+        this.displayCard();
     }
 
     // Filter cards by category
