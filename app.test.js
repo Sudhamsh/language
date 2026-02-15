@@ -311,6 +311,121 @@ runner.test('Should handle single card in level', () => {
     assertArrayLength(level2.flashcards, 1, 'Level 2 should have exactly 1 card');
 });
 
+// Real Data Tests (Level 2)
+runner.test('Should load actual FLASHCARD_DATA if available', () => {
+    if (typeof FLASHCARD_DATA !== 'undefined') {
+        assertTrue(FLASHCARD_DATA.levels !== undefined, 'FLASHCARD_DATA should have levels');
+        assertTrue(FLASHCARD_DATA.levels.length >= 2, 'Should have at least 2 levels');
+    }
+});
+
+runner.test('Level 1 should have 100 flashcards', () => {
+    if (typeof FLASHCARD_DATA !== 'undefined') {
+        const level1 = FLASHCARD_DATA.levels.find(l => l.id === 1);
+        assertTrue(level1 !== undefined, 'Level 1 should exist');
+        assertArrayLength(level1.flashcards, 100, 'Level 1 should have 100 flashcards');
+    }
+});
+
+runner.test('Level 2 should have 100 flashcards', () => {
+    if (typeof FLASHCARD_DATA !== 'undefined') {
+        const level2 = FLASHCARD_DATA.levels.find(l => l.id === 2);
+        assertTrue(level2 !== undefined, 'Level 2 should exist');
+        assertArrayLength(level2.flashcards, 100, 'Level 2 should have 100 flashcards');
+    }
+});
+
+runner.test('Level 2 should have correct name and description', () => {
+    if (typeof FLASHCARD_DATA !== 'undefined') {
+        const level2 = FLASHCARD_DATA.levels.find(l => l.id === 2);
+        assertEquals(level2.name, 'Level 2 - Intermediate', 'Level 2 should have correct name');
+        assertTrue(level2.description.length > 0, 'Level 2 should have a description');
+    }
+});
+
+runner.test('Level 2 flashcards should have IDs starting from 101', () => {
+    if (typeof FLASHCARD_DATA !== 'undefined') {
+        const level2 = FLASHCARD_DATA.levels.find(l => l.id === 2);
+        if (level2 && level2.flashcards.length > 0) {
+            assertEquals(level2.flashcards[0].id, 101, 'First Level 2 card should have ID 101');
+            assertEquals(level2.flashcards[level2.flashcards.length - 1].id, 200, 'Last Level 2 card should have ID 200');
+        }
+    }
+});
+
+runner.test('No duplicate words between Level 1 and Level 2', () => {
+    if (typeof FLASHCARD_DATA !== 'undefined') {
+        const level1 = FLASHCARD_DATA.levels.find(l => l.id === 1);
+        const level2 = FLASHCARD_DATA.levels.find(l => l.id === 2);
+
+        if (level1 && level2) {
+            const level1Words = new Set(level1.flashcards.map(c => c.telugu));
+            const level2Words = level2.flashcards.map(c => c.telugu);
+
+            const duplicates = level2Words.filter(word => level1Words.has(word));
+            assertArrayLength(duplicates, 0, `No duplicate Telugu words should exist. Found: ${duplicates.join(', ')}`);
+        }
+    }
+});
+
+runner.test('No duplicate English translations between Level 1 and Level 2', () => {
+    if (typeof FLASHCARD_DATA !== 'undefined') {
+        const level1 = FLASHCARD_DATA.levels.find(l => l.id === 1);
+        const level2 = FLASHCARD_DATA.levels.find(l => l.id === 2);
+
+        if (level1 && level2) {
+            const level1English = new Set(level1.flashcards.map(c => c.english.toLowerCase()));
+            const level2English = level2.flashcards.map(c => c.english.toLowerCase());
+
+            const duplicates = level2English.filter(word => level1English.has(word));
+            assertArrayLength(duplicates, 0, `No duplicate English words should exist. Found: ${duplicates.join(', ')}`);
+        }
+    }
+});
+
+runner.test('All Level 2 flashcards should have required fields', () => {
+    if (typeof FLASHCARD_DATA !== 'undefined') {
+        const level2 = FLASHCARD_DATA.levels.find(l => l.id === 2);
+
+        if (level2) {
+            level2.flashcards.forEach((card, index) => {
+                assertTrue(card.id !== undefined, `Level 2 card ${index} should have an id`);
+                assertTrue(card.telugu !== undefined, `Level 2 card ${index} should have telugu text`);
+                assertTrue(card.romanization !== undefined, `Level 2 card ${index} should have romanization`);
+                assertTrue(card.english !== undefined, `Level 2 card ${index} should have english translation`);
+                assertTrue(card.category !== undefined, `Level 2 card ${index} should have a category`);
+            });
+        }
+    }
+});
+
+runner.test('Level 2 should have appropriate categories', () => {
+    if (typeof FLASHCARD_DATA !== 'undefined') {
+        const level2 = FLASHCARD_DATA.levels.find(l => l.id === 2);
+
+        if (level2) {
+            const categories = new Set(level2.flashcards.map(c => c.category));
+            assertTrue(categories.size > 0, 'Level 2 should have at least one category');
+
+            // Level 2 should have some intermediate categories
+            const level2Categories = Array.from(categories);
+            console.log(`  Level 2 categories: ${level2Categories.join(', ')}`);
+        }
+    }
+});
+
+runner.test('Level 2 IDs should be unique', () => {
+    if (typeof FLASHCARD_DATA !== 'undefined') {
+        const level2 = FLASHCARD_DATA.levels.find(l => l.id === 2);
+
+        if (level2) {
+            const ids = level2.flashcards.map(card => card.id);
+            const uniqueIds = new Set(ids);
+            assertEquals(ids.length, uniqueIds.size, 'All Level 2 card IDs should be unique');
+        }
+    }
+});
+
 // Run tests
 if (typeof window !== 'undefined') {
     // Running in browser
