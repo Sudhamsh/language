@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telugu Flashcards - Test Suite</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        #console {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            max-height: 600px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .test-pass {
+            color: #4ec9b0;
+        }
+
+        .test-fail {
+            color: #f48771;
+        }
+
+        .test-summary {
+            color: #dcdcaa;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            margin: 0 10px;
+        }
+
+        button:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .status {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .status.running {
+            color: #dcdcaa;
+        }
+
+        .status.passed {
+            color: #4ec9b0;
+        }
+
+        .status.failed {
+            color: #f48771;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test Suite</h1>
+        <p class="subtitle">Telugu Flashcard Application Tests</p>
+
+        <div class="controls">
+            <button onclick="runTests()">▶ Run Tests</button>
+            <button onclick="clearConsole()">🗑 Clear Console</button>
+        </div>
+
+        <div class="status" id="status">Ready to run tests</div>
+
+        <div id="console"></div>
+    </div>
+
+    <script src="app.test.js"></script>
+    <script>
+        const consoleDiv = document.getElementById('console');
+        const statusDiv = document.getElementById('status');
+
+        // Override console methods to display in the page
+        const originalLog = console.log;
+        const originalError = console.error;
+
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            const message = args.join(' ');
+            const line = document.createElement('div');
+
+            if (message.includes('✓')) {
+                line.className = 'test-pass';
+            } else if (message.includes('📊')) {
+                line.className = 'test-summary';
+            }
+
+            line.textContent = message;
+            consoleDiv.appendChild(line);
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        };
+
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            const message = args.join(' ');
+            const line = document.createElement('div');
+            line.className = 'test-fail';
+            line.textContent = message;
+            consoleDiv.appendChild(line);
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        };
+
+        async function runTests() {
+            clearConsole();
+            statusDiv.textContent = 'Running tests...';
+            statusDiv.className = 'status running';
+
+            // Wait a bit for UI to update
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            const success = await runner.run();
+
+            if (success) {
+                statusDiv.textContent = '✅ All tests passed!';
+                statusDiv.className = 'status passed';
+            } else {
+                statusDiv.textContent = '❌ Some tests failed';
+                statusDiv.className = 'status failed';
+            }
+        }
+
+        function clearConsole() {
+            consoleDiv.innerHTML = '';
+            statusDiv.textContent = 'Ready to run tests';
+            statusDiv.className = 'status';
+        }
+
+        // Auto-run tests on load
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(runTests, 500);
+        });
+    </script>
+</body>
+</html>

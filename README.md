@@ -54,10 +54,13 @@ A professional, interactive web application for learning Telugu vocabulary throu
 ```
 language/
 ├── index.html              # Main HTML file
-├── style.css              # Styling and animations
-├── app.js                 # Application logic
-├── flashcards-data.json   # Telugu vocabulary data
-└── README.md              # This file
+├── style.css               # Styling and animations
+├── app.js                  # Application logic
+├── app.test.js             # Test suite
+├── test.html               # Test runner UI
+├── README.md               # This file
+└── telugu/
+    └── telugu-data.js      # Telugu vocabulary data (Levels 1 & 2)
 ```
 
 ## Extending the Flashcards
@@ -107,6 +110,42 @@ The flashcard data is stored in `flashcards-data.json` in an extensible format. 
 - **Places**: Locations and buildings
 - **Time**: Time-related words
 - **Questions**: Question words (who, what, where, when, why, how)
+
+## Testing
+
+The application includes a comprehensive test suite to ensure reliability.
+
+### Running Tests
+
+**In Browser:**
+1. Open [test.html](test.html) in your web browser
+2. Tests will run automatically and display results
+3. Click "Run Tests" to re-run
+
+**Via Console:**
+```bash
+# If you have Node.js installed
+node app.test.js
+```
+
+### Test Coverage
+
+The test suite includes:
+- ✓ Data loading and validation
+- ✓ Level switching functionality
+- ✓ Category filtering
+- ✓ Navigation (next/previous cards)
+- ✓ Shuffle algorithm
+- ✓ Card display
+- ✓ Edge cases and error handling
+- ✓ Data integrity checks
+
+### Test Results
+
+All tests should pass. If any fail, check:
+- Data file format is correct
+- All required fields are present
+- IDs are unique within each level
 
 ## Technical Details
 
