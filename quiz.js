@@ -4,7 +4,7 @@ class LanguageQuiz {
         // Check URL parameter for language
         const urlParams = new URLSearchParams(window.location.search);
         const langParam = urlParams.get('lang');
-        this.currentLanguage = (langParam === 'spanish' || langParam === 'telugu' || langParam === 'french') ? langParam : 'telugu';
+        this.currentLanguage = (langParam === 'spanish' || langParam === 'telugu' || langParam === 'hindi' || langParam === 'french') ? langParam : 'telugu';
 
         this.selectedLevel = 1;
         this.numQuestions = 10;
