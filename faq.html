@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Language Flashcards</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .faq-header h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .faq-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+
+        .faq-nav {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .faq-nav h2 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .faq-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .faq-nav li {
+            margin: 8px 0;
+        }
+
+        .faq-nav a {
+            color: var(--text-dark);
+            text-decoration: none;
+            padding: 8px 12px;
+            display: block;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .faq-nav a:hover {
+            background: var(--primary-light);
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .faq-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .faq-section h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        .faq-item {
+            margin-bottom: 25px;
+        }
+
+        .faq-question {
+            color: var(--text-dark);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .faq-question::before {
+            content: "Q:";
+            color: var(--primary-color);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .faq-answer {
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-left: 30px;
+        }
+
+        .faq-answer p {
+            margin-bottom: 12px;
+        }
+
+        .faq-answer ul, .faq-answer ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .faq-answer li {
+            margin: 8px 0;
+        }
+
+        .faq-answer code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: var(--primary-color);
+        }
+
+        .alert-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .alert-box.success {
+            background: #d1fae5;
+            border-left-color: #10b981;
+        }
+
+        .alert-box.info {
+            background: #dbeafe;
+            border-left-color: #3b82f6;
+        }
+
+        .steps-list {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .steps-list li {
+            margin: 12px 0;
+            padding-left: 10px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        @media (max-width: 768px) {
+            .faq-header h1 {
+                font-size: 2rem;
+            }
+
+            .faq-section {
+                padding: 20px;
+            }
+
+            .faq-question {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="faq-container">
+            <!-- Header -->
+            <div class="faq-header">
+                <h1>❓ Frequently Asked Questions</h1>
+                <p>Find answers to common questions about the Language Flashcards app</p>
+            </div>
+
+            <!-- Quick Navigation -->
+            <div class="faq-nav">
+                <h2>📑 Quick Navigation</h2>
+                <ul>
+                    <li><a href="#audio-issues">🔊 Audio Issues & Troubleshooting</a></li>
+                    <li><a href="#getting-started">🚀 Getting Started</a></li>
+                    <li><a href="#features">✨ Features & Usage</a></li>
+                    <li><a href="#languages">🌍 Languages & Content</a></li>
+                    <li><a href="#technical">💻 Technical Questions</a></li>
+                    <li><a href="#feedback">💬 Feedback & Support</a></li>
+                </ul>
+            </div>
+
+            <!-- Audio Issues Section -->
+            <div id="audio-issues" class="faq-section">
+                <h2>🔊 Audio Issues & Troubleshooting</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">I click the audio button but hear no sound. What should I do?</div>
+                    <div class="faq-answer">
+                        <p>This is a common issue with text-to-speech in browsers. Follow these troubleshooting steps:</p>
+
+                        <div class="alert-box info">
+                            <strong>Quick Test:</strong> Open the <a href="test/audio-test.html" target="_blank">Audio Diagnostic Tool</a> to check if your browser supports audio and which voices are available.
+                        </div>
+
+                        <h3>For macOS Users:</h3>
+                        <div class="steps-list">
+                            <ol>
+                                <li><strong>Check System Voices:</strong>
+                                    <ul>
+                                        <li>Open <strong>System Settings</strong> (or System Preferences)</li>
+                                        <li>Go to <strong>Accessibility</strong> → <strong>Spoken Content</strong></li>
+                                        <li>Click <strong>System Voice</strong> dropdown</li>
+                                        <li>Click <strong>"Manage Voices..."</strong></li>
+                                        <li>Download voices for your languages:
+                                            <ul>
+                                                <li>Spanish: Download a Spanish voice (e.g., "Mónica", "Jorge")</li>
+                                                <li>French: Download a French voice (e.g., "Thomas", "Amélie")</li>
+                                                <li>Telugu: May use English voice as fallback</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><strong>Check Browser Volume:</strong> Ensure Chrome/Safari volume is not muted</li>
+                                <li><strong>Try Different Browser:</strong> Chrome usually has the best voice support</li>
+                                <li><strong>Restart Browser:</strong> Close and reopen after downloading voices</li>
+                            </ol>
+                        </div>
+
+                        <h3>For Windows Users:</h3>
+                        <div class="steps-list">
+                            <ol>
+                                <li><strong>Install Language Packs:</strong>
+                                    <ul>
+                                        <li>Open <strong>Settings</strong> (Win + I)</li>
+                                        <li>Go to <strong>Time & Language</strong> → <strong>Language & Region</strong></li>
+                                        <li>Click <strong>"Add a language"</strong></li>
+                                        <li>Add languages you want:
+                                            <ul>
+                                                <li>Spanish (España or México)</li>
+                                                <li>French (France)</li>
+                                            </ul>
+                                        </li>
+                                        <li>Click the language → <strong>"Options"</strong> → Download <strong>Text-to-speech</strong></li>
+                                    </ul>
+                                </li>
+                                <li><strong>Enable Speech Settings:</strong>
+                                    <ul>
+                                        <li>Go to <strong>Settings</strong> → <strong>Accessibility</strong> → <strong>Narrator</strong></li>
+                                        <li>Scroll to <strong>"Voice"</strong> section</li>
+                                        <li>Ensure voices are downloaded and available</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Try Microsoft Edge:</strong> Edge has better Windows voice integration than Chrome</li>
+                                <li><strong>Restart Browser:</strong> Close and reopen after installing language packs</li>
+                            </ol>
+                        </div>
+
+                        <div class="alert-box success">
+                            <strong>✅ Success Story:</strong> A user on macOS Chrome had this exact issue. After downloading Spanish and French voices in System Settings → Accessibility → Spoken Content → Manage Voices, the audio worked perfectly!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">The voice sounds robotic or wrong. Can I improve it?</div>
+                    <div class="faq-answer">
+                        <p>Voice quality depends on your operating system and browser:</p>
+                        <ul>
+                            <li><strong>Best Quality:</strong> Chrome on macOS/Windows with downloaded voices</li>
+                            <li><strong>Good Quality:</strong> Safari on macOS with Apple voices</li>
+                            <li><strong>Download Better Voices:</strong> Follow the steps above to download premium voices</li>
+                            <li><strong>Try Different Browser:</strong> Some browsers have better TTS engines</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Telugu audio doesn't work or sounds wrong. Why?</div>
+                    <div class="faq-answer">
+                        <p>Telugu text-to-speech support is limited on most systems:</p>
+                        <div class="alert-box">
+                            <strong>⚠️ Known Limitation:</strong> Most browsers don't have native Telugu voices. The app will use a fallback voice (usually English) which may not pronounce Telugu correctly. You can still use the romanization guide for pronunciation help.
+                        </div>
+                        <p><strong>Workaround:</strong> Use the romanization text shown on each card as a pronunciation guide (e.g., "Namaskāram" for నమస్కారం).</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Auto-play isn't working. What's wrong?</div>
+                    <div class="faq-answer">
+                        <p>Browsers block auto-play audio until you interact with the page:</p>
+                        <ol>
+                            <li>Click the 🔊 speaker button manually at least once</li>
+                            <li>Then enable the 🔊 Auto-play toggle</li>
+                            <li>Auto-play should now work when navigating cards</li>
+                        </ol>
+                        <p>This is a browser security feature to prevent unwanted sounds.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Getting Started Section -->
+            <div id="getting-started" class="faq-section">
+                <h2>🚀 Getting Started</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">How do I start learning?</div>
+                    <div class="faq-answer">
+                        <ol>
+                            <li>Visit <a href="https://sudhamsh.github.io/language/" target="_blank">sudhamsh.github.io/language</a></li>
+                            <li>Select a language: 🇮🇳 Telugu, 🇪🇸 Spanish, or 🇫🇷 French</li>
+                            <li>Choose Level 1 (Basics) or Level 2 (Intermediate)</li>
+                            <li>Click on a flashcard to flip and see the translation</li>
+                            <li>Use arrow keys or navigation buttons to move between cards</li>
+                            <li>Click 🔊 to hear pronunciation</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Do I need to install anything?</div>
+                    <div class="faq-answer">
+                        <p>No! This app runs entirely in your browser. No installation, no downloads, no sign-up required. Just visit the website and start learning.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Does it work offline?</div>
+                    <div class="faq-answer">
+                        <p>Once you load the page, the flashcards work offline. However:</p>
+                        <ul>
+                            <li>✅ Flashcards and text work offline</li>
+                            <li>⚠️ Audio may require internet on first use (to download voices)</li>
+                            <li>⚠️ Category switching and navigation work offline</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features & Usage Section -->
+            <div id="features" class="faq-section">
+                <h2>✨ Features & Usage</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">What are the keyboard shortcuts?</div>
+                    <div class="faq-answer">
+                        <ul>
+                            <li><code>Space</code> or <code>Enter</code> - Flip flashcard</li>
+                            <li><code>Left Arrow</code> - Previous card</li>
+                            <li><code>Right Arrow</code> - Next card</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">How does the quiz work?</div>
+                    <div class="faq-answer">
+                        <ol>
+                            <li>Click <strong>"📝 Take Quiz"</strong> from the flashcards page</li>
+                            <li>Select your language and level</li>
+                            <li>Choose number of questions (5, 10, 15, or 20)</li>
+                            <li>Answer multiple-choice questions</li>
+                            <li>Get instant feedback and see your final score</li>
+                            <li>Quiz tests both Native → English and English → Native</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">What does "Shuffle" do?</div>
+                    <div class="faq-answer">
+                        <p>The 🔀 Shuffle button randomizes the order of flashcards. This helps with:</p>
+                        <ul>
+                            <li>Preventing memorization of card order</li>
+                            <li>Testing your actual knowledge</li>
+                            <li>Making practice sessions more engaging</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">How do categories work?</div>
+                    <div class="faq-answer">
+                        <p>Categories filter flashcards by topic:</p>
+                        <ul>
+                            <li>Click <strong>"All"</strong> to see all 100 words in the level</li>
+                            <li>Click a category (e.g., "Greetings", "Numbers") to see only those words</li>
+                            <li>Great for focused learning on specific topics</li>
+                            <li>Each level has 10-14 different categories</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Languages & Content Section -->
+            <div id="languages" class="faq-section">
+                <h2>🌍 Languages & Content</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">What languages are available?</div>
+                    <div class="faq-answer">
+                        <ul>
+                            <li>🇮🇳 <strong>Telugu</strong> - 200 words (100 Basics + 100 Intermediate)</li>
+                            <li>🇪🇸 <strong>Spanish</strong> - 200 words (100 Basics + 100 Intermediate)</li>
+                            <li>🇫🇷 <strong>French</strong> - 200 words (100 Basics + 100 Intermediate)</li>
+                            <li><strong>Total:</strong> 600 vocabulary words across 3 languages</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">What's the difference between Level 1 and Level 2?</div>
+                    <div class="faq-answer">
+                        <ul>
+                            <li><strong>Level 1 (Basics):</strong> Essential words like greetings, numbers 1-10, family, common verbs, colors, pronouns</li>
+                            <li><strong>Level 2 (Intermediate):</strong> More advanced vocabulary like numbers 11-1000, days/time, food, clothing, body parts, places</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Can you add more languages?</div>
+                    <div class="faq-answer">
+                        <p>Yes! This is open source. You can:</p>
+                        <ul>
+                            <li><a href="https://github.com/Sudhamsh/language/issues/new?template=feature_request.yml" target="_blank">Request a language via GitHub Issues</a></li>
+                            <li>Contribute vocabulary via pull requests</li>
+                            <li>Check the Contributing section in the <a href="https://github.com/Sudhamsh/language#-contributing" target="_blank">README</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">I found a translation error. How do I report it?</div>
+                    <div class="faq-answer">
+                        <p>Please <a href="https://github.com/Sudhamsh/language/issues/new?template=feedback.yml" target="_blank">report it via GitHub Issues</a> or use the "💬 Report Issue / Give Feedback" link in the footer. Include:</p>
+                        <ul>
+                            <li>Which language and word</li>
+                            <li>What's incorrect</li>
+                            <li>What the correct translation should be</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Questions Section -->
+            <div id="technical" class="faq-section">
+                <h2>💻 Technical Questions</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">Which browsers are supported?</div>
+                    <div class="faq-answer">
+                        <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
+                            <tr style="background: #f3f4f6;">
+                                <th style="padding: 10px; text-align: left;">Browser</th>
+                                <th style="padding: 10px; text-align: left;">Flashcards</th>
+                                <th style="padding: 10px; text-align: left;">Audio</th>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px;">Chrome</td>
+                                <td style="padding: 10px;">✅ Excellent</td>
+                                <td style="padding: 10px;">✅ Best quality</td>
+                            </tr>
+                            <tr style="background: #f9fafb;">
+                                <td style="padding: 10px;">Safari</td>
+                                <td style="padding: 10px;">✅ Excellent</td>
+                                <td style="padding: 10px;">✅ High quality</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px;">Firefox</td>
+                                <td style="padding: 10px;">✅ Excellent</td>
+                                <td style="padding: 10px;">⚠️ Good</td>
+                            </tr>
+                            <tr style="background: #f9fafb;">
+                                <td style="padding: 10px;">Edge</td>
+                                <td style="padding: 10px;">✅ Excellent</td>
+                                <td style="padding: 10px;">⚠️ Good</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Does this work on mobile?</div>
+                    <div class="faq-answer">
+                        <p>Yes! The app is fully responsive and works on:</p>
+                        <ul>
+                            <li>📱 iPhone (Safari, Chrome)</li>
+                            <li>📱 Android (Chrome, Firefox)</li>
+                            <li>💻 Tablets (iPad, Android tablets)</li>
+                            <li>🖥️ Desktops and laptops</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">How do I share a specific language with someone?</div>
+                    <div class="faq-answer">
+                        <p>Use deep linking with URL parameters:</p>
+                        <ul>
+                            <li>Telugu: <code>https://sudhamsh.github.io/language/?lang=telugu</code></li>
+                            <li>Spanish: <code>https://sudhamsh.github.io/language/?lang=spanish</code></li>
+                            <li>French: <code>https://sudhamsh.github.io/language/?lang=french</code></li>
+                            <li>Quiz: <code>https://sudhamsh.github.io/language/quiz.html?lang=spanish</code></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Is my progress saved?</div>
+                    <div class="faq-answer">
+                        <p>Currently, progress is not saved between sessions. This is a simple, no-account flashcard app. Future versions may include:</p>
+                        <ul>
+                            <li>Browser local storage for progress tracking</li>
+                            <li>Marking cards as "known" or "learning"</li>
+                            <li>Spaced repetition algorithms</li>
+                        </ul>
+                        <p>Want this feature? <a href="https://github.com/Sudhamsh/language/issues/new?template=feature_request.yml" target="_blank">Request it on GitHub!</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feedback & Support Section -->
+            <div id="feedback" class="faq-section">
+                <h2>💬 Feedback & Support</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">How do I report a bug or suggest a feature?</div>
+                    <div class="faq-answer">
+                        <p>Use GitHub Issues (no account required for viewing, account needed for posting):</p>
+                        <ul>
+                            <li>🐛 <a href="https://github.com/Sudhamsh/language/issues/new?template=bug_report.yml" target="_blank">Report a Bug</a></li>
+                            <li>✨ <a href="https://github.com/Sudhamsh/language/issues/new?template=feature_request.yml" target="_blank">Request a Feature</a></li>
+                            <li>💬 <a href="https://github.com/Sudhamsh/language/issues/new?template=feedback.yml" target="_blank">Share General Feedback</a></li>
+                        </ul>
+                        <p>Or click "💬 Report Issue / Give Feedback" in the app footer!</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Is this app free?</div>
+                    <div class="faq-answer">
+                        <p>Yes! 100% free and open source. No ads, no tracking, no paid features. Licensed under MIT License.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Can I contribute?</div>
+                    <div class="faq-answer">
+                        <p>Absolutely! Contributions are welcome:</p>
+                        <ul>
+                            <li>Add more vocabulary words</li>
+                            <li>Translate to new languages</li>
+                            <li>Improve translations or fix typos</li>
+                            <li>Add features or fix bugs</li>
+                            <li>Improve documentation</li>
+                        </ul>
+                        <p>Visit the <a href="https://github.com/Sudhamsh/language" target="_blank">GitHub repository</a> to get started!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back Link -->
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="index.html" class="back-link">← Back to Flashcards</a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Still have questions? <a href="https://github.com/Sudhamsh/language/issues/new/choose" target="_blank" style="color: white; text-decoration: underline;">Ask on GitHub</a></p>
+            <div class="feedback-section">
+                <a href="https://github.com/Sudhamsh/language/issues/new/choose" target="_blank" class="feedback-link" title="Report bugs, request features, or share feedback">
+                    💬 Report Issue / Give Feedback
+                </a>
+                <span class="footer-divider">•</span>
+                <a href="https://github.com/Sudhamsh/language" target="_blank" class="github-link" title="View on GitHub">
+                    ⭐ Star on GitHub
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -44,6 +44,8 @@ An interactive web application for learning **Telugu**, **Spanish**, and **Frenc
 ### Option 1: Use Online (Recommended)
 Visit the live site: **[https://sudhamsh.github.io/language/](https://sudhamsh.github.io/language/)**
 
+💡 **Need help?** Check out the **[FAQ page](https://sudhamsh.github.io/language/faq.html)** for troubleshooting, audio setup, and usage tips!
+
 ### Option 2: Run Locally
 1. Clone the repository:
    ```bash
@@ -89,6 +91,7 @@ No build process or dependencies needed! 🎉
 language/
 ├── index.html              # Main flashcards page
 ├── quiz.html              # Quiz page
+├── faq.html               # FAQ and troubleshooting page
 ├── app.js                 # Flashcard logic
 ├── quiz.js               # Quiz logic
 ├── style.css             # Main styles
@@ -99,6 +102,11 @@ language/
 │   └── spanish-data.js   # Spanish vocabulary (200 words)
 ├── french/
 │   └── french-data.js    # French vocabulary (200 words)
+├── .github/
+│   └── ISSUE_TEMPLATE/   # GitHub issue templates
+│       ├── bug_report.yml
+│       ├── feature_request.yml
+│       └── feedback.yml
 └── test/
     ├── test.html         # Telugu test suite
     ├── test-spanish.html # Spanish test suite
