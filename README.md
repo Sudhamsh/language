@@ -1,224 +1,222 @@
-# Language Flashcards - Interactive Learning App
+# 🌍 Multi-Language Flashcard Learning App
 
-A professional, interactive web application for learning Telugu and Spanish vocabulary through flashcards. Perfect for English speakers learning new languages!
+An interactive web application for learning **Telugu**, **Spanish**, and **French** vocabulary with audio pronunciation support.
 
-## Features
+**Live Demo:** [https://sudhamsh.github.io/language/](https://sudhamsh.github.io/language/)
 
-### 🌍 Multi-Language Support
-- **Telugu**: 200 words across 2 levels (🇮🇳 Telugu script with romanization)
-- **Spanish**: 200 words across 2 levels (🇪🇸 Spanish with pronunciation guide)
-- Easy language switching with one click
+![Languages](https://img.shields.io/badge/Languages-Telugu%20%7C%20Spanish%20%7C%20French-blue)
+![Vocabulary](https://img.shields.io/badge/Vocabulary-600%20Words-green)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
-### 🎴 Interactive Flashcards
-- Click or tap to flip between native language and English
-- Beautiful card flip animations
-- Pronunciation guides (romanization for Telugu, phonetics for Spanish)
+## ✨ Features
+
+### 📚 Interactive Flashcards
+- **600 vocabulary words** across 3 languages (200 each)
+- **2 difficulty levels** per language (Basics & Intermediate)
+- **Category filtering** (Greetings, Numbers, Family, Verbs, Colors, etc.)
+- **Flip animation** to reveal translations
+- **Romanization** for pronunciation guidance
+- **Shuffle mode** for randomized practice
+
+### 🔊 Audio Pronunciation
+- **Native voice support** for Spanish and French
+- **Click-to-hear** pronunciation on each flashcard
+- **Auto-play mode** for hands-free learning
+- **Quiz audio** for native language questions
+- **Graceful fallback** for unsupported languages
 
 ### 📝 Quiz Mode
-- Test your knowledge with multiple-choice questions
-- Choose your language (Telugu or Spanish)
-- Choose between Level 1 (Basics) or Level 2 (Intermediate)
-- Configurable question count (5, 10, 15, or 20 questions)
-- Two question types: Native Language → English and English → Native Language
-- Real-time score tracking
-- Detailed results with performance feedback
+- **Multiple choice questions** with 4 options
+- **Configurable difficulty** (5, 10, 15, or 20 questions)
+- **Bidirectional testing** (Native → English and English → Native)
+- **Score tracking** with instant feedback
+- **Results summary** with percentage and performance message
 
-### 🎯 Smart Learning Features
-- **Two Languages**: Telugu and Spanish, both with 200 words each
-- **Two Levels**: Level 1 (100 basic words) and Level 2 (100 intermediate words)
-- **Category Filters**: Filter by Greetings, Numbers, Family, Verbs, and more
-- **Shuffle Mode**: Randomize cards for better learning
-- **Keyboard Shortcuts**: Learn faster with keyboard navigation
+### 🌐 Additional Features
+- **Deep linking** - Share specific language with URL parameters
+- **Mobile responsive** - Works on phones, tablets, and desktops
+- **Keyboard shortcuts** - Space/Enter to flip, arrows to navigate
+- **Offline ready** - No backend required, runs entirely in browser
 
-### 💾 Browser Storage
-- No internet required after initial load
-- Works completely offline
-- Pure HTML/CSS/JavaScript - no dependencies
+## 🚀 Quick Start
 
-### 📱 Mobile-Friendly
-- Fully responsive design for all screen sizes
-- Optimized for tablets (768px) and phones (480px)
-- Touch-friendly buttons and interface
-- Works seamlessly on iOS and Android devices
+### Option 1: Use Online (Recommended)
+Visit the live site: **[https://sudhamsh.github.io/language/](https://sudhamsh.github.io/language/)**
 
-## How to Use
+### Option 2: Run Locally
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Sudhamsh/language.git
+   cd language
+   ```
 
-### Flashcard Mode
-1. Open `index.html` in your web browser
-2. **Select your language** (🇮🇳 Telugu or 🇪🇸 Spanish)
-3. Select a level (Level 1: Basics or Level 2: Intermediate)
-4. Click on a card to flip between native language and English
-5. Use Previous/Next buttons or arrow keys to navigate
-6. Switch languages anytime by clicking the language selector
+2. Open in browser:
+   ```bash
+   open index.html
+   # or just double-click index.html
+   ```
+
+No build process or dependencies needed! 🎉
+
+## 📖 Usage
+
+### Flashcards Mode
+1. **Select a language** using the language buttons (🇮🇳 Telugu, 🇪🇸 Spanish, 🇫🇷 French)
+2. **Choose a level** (Level 1 - Basics or Level 2 - Intermediate)
+3. **Filter by category** (optional) to focus on specific topics
+4. **Click the card** to flip and see the translation
+5. **Use navigation buttons** or arrow keys to move between cards
+6. **Click 🔊** to hear pronunciation
+7. **Enable auto-play** for automatic pronunciation on each card
 
 ### Quiz Mode
-1. Open `quiz.html` in your web browser
-2. **Select your language** (🇮🇳 Telugu or 🇪🇸 Spanish)
-3. Select a level (1 or 2)
-4. Choose number of questions (5, 10, 15, or 20)
-5. Click **Start Quiz**
-6. Read the question and select your answer from 4 options
-7. Click **Submit Answer** to check if you're correct
-8. View your results at the end with detailed statistics
+1. Click **"📝 Take Quiz"** from the flashcards page
+2. **Select your language** and difficulty level
+3. **Choose number of questions** (5, 10, 15, or 20)
+4. **Answer questions** by selecting the correct translation
+5. **Click 🔊** on native language questions to hear pronunciation
+6. **View results** and retry to improve your score
 
-### Keyboard Shortcuts (Flashcard Mode)
-- **Space/Enter**: Flip the current card
-- **Left Arrow**: Previous card
-- **Right Arrow**: Next card
+### Keyboard Shortcuts
+- **Space / Enter** - Flip flashcard
+- **Left Arrow** - Previous card
+- **Right Arrow** - Next card
 
-### Navigation
-- Use **Previous/Next** buttons to navigate through cards
-- Click **category buttons** to filter by topic
-- Click **Shuffle** to randomize card order
-- Switch between **Level 1** and **Level 2** using level selector buttons
-
-## File Structure
+## 🗂️ Project Structure
 
 ```
 language/
-├── index.html              # Flashcard interface (multi-language)
-├── style.css               # Flashcard styling and animations
-├── app.js                  # Flashcard application logic (multi-language)
-├── quiz.html               # Quiz interface (multi-language)
-├── quiz-style.css          # Quiz styling
-├── quiz.js                 # Quiz application logic (multi-language)
-├── app.test.js             # Comprehensive test suite
-├── test.html               # Telugu test runner UI
-├── test-spanish.html       # Spanish test runner UI
-├── README.md               # This file
+├── index.html              # Main flashcards page
+├── quiz.html              # Quiz page
+├── app.js                 # Flashcard logic
+├── quiz.js               # Quiz logic
+├── style.css             # Main styles
+├── quiz-style.css        # Quiz-specific styles
 ├── telugu/
-│   └── telugu-data.js      # Telugu vocabulary data (Levels 1 & 2, 200 words total)
-└── spanish/
-    └── spanish-data.js     # Spanish vocabulary data (Levels 1 & 2, 200 words total)
+│   └── telugu-data.js    # Telugu vocabulary (200 words)
+├── spanish/
+│   └── spanish-data.js   # Spanish vocabulary (200 words)
+├── french/
+│   └── french-data.js    # French vocabulary (200 words)
+├── test.html             # Telugu test suite
+├── test-spanish.html     # Spanish test suite
+├── test-french.html      # French test suite
+└── app.test.js           # Comprehensive test suite
 ```
 
-## Extending the Flashcards
+## 📊 Vocabulary Coverage
 
-The flashcard data is stored in `flashcards-data.json` in an extensible format. To add more flashcards:
+| Language | Level 1 | Level 2 | Total | Categories |
+|----------|---------|---------|-------|------------|
+| 🇮🇳 Telugu  | 100 | 100 | 200 | 13 categories |
+| 🇪🇸 Spanish | 100 | 100 | 200 | 14 categories |
+| 🇫🇷 French  | 100 | 100 | 200 | 14 categories |
+| **Total** | **300** | **300** | **600** | - |
 
-### JSON Format
-```json
-{
-  "flashcards": [
-    {
-      "id": 101,
-      "telugu": "తెలుగు పాఠం",
-      "romanization": "Telugu Pāṭham",
-      "english": "Telugu Lesson",
-      "category": "Education"
-    }
-  ]
-}
-```
+### Categories Include:
+- Greetings & Polite Phrases
+- Numbers (1-1000)
+- Family & Relationships
+- Common Verbs & Actions
+- Pronouns
+- Adjectives & Descriptions
+- Colors
+- Body Parts
+- Places & Locations
+- Time & Days
+- Food & Drink
+- Clothing
+- Questions Words
+- Common Words & Phrases
 
-### Fields
-- **id**: Unique identifier (integer)
-- **telugu**: Telugu script text
-- **romanization**: Romanized pronunciation guide
-- **english**: English translation
-- **category**: Category for filtering
+## 🎯 Target Audience
 
-### Adding New Categories
-1. Add new flashcards with a new category name
-2. Add a category button in `index.html`:
-```html
-<button class="category-btn" data-category="YourCategory">Your Category</button>
-```
+Perfect for:
+- 📖 **Language Teachers** - Use in classroom or assign as homework
+- 👨‍🎓 **Students** - Self-paced vocabulary learning
+- 🌏 **Travelers** - Learn essential phrases before trips
+- 👨‍👩‍👧‍👦 **Parents** - Teach children heritage languages
+- 🧠 **Language Enthusiasts** - Expand multilingual skills
 
-## Categories Included
+## 🔧 Technical Details
 
-- **Greetings**: Basic greetings and polite phrases
-- **Numbers**: 1-10
-- **Family**: Family member terms
-- **Verbs**: Common action words
-- **Common Words**: Frequently used vocabulary
-- **Pronouns**: I, you, he, she, we, they
-- **Adjectives**: Descriptive words
-- **Colors**: Color names
-- **Body Parts**: Parts of the body
-- **Places**: Locations and buildings
-- **Time**: Time-related words
-- **Questions**: Question words (who, what, where, when, why, how)
+### Built With
+- **Pure HTML5, CSS3, JavaScript** - No frameworks or dependencies
+- **Web Speech API** - For audio pronunciation
+- **CSS Grid & Flexbox** - Responsive layouts
+- **URL Parameters** - Deep linking support
 
-## Testing
+### Browser Support
+| Feature | Chrome | Safari | Firefox | Edge |
+|---------|--------|--------|---------|------|
+| Flashcards | ✅ | ✅ | ✅ | ✅ |
+| Quiz | ✅ | ✅ | ✅ | ✅ |
+| Audio (Spanish/French) | ✅ | ✅ | ✅ | ✅ |
+| Audio (Telugu) | ⚠️ Fallback | ⚠️ Fallback | ⚠️ Fallback | ⚠️ Fallback |
 
-The application includes comprehensive test suites for both languages to ensure reliability.
+*Telugu audio uses English voice fallback on most systems*
 
-### Running Tests
+## 🧪 Testing
 
-**Telugu Tests:**
-1. Open [test.html](test.html) in your web browser
-2. Tests will run automatically and display results
-3. Tests validate Telugu data structure, duplicates, and integrity
+Run the test suites by opening in browser:
+- **test.html** - Telugu data validation (69 tests)
+- **test-spanish.html** - Spanish data validation (13 tests)
+- **test-french.html** - French data validation (13 tests)
 
-**Spanish Tests:**
-1. Open [test-spanish.html](test-spanish.html) in your web browser
-2. Tests will run automatically and display results
-3. Tests validate Spanish data structure, duplicates, and integrity
+All tests validate:
+- Correct word counts (100 per level)
+- Proper ID ranges (1-100, 101-200)
+- No duplicate words within or between levels
+- Required fields present (native, romanization, english, category)
+- Valid category names
 
-**Via Console:**
-```bash
-# If you have Node.js installed
-node app.test.js
-```
+## 🌟 Deep Linking
 
-### Test Coverage
+Share specific languages with URL parameters:
+- Telugu flashcards: `index.html?lang=telugu`
+- Spanish flashcards: `index.html?lang=spanish`
+- French flashcards: `index.html?lang=french`
+- Spanish quiz: `quiz.html?lang=spanish`
 
-The test suite includes 50+ tests covering:
-- ✓ Data loading and validation
-- ✓ Level switching functionality (Levels 1 & 2)
-- ✓ Category filtering
-- ✓ Navigation (next/previous cards)
-- ✓ Shuffle algorithm
-- ✓ Card display
-- ✓ Edge cases and error handling
-- ✓ Data integrity checks (no duplicate words between levels)
-- ✓ Quiz question generation
-- ✓ Quiz answer option generation (1 correct + 3 random wrong)
-- ✓ Quiz score tracking and calculation
-- ✓ Quiz progress tracking
-- ✓ Quiz percentage calculations
-- ✓ Quiz completion logic
+## 🤝 Contributing
 
-### Test Results
+Contributions are welcome! To add more vocabulary:
 
-All tests should pass. If any fail, check:
-- Data file format is correct
-- All required fields are present
-- IDs are unique within each level
+1. Edit the appropriate data file:
+   - `telugu/telugu-data.js`
+   - `spanish/spanish-data.js`
+   - `french/french-data.js`
 
-## Technical Details
+2. Follow the data structure:
+   ```javascript
+   {
+     id: 1,
+     telugu: "నమస్కారం",  // or spanish/french
+     romanization: "Namaskāram",
+     english: "Hello",
+     category: "Greetings"
+   }
+   ```
 
-### Technologies Used
-- Pure HTML5, CSS3, and JavaScript (ES6+)
-- No external dependencies
-- Responsive design for mobile and desktop
-- LocalStorage API for persistence
+3. Run tests to validate
+4. Submit a pull request
 
-### Browser Compatibility
-- Works on all modern browsers (Chrome, Firefox, Safari, Edge)
-- Mobile-friendly responsive design
-- Requires JavaScript enabled
+## 📝 License
 
-## Tips for Learning
+This project is open source and available under the MIT License.
 
-1. **Daily Practice**: Review 10-20 cards daily for best retention
-2. **Active Recall**: Try to recall the answer before flipping
-3. **Spaced Repetition**: Review known cards periodically
-4. **Category Focus**: Master one category at a time
-5. **Use Romanization**: Learn pronunciation alongside vocabulary
+## 👨‍💻 Author
 
-## License
+Created by **Sudhamsh Bachu**
 
-Free to use for educational purposes.
+## 🙏 Acknowledgments
 
-## Contributing
-
-To add more flashcards or improve the app:
-1. Edit `flashcards-data.json` to add vocabulary
-2. Modify `style.css` for design changes
-3. Update `app.js` for new features
+- Vocabulary compiled with assistance from language teaching resources
+- Audio powered by Web Speech API
+- Built with ❤️ for language learners everywhere
 
 ---
 
-Happy Learning! నేర్చుకోవడం ఆనందంగా! (Nērchukōvaḍaṁ ānandaṅgā!)
+**Happy Learning! 🎓**
+
+నేర్చుకోవడం ఆనందంగా! (Telugu) | ¡Feliz aprendizaje! (Spanish) | Bon apprentissage! (French)
