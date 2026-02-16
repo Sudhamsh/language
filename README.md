@@ -37,6 +37,7 @@ An interactive web application for learning **Telugu**, **Spanish**, and **Frenc
 - **Mobile responsive** - Works on phones, tablets, and desktops
 - **Keyboard shortcuts** - Space/Enter to flip, arrows to navigate
 - **Offline ready** - No backend required, runs entirely in browser
+- **Feedback system** - Built-in issue reporting via GitHub Issues
 
 ## 🚀 Quick Start
 
@@ -184,7 +185,24 @@ Share specific languages with URL parameters:
 
 ## 🤝 Contributing
 
-Contributions are welcome! To add more vocabulary:
+Contributions are welcome! Here's how you can help:
+
+### 💬 Report Issues or Share Feedback
+
+Found a bug? Have a feature request? Want to share your thoughts?
+
+**[Open an issue on GitHub](https://github.com/Sudhamsh/language/issues/new/choose)**
+
+We have templates for:
+- 🐛 **Bug Reports** - Report technical issues
+- ✨ **Feature Requests** - Suggest new features or improvements
+- 💬 **General Feedback** - Share your thoughts and suggestions
+
+You can also use the "💬 Report Issue / Give Feedback" link in the app footer!
+
+### 📚 Add More Vocabulary
+
+To add more vocabulary words:
 
 1. Edit the appropriate data file:
    - `telugu/telugu-data.js`
@@ -202,7 +220,7 @@ Contributions are welcome! To add more vocabulary:
    }
    ```
 
-3. Run tests to validate
+3. Run tests to validate (`test/test.html`, `test/test-spanish.html`, `test/test-french.html`)
 4. Submit a pull request
 
 ## 📝 License

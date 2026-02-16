@@ -1,0 +1,100 @@
+name: 🐛 Bug Report
+description: Report a bug or issue with the flashcard app
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the information below.
+
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language
+      description: Which language were you using?
+      options:
+        - Telugu
+        - Spanish
+        - French
+        - All languages
+        - Not applicable
+    validations:
+      required: true
+
+  - type: dropdown
+    id: page
+    attributes:
+      label: Page/Feature
+      description: Where did you encounter the issue?
+      options:
+        - Flashcards
+        - Quiz
+        - Audio pronunciation
+        - Navigation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: What happened? Please be as detailed as possible.
+      placeholder: "Example: When I click the audio button on Telugu flashcards, no sound plays..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this issue?
+      placeholder: |
+        1. Go to flashcards page
+        2. Select Telugu language
+        3. Click audio button
+        4. No sound plays
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: "Audio should play the Telugu pronunciation"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      description: Which browser are you using?
+      options:
+        - Chrome
+        - Safari
+        - Firefox
+        - Edge
+        - Mobile Safari (iOS)
+        - Mobile Chrome (Android)
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: Operating System
+      description: What OS are you using?
+      placeholder: "e.g., macOS 14, Windows 11, iOS 17, Android 13"
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Add any other context, screenshots, or information about the problem
+      placeholder: "Screenshots, console errors, etc."

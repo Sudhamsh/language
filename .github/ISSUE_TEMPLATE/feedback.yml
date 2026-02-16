@@ -1,0 +1,52 @@
+name: 💬 General Feedback
+description: Share your thoughts, suggestions, or general feedback
+title: "[Feedback]: "
+labels: ["feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We value your feedback! Let us know what you think about the app.
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Feedback Type
+      description: What kind of feedback is this?
+      options:
+        - Positive feedback / What I love
+        - Suggestion for improvement
+        - Usability issue
+        - Content issue (incorrect translation, typo)
+        - General comment
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: feedback
+    attributes:
+      label: Your Feedback
+      description: Tell us what's on your mind
+      placeholder: "I really like... / I think you could improve... / I noticed that..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: language
+    attributes:
+      label: Related Language (if applicable)
+      description: Does this feedback relate to a specific language?
+      options:
+        - Telugu
+        - Spanish
+        - French
+        - All languages
+        - Not applicable
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Information
+      description: Anything else you'd like to share?
+      placeholder: "Optional additional context..."
