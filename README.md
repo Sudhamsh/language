@@ -1,17 +1,17 @@
 # 🌍 Multi-Language Flashcard Learning App
 
-An interactive web application for learning **Telugu**, **Spanish**, and **French** vocabulary with audio pronunciation support.
+An interactive web application for learning **Telugu**, **Hindi**, **Spanish**, and **French** vocabulary with audio pronunciation support.
 
 **Live Demo:** [https://sudhamsh.github.io/language/](https://sudhamsh.github.io/language/)
 
-![Languages](https://img.shields.io/badge/Languages-Telugu%20%7C%20Spanish%20%7C%20French-blue)
-![Vocabulary](https://img.shields.io/badge/Vocabulary-600%20Words-green)
+![Languages](https://img.shields.io/badge/Languages-Telugu%20%7C%20Hindi%20%7C%20Spanish%20%7C%20French-blue)
+![Vocabulary](https://img.shields.io/badge/Vocabulary-800%20Words-green)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
 ## ✨ Features
 
 ### 📚 Interactive Flashcards
-- **600 vocabulary words** across 3 languages (200 each)
+- **800 vocabulary words** across 4 languages (200 each)
 - **2 difficulty levels** per language (Basics & Intermediate)
 - **Category filtering** (Greetings, Numbers, Family, Verbs, Colors, etc.)
 - **Flip animation** to reveal translations
@@ -98,6 +98,8 @@ language/
 ├── quiz-style.css        # Quiz-specific styles
 ├── telugu/
 │   └── telugu-data.js    # Telugu vocabulary (200 words)
+├── hindi/
+│   └── hindi-data.js     # Hindi vocabulary (200 words)
 ├── spanish/
 │   └── spanish-data.js   # Spanish vocabulary (200 words)
 ├── french/
@@ -109,6 +111,7 @@ language/
 │       └── feedback.yml
 └── test/
     ├── test.html         # Telugu test suite
+    ├── test-hindi.html   # Hindi test suite
     ├── test-spanish.html # Spanish test suite
     ├── test-french.html  # French test suite
     ├── app.test.js       # Comprehensive test suite
@@ -121,9 +124,10 @@ language/
 | Language | Level 1 | Level 2 | Total | Categories |
 |----------|---------|---------|-------|------------|
 | 🇮🇳 Telugu  | 100 | 100 | 200 | 13 categories |
+| 🇮🇳 Hindi   | 100 | 100 | 200 | 14 categories |
 | 🇪🇸 Spanish | 100 | 100 | 200 | 14 categories |
 | 🇫🇷 French  | 100 | 100 | 200 | 14 categories |
-| **Total** | **300** | **300** | **600** | - |
+| **Total** | **400** | **400** | **800** | - |
 
 ### Categories Include:
 - Greetings & Polite Phrases
@@ -172,6 +176,7 @@ Perfect for:
 
 Run the test suites by opening in browser:
 - **test/test.html** - Telugu data validation (69 tests)
+- **test/test-hindi.html** - Hindi data validation (13 tests)
 - **test/test-spanish.html** - Spanish data validation (13 tests)
 - **test/test-french.html** - French data validation (13 tests)
 - **test/audio-test.html** - Audio pronunciation diagnostic tool

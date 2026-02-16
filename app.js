@@ -168,6 +168,7 @@ class FlashcardApp {
     getLanguageCode() {
         const languageCodes = {
             telugu: 'te',
+            hindi: 'hi',
             spanish: 'es',
             french: 'fr'
         };

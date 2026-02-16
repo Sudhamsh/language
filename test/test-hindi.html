@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hindi Flashcards - Test Suite</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        #console {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            max-height: 600px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .test-pass {
+            color: #4ec9b0;
+        }
+
+        .test-fail {
+            color: #f48771;
+        }
+
+        .test-summary {
+            color: #dcdcaa;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .status {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .status.running {
+            color: #dcdcaa;
+        }
+
+        .status.passed {
+            color: #4ec9b0;
+        }
+
+        .status.failed {
+            color: #f48771;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Hindi Test Suite</h1>
+        <p class="subtitle">Hindi Flashcard Application Tests</p>
+
+        <div class="controls">
+            <button onclick="runTests()">▶ Run Tests</button>
+            <button onclick="clearConsole()">🗑 Clear Console</button>
+        </div>
+
+        <div class="status" id="status">Ready to run tests</div>
+
+        <div id="console"></div>
+    </div>
+
+    <script src="../hindi/hindi-data.js"></script>
+    <script src="../app.test.js"></script>
+    <script>
+        const consoleDiv = document.getElementById('console');
+        const statusDiv = document.getElementById('status');
+
+        // Override console methods to display in the page
+        const originalLog = console.log;
+        const originalError = console.error;
+
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            const message = args.join(' ');
+            const line = document.createElement('div');
+
+            if (message.includes('✓')) {
+                line.className = 'test-pass';
+            } else if (message.includes('📊')) {
+                line.className = 'test-summary';
+            }
+
+            line.textContent = message;
+            consoleDiv.appendChild(line);
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        };
+
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            const message = args.join(' ');
+            const line = document.createElement('div');
+            line.className = 'test-fail';
+            line.textContent = message;
+            consoleDiv.appendChild(line);
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        };
+
+        // Custom test runner for Hindi
+        class HindiTestRunner {
+            constructor() {
+                this.tests = [];
+                this.passed = 0;
+                this.failed = 0;
+            }
+
+            test(description, testFn) {
+                this.tests.push({ description, testFn });
+            }
+
+            async run() {
+                console.log('🧪 Running Hindi Flashcard Tests...\n');
+
+                for (const { description, testFn } of this.tests) {
+                    try {
+                        await testFn();
+                        this.passed++;
+                        console.log(`✓ ${description}`);
+                    } catch (error) {
+                        this.failed++;
+                        console.error(`✗ ${description}`);
+                        console.error(`  Error: ${error.message}`);
+                    }
+                }
+
+                console.log(`\n📊 Test Results: ${this.passed} passed, ${this.failed} failed, ${this.tests.length} total`);
+                return this.failed === 0;
+            }
+        }
+
+        const hindiRunner = new HindiTestRunner();
+
+        // Hindi Data Tests
+        hindiRunner.test('Hindi FLASHCARD_DATA should be defined', () => {
+            if (typeof FLASHCARD_DATA === 'undefined') {
+                throw new Error('FLASHCARD_DATA is not defined');
+            }
+        });
+
+        hindiRunner.test('Hindi should have 2 levels', () => {
+            const levels = FLASHCARD_DATA.levels;
+            if (levels.length !== 2) {
+                throw new Error(`Expected 2 levels, got ${levels.length}`);
+            }
+        });
+
+        hindiRunner.test('Level 1 should have 100 flashcards', () => {
+            const level1 = FLASHCARD_DATA.levels[0];
+            if (level1.flashcards.length !== 100) {
+                throw new Error(`Expected 100 flashcards in Level 1, got ${level1.flashcards.length}`);
+            }
+        });
+
+        hindiRunner.test('Level 2 should have 100 flashcards', () => {
+            const level2 = FLASHCARD_DATA.levels[1];
+            if (level2.flashcards.length !== 100) {
+                throw new Error(`Expected 100 flashcards in Level 2, got ${level2.flashcards.length}`);
+            }
+        });
+
+        hindiRunner.test('Level 1 IDs should be 1-100', () => {
+            const level1 = FLASHCARD_DATA.levels[0];
+            const ids = level1.flashcards.map(card => card.id);
+            const min = Math.min(...ids);
+            const max = Math.max(...ids);
+            if (min !== 1 || max !== 100) {
+                throw new Error(`Level 1 IDs should range from 1-100, got ${min}-${max}`);
+            }
+        });
+
+        hindiRunner.test('Level 2 IDs should be 101-200', () => {
+            const level2 = FLASHCARD_DATA.levels[1];
+            const ids = level2.flashcards.map(card => card.id);
+            const min = Math.min(...ids);
+            const max = Math.max(...ids);
+            if (min !== 101 || max !== 200) {
+                throw new Error(`Level 2 IDs should range from 101-200, got ${min}-${max}`);
+            }
+        });
+
+        hindiRunner.test('No duplicate IDs in Level 1', () => {
+            const level1 = FLASHCARD_DATA.levels[0];
+            const ids = level1.flashcards.map(card => card.id);
+            const uniqueIds = new Set(ids);
+            if (ids.length !== uniqueIds.size) {
+                throw new Error('Duplicate IDs found in Level 1');
+            }
+        });
+
+        hindiRunner.test('No duplicate IDs in Level 2', () => {
+            const level2 = FLASHCARD_DATA.levels[1];
+            const ids = level2.flashcards.map(card => card.id);
+            const uniqueIds = new Set(ids);
+            if (ids.length !== uniqueIds.size) {
+                throw new Error('Duplicate IDs found in Level 2');
+            }
+        });
+
+        hindiRunner.test('All cards have required fields', () => {
+            const allCards = [
+                ...FLASHCARD_DATA.levels[0].flashcards,
+                ...FLASHCARD_DATA.levels[1].flashcards
+            ];
+
+            for (const card of allCards) {
+                if (!card.hindi || !card.romanization || !card.english || !card.category) {
+                    throw new Error(`Card ${card.id} is missing required fields`);
+                }
+            }
+        });
+
+        hindiRunner.test('No duplicate Hindi words in Level 1', () => {
+            const level1 = FLASHCARD_DATA.levels[0];
+            const words = level1.flashcards.map(card => card.hindi);
+            const uniqueWords = new Set(words);
+            if (words.length !== uniqueWords.size) {
+                throw new Error('Duplicate Hindi words found in Level 1');
+            }
+        });
+
+        hindiRunner.test('No duplicate Hindi words in Level 2', () => {
+            const level2 = FLASHCARD_DATA.levels[1];
+            const words = level2.flashcards.map(card => card.hindi);
+            const uniqueWords = new Set(words);
+            if (words.length !== uniqueWords.size) {
+                throw new Error('Duplicate Hindi words found in Level 2');
+            }
+        });
+
+        hindiRunner.test('Valid categories are used', () => {
+            const validCategories = [
+                'Greetings', 'Numbers', 'Family', 'Pronouns', 'Verbs',
+                'Common Words', 'Colors', 'Body Parts', 'Questions',
+                'Time', 'Places', 'Adjectives', 'Food', 'Clothing'
+            ];
+
+            const allCards = [
+                ...FLASHCARD_DATA.levels[0].flashcards,
+                ...FLASHCARD_DATA.levels[1].flashcards
+            ];
+
+            for (const card of allCards) {
+                if (!validCategories.includes(card.category)) {
+                    throw new Error(`Invalid category "${card.category}" in card ${card.id}`);
+                }
+            }
+        });
+
+        hindiRunner.test('All Hindi text uses Devanagari script', () => {
+            const allCards = [
+                ...FLASHCARD_DATA.levels[0].flashcards,
+                ...FLASHCARD_DATA.levels[1].flashcards
+            ];
+
+            const devanagariRegex = /[\u0900-\u097F]/;
+            for (const card of allCards) {
+                if (!devanagariRegex.test(card.hindi)) {
+                    throw new Error(`Card ${card.id} (${card.hindi}) doesn't contain Devanagari script`);
+                }
+            }
+        });
+
+        // Function to run all tests
+        async function runTests() {
+            clearConsole();
+            statusDiv.textContent = 'Running tests...';
+            statusDiv.className = 'status running';
+
+            const success = await hindiRunner.run();
+
+            if (success) {
+                statusDiv.textContent = '✅ All tests passed!';
+                statusDiv.className = 'status passed';
+            } else {
+                statusDiv.textContent = '❌ Some tests failed';
+                statusDiv.className = 'status failed';
+            }
+        }
+
+        function clearConsole() {
+            consoleDiv.innerHTML = '';
+            hindiRunner.passed = 0;
+            hindiRunner.failed = 0;
+        }
+
+        // Auto-run tests on load
+        window.addEventListener('load', runTests);
+    </script>
+</body>
+</html>

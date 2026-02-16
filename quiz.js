@@ -167,6 +167,7 @@ class LanguageQuiz {
     getLanguageCode() {
         const languageCodes = {
             telugu: 'te',
+            hindi: 'hi',
             spanish: 'es',
             french: 'fr'
         };
