@@ -98,10 +98,13 @@ language/
 │   └── spanish-data.js   # Spanish vocabulary (200 words)
 ├── french/
 │   └── french-data.js    # French vocabulary (200 words)
-├── test.html             # Telugu test suite
-├── test-spanish.html     # Spanish test suite
-├── test-french.html      # French test suite
-└── app.test.js           # Comprehensive test suite
+└── test/
+    ├── test.html         # Telugu test suite
+    ├── test-spanish.html # Spanish test suite
+    ├── test-french.html  # French test suite
+    ├── app.test.js       # Comprehensive test suite
+    ├── run-all-tests.js  # Test runner
+    └── audio-test.html   # Audio diagnostic tool
 ```
 
 ## 📊 Vocabulary Coverage
@@ -159,9 +162,10 @@ Perfect for:
 ## 🧪 Testing
 
 Run the test suites by opening in browser:
-- **test.html** - Telugu data validation (69 tests)
-- **test-spanish.html** - Spanish data validation (13 tests)
-- **test-french.html** - French data validation (13 tests)
+- **test/test.html** - Telugu data validation (69 tests)
+- **test/test-spanish.html** - Spanish data validation (13 tests)
+- **test/test-french.html** - French data validation (13 tests)
+- **test/audio-test.html** - Audio pronunciation diagnostic tool
 
 All tests validate:
 - Correct word counts (100 per level)
