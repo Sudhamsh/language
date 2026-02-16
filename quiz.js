@@ -14,6 +14,16 @@ class LanguageQuiz {
         this.wrongAnswers = 0;
         this.answered = false;
 
+        // Initialize speech synthesis
+        this.speech = window.speechSynthesis;
+        this.currentUtterance = null;
+        this.voices = [];
+        this.voicesLoaded = false;
+        this.hasShownVoiceWarning = false;
+
+        // Load voices
+        this.loadVoices();
+
         this.init();
     }
 
@@ -134,6 +144,114 @@ class LanguageQuiz {
         return displays[this.currentLanguage];
     }
 
+    // Load available voices
+    loadVoices() {
+        if (!this.speech) return;
+
+        const loadVoicesList = () => {
+            this.voices = this.speech.getVoices();
+            this.voicesLoaded = true;
+            console.log('Quiz: Available voices:', this.voices.length);
+        };
+
+        // Load voices immediately if available
+        loadVoicesList();
+
+        // Chrome loads voices asynchronously
+        if (this.speech.onvoiceschanged !== undefined) {
+            this.speech.onvoiceschanged = loadVoicesList;
+        }
+    }
+
+    // Get language code for speech synthesis
+    getLanguageCode() {
+        const languageCodes = {
+            telugu: 'te',
+            spanish: 'es',
+            french: 'fr'
+        };
+        return languageCodes[this.currentLanguage] || 'en';
+    }
+
+    // Get the best voice for the language
+    getVoiceForLanguage(isNativeLanguage) {
+        const langCode = isNativeLanguage ? this.getLanguageCode() : 'en';
+
+        // Try to find a voice that matches the language
+        let voice = this.voices.find(v => v.lang.startsWith(langCode));
+
+        // Fallback to default voice
+        if (!voice && this.voices.length > 0) {
+            voice = this.voices.find(v => v.default) || this.voices[0];
+            console.log(`No voice found for ${langCode}, using default: ${voice.name}`);
+        }
+
+        return voice;
+    }
+
+    // Speak the question text (only for native-to-english questions)
+    speakQuestion(text, isNativeLanguage = true) {
+        if (!this.speech) {
+            console.warn('Speech synthesis not supported in this browser');
+            alert('Speech synthesis is not supported in your browser. Please try Chrome or Safari.');
+            return;
+        }
+
+        // Wait for voices to load
+        if (!this.voicesLoaded || this.voices.length === 0) {
+            console.log('Voices not loaded yet, waiting...');
+            setTimeout(() => this.speakQuestion(text, isNativeLanguage), 100);
+            return;
+        }
+
+        // Cancel any ongoing speech
+        this.speech.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        // Set the voice
+        const voice = this.getVoiceForLanguage(isNativeLanguage);
+        if (voice) {
+            utterance.voice = voice;
+            utterance.lang = voice.lang;
+            console.log(`Speaking "${text}" with voice: ${voice.name} (${voice.lang})`);
+        } else {
+            // Fallback: use default voice
+            const defaultVoice = this.voices.find(v => v.default) || this.voices[0];
+            if (defaultVoice) {
+                utterance.voice = defaultVoice;
+                utterance.lang = defaultVoice.lang;
+                console.log(`No ${this.currentLanguage} voice found. Using default: ${defaultVoice.name}`);
+
+                // Show warning once per session
+                if (isNativeLanguage && !this.hasShownVoiceWarning) {
+                    this.hasShownVoiceWarning = true;
+                    setTimeout(() => {
+                        alert(`Note: ${this.currentLanguage.charAt(0).toUpperCase() + this.currentLanguage.slice(1)} voice is not available on your system.\n\nUsing English voice as fallback (pronunciation will not be accurate).\n\nFor Spanish and French, native voices should be available.`);
+                    }, 100);
+                }
+            } else {
+                utterance.lang = 'en-US';
+                console.log('No voice found, using language code en-US');
+            }
+        }
+
+        utterance.rate = 0.9; // Slightly slower for learning
+        utterance.pitch = 1.0;
+        utterance.volume = 1.0;
+
+        // Error handling
+        utterance.onerror = (event) => {
+            console.error('Speech synthesis error:', event);
+            if (event.error !== 'interrupted') {
+                alert(`Could not pronounce the word. Error: ${event.error}`);
+            }
+        };
+
+        this.currentUtterance = utterance;
+        this.speech.speak(utterance);
+    }
+
     setupEventListeners() {
         // Language selector buttons
         const languageButtons = document.querySelectorAll('.language-btn');
@@ -189,6 +307,16 @@ class LanguageQuiz {
         document.getElementById('btn-retry').addEventListener('click', () => {
             this.showScreen('start-screen');
             this.resetQuiz();
+        });
+
+        // Audio button for quiz questions
+        document.getElementById('audio-btn-quiz').addEventListener('click', () => {
+            const question = this.questions[this.currentQuestionIndex];
+            if (question) {
+                // Check if it's a native-to-english question
+                const isNativeToEnglish = question.type.includes('→ English');
+                this.speakQuestion(question.question, isNativeToEnglish);
+            }
         });
     }
 
@@ -338,6 +466,15 @@ class LanguageQuiz {
 
         // Update progress
         this.updateProgress();
+
+        // Show/hide audio button based on question type
+        const audioBtn = document.getElementById('audio-btn-quiz');
+        const isNativeToEnglish = question.type.includes('→ English');
+        if (isNativeToEnglish) {
+            audioBtn.style.display = 'flex';
+        } else {
+            audioBtn.style.display = 'none';
+        }
     }
 
     submitAnswer() {
