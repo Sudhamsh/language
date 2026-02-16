@@ -204,10 +204,10 @@
             }
         });
 
-        hindiRunner.test('Hindi should have 2 levels', () => {
+        hindiRunner.test('Hindi should have 3 levels', () => {
             const levels = FLASHCARD_DATA.levels;
-            if (levels.length !== 2) {
-                throw new Error(`Expected 2 levels, got ${levels.length}`);
+            if (levels.length !== 3) {
+                throw new Error(`Expected 3 levels, got ${levels.length}`);
             }
         });
 
@@ -245,6 +245,31 @@
             }
         });
 
+        hindiRunner.test('Level 3 should have 100 flashcards', () => {
+            const level3 = FLASHCARD_DATA.levels[2];
+            if (level3.flashcards.length !== 100) {
+                throw new Error(`Expected 100 flashcards in Level 3, got ${level3.flashcards.length}`);
+            }
+        });
+
+        hindiRunner.test('Level 3 IDs should be 201-300', () => {
+            const level3 = FLASHCARD_DATA.levels[2];
+            const ids = level3.flashcards.map(card => card.id);
+            const min = Math.min(...ids);
+            const max = Math.max(...ids);
+            if (min !== 201 || max !== 300) {
+                throw new Error(`Level 3 IDs should range from 201-300, got ${min}-${max}`);
+            }
+        });
+
+        hindiRunner.test('Level 3 should be Numbers only', () => {
+            const level3 = FLASHCARD_DATA.levels[2];
+            const categories = new Set(level3.flashcards.map(card => card.category));
+            if (categories.size !== 1 || !categories.has('Numbers')) {
+                throw new Error(`Level 3 should only contain Numbers category, found: ${Array.from(categories).join(', ')}`);
+            }
+        });
+
         hindiRunner.test('No duplicate IDs in Level 1', () => {
             const level1 = FLASHCARD_DATA.levels[0];
             const ids = level1.flashcards.map(card => card.id);
@@ -263,10 +288,20 @@
             }
         });
 
+        hindiRunner.test('No duplicate IDs in Level 3', () => {
+            const level3 = FLASHCARD_DATA.levels[2];
+            const ids = level3.flashcards.map(card => card.id);
+            const uniqueIds = new Set(ids);
+            if (ids.length !== uniqueIds.size) {
+                throw new Error('Duplicate IDs found in Level 3');
+            }
+        });
+
         hindiRunner.test('All cards have required fields', () => {
             const allCards = [
                 ...FLASHCARD_DATA.levels[0].flashcards,
-                ...FLASHCARD_DATA.levels[1].flashcards
+                ...FLASHCARD_DATA.levels[1].flashcards,
+                ...FLASHCARD_DATA.levels[2].flashcards
             ];
 
             for (const card of allCards) {
@@ -294,6 +329,15 @@
             }
         });
 
+        hindiRunner.test('No duplicate Hindi words in Level 3', () => {
+            const level3 = FLASHCARD_DATA.levels[2];
+            const words = level3.flashcards.map(card => card.hindi);
+            const uniqueWords = new Set(words);
+            if (words.length !== uniqueWords.size) {
+                throw new Error('Duplicate Hindi words found in Level 3');
+            }
+        });
+
         hindiRunner.test('Valid categories are used', () => {
             const validCategories = [
                 'Greetings', 'Numbers', 'Family', 'Pronouns', 'Verbs',
@@ -303,7 +347,8 @@
 
             const allCards = [
                 ...FLASHCARD_DATA.levels[0].flashcards,
-                ...FLASHCARD_DATA.levels[1].flashcards
+                ...FLASHCARD_DATA.levels[1].flashcards,
+                ...FLASHCARD_DATA.levels[2].flashcards
             ];
 
             for (const card of allCards) {
@@ -316,7 +361,8 @@
         hindiRunner.test('All Hindi text uses Devanagari script', () => {
             const allCards = [
                 ...FLASHCARD_DATA.levels[0].flashcards,
-                ...FLASHCARD_DATA.levels[1].flashcards
+                ...FLASHCARD_DATA.levels[1].flashcards,
+                ...FLASHCARD_DATA.levels[2].flashcards
             ];
 
             const devanagariRegex = /[\u0900-\u097F]/;

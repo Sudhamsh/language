@@ -97,6 +97,7 @@ class FlashcardApp {
             console.log(`FLASHCARD_DATA loaded with ${FLASHCARD_DATA.levels[0].flashcards[0].telugu || FLASHCARD_DATA.levels[0].flashcards[0].hindi || FLASHCARD_DATA.levels[0].flashcards[0].spanish || FLASHCARD_DATA.levels[0].flashcards[0].french}`);
 
             this.levels = FLASHCARD_DATA.levels;
+            this.renderLevelButtons();
             this.switchLevel(this.currentLevel);
             console.log(`✓ Loaded ${this.levels.length} levels for ${this.currentLanguage}`);
         } catch (error) {
@@ -138,6 +139,38 @@ class FlashcardApp {
         document.getElementById('app-title').textContent = config.title;
         document.getElementById('app-subtitle').textContent = config.subtitle;
         document.getElementById('footer-text').textContent = config.footer;
+    }
+
+    // Render level buttons dynamically based on available levels
+    renderLevelButtons() {
+        const container = document.getElementById('level-selector');
+        if (!container) return;
+
+        // Clear existing buttons
+        container.innerHTML = '';
+
+        // Create button for each level
+        this.levels.forEach((level, index) => {
+            const button = document.createElement('button');
+            button.className = 'level-btn';
+            button.dataset.level = level.id;
+            button.textContent = level.name;
+
+            // Set first level as active by default
+            if (index === 0) {
+                button.classList.add('active');
+            }
+
+            // Add click event listener
+            button.addEventListener('click', (e) => {
+                const levelId = parseInt(e.target.dataset.level);
+                document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                this.switchLevel(levelId);
+            });
+
+            container.appendChild(button);
+        });
     }
 
     // Get the native language field name
@@ -321,17 +354,6 @@ class FlashcardApp {
                     e.target.classList.add('active');
                     await this.switchLanguage(language);
                 }
-            });
-        });
-
-        // Level selector buttons
-        const levelButtons = document.querySelectorAll('.level-btn');
-        levelButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const level = parseInt(e.target.dataset.level);
-                levelButtons.forEach(b => b.classList.remove('active'));
-                e.target.classList.add('active');
-                this.switchLevel(level);
             });
         });
 

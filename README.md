@@ -5,14 +5,15 @@ An interactive web application for learning **Telugu**, **Hindi**, **Spanish**, 
 **Live Demo:** [https://sudhamsh.github.io/language/](https://sudhamsh.github.io/language/)
 
 ![Languages](https://img.shields.io/badge/Languages-Telugu%20%7C%20Hindi%20%7C%20Spanish%20%7C%20French-blue)
-![Vocabulary](https://img.shields.io/badge/Vocabulary-800%20Words-green)
+![Vocabulary](https://img.shields.io/badge/Vocabulary-900%20Words-green)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
 ## ✨ Features
 
 ### 📚 Interactive Flashcards
-- **800 vocabulary words** across 4 languages (200 each)
-- **2 difficulty levels** per language (Basics & Intermediate)
+- **900 vocabulary words** across 4 languages
+- **2-3 difficulty levels** per language (Basics, Intermediate, and Advanced for Hindi)
+- **Hindi Level 3**: Complete numbers 1-100 in Devanagari script
 - **Category filtering** (Greetings, Numbers, Family, Verbs, Colors, etc.)
 - **Flip animation** to reveal translations
 - **Romanization** for pronunciation guidance
@@ -121,13 +122,13 @@ language/
 
 ## 📊 Vocabulary Coverage
 
-| Language | Level 1 | Level 2 | Total | Categories |
-|----------|---------|---------|-------|------------|
-| 🇮🇳 Telugu  | 100 | 100 | 200 | 13 categories |
-| 🇮🇳 Hindi   | 100 | 100 | 200 | 14 categories |
-| 🇪🇸 Spanish | 100 | 100 | 200 | 14 categories |
-| 🇫🇷 French  | 100 | 100 | 200 | 14 categories |
-| **Total** | **400** | **400** | **800** | - |
+| Language | Level 1 | Level 2 | Level 3 | Total | Categories |
+|----------|---------|---------|---------|-------|------------|
+| 🇮🇳 Telugu  | 100 | 100 | - | 200 | 13 categories |
+| 🇮🇳 Hindi   | 100 | 100 | 100 (Numbers 1-100) | **300** | 14 categories |
+| 🇪🇸 Spanish | 100 | 100 | - | 200 | 14 categories |
+| 🇫🇷 French  | 100 | 100 | - | 200 | 14 categories |
+| **Total** | **400** | **400** | **100** | **900** | - |
 
 ### Categories Include:
 - Greetings & Polite Phrases
@@ -176,14 +177,14 @@ Perfect for:
 
 Run the test suites by opening in browser:
 - **test/test.html** - Telugu data validation (69 tests)
-- **test/test-hindi.html** - Hindi data validation (13 tests)
+- **test/test-hindi.html** - Hindi data validation (19 tests, includes Level 3)
 - **test/test-spanish.html** - Spanish data validation (13 tests)
 - **test/test-french.html** - French data validation (13 tests)
 - **test/audio-test.html** - Audio pronunciation diagnostic tool
 
 All tests validate:
-- Correct word counts (100 per level)
-- Proper ID ranges (1-100, 101-200)
+- Correct word counts (100 per level, 300 for Hindi)
+- Proper ID ranges (1-100, 101-200, 201-300 for Hindi Level 3)
 - No duplicate words within or between levels
 - Required fields present (native, romanization, english, category)
 - Valid category names
