@@ -111,6 +111,10 @@ class LanguageQuiz {
                 title: '📝 Telugu Quiz',
                 subtitle: 'Test your Telugu vocabulary knowledge'
             },
+            hindi: {
+                title: '📝 Hindi Quiz',
+                subtitle: 'Test your Hindi vocabulary knowledge'
+            },
             spanish: {
                 title: '📝 Spanish Quiz',
                 subtitle: 'Test your Spanish vocabulary knowledge'
@@ -129,6 +133,7 @@ class LanguageQuiz {
     // Get the native language field name
     getNativeField() {
         if (this.currentLanguage === 'telugu') return 'telugu';
+        if (this.currentLanguage === 'hindi') return 'hindi';
         if (this.currentLanguage === 'spanish') return 'spanish';
         if (this.currentLanguage === 'french') return 'french';
         return 'telugu';

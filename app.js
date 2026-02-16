@@ -7,7 +7,7 @@ class FlashcardApp {
         // Check URL parameter for language
         const urlParams = new URLSearchParams(window.location.search);
         const langParam = urlParams.get('lang');
-        this.currentLanguage = (langParam === 'spanish' || langParam === 'telugu' || langParam === 'french') ? langParam : 'telugu';
+        this.currentLanguage = (langParam === 'spanish' || langParam === 'telugu' || langParam === 'hindi' || langParam === 'french') ? langParam : 'telugu';
 
         this.flashcards = [];
         this.filteredCards = [];
@@ -96,7 +96,7 @@ class FlashcardApp {
                 throw new Error('FLASHCARD_DATA not found after loading script.');
             }
 
-            console.log(`FLASHCARD_DATA loaded with ${FLASHCARD_DATA.levels[0].flashcards[0].telugu || FLASHCARD_DATA.levels[0].flashcards[0].spanish}`);
+            console.log(`FLASHCARD_DATA loaded with ${FLASHCARD_DATA.levels[0].flashcards[0].telugu || FLASHCARD_DATA.levels[0].flashcards[0].hindi || FLASHCARD_DATA.levels[0].flashcards[0].spanish || FLASHCARD_DATA.levels[0].flashcards[0].french}`);
 
             this.levels = FLASHCARD_DATA.levels;
             this.switchLevel(this.currentLevel);
@@ -115,6 +115,12 @@ class FlashcardApp {
                 subtitle: 'Master Telugu vocabulary with interactive flashcards',
                 footer: 'Practice regularly to master Telugu! Use categories to focus on specific topics.',
                 fieldName: 'telugu'
+            },
+            hindi: {
+                title: '🇮🇳 Hindi Flashcards',
+                subtitle: 'Master Hindi vocabulary with interactive flashcards',
+                footer: 'Practice regularly to master Hindi! Use categories to focus on specific topics.',
+                fieldName: 'hindi'
             },
             spanish: {
                 title: '🇪🇸 Spanish Flashcards',
@@ -139,6 +145,7 @@ class FlashcardApp {
     // Get the native language field name
     getNativeField() {
         if (this.currentLanguage === 'telugu') return 'telugu';
+        if (this.currentLanguage === 'hindi') return 'hindi';
         if (this.currentLanguage === 'spanish') return 'spanish';
         if (this.currentLanguage === 'french') return 'french';
         return 'telugu';
