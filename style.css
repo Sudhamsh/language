@@ -39,6 +39,7 @@ body {
     text-align: center;
     margin-bottom: 30px;
     color: white;
+    position: relative;
 }
 
 .header h1 {
@@ -51,6 +52,30 @@ body {
 .subtitle {
     font-size: 1.1rem;
     opacity: 0.95;
+}
+
+.home-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 2rem;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.2);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.home-icon:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Stats Dashboard */
@@ -489,6 +514,12 @@ body {
 @media (max-width: 768px) {
     .header h1 {
         font-size: 2rem;
+    }
+
+    .home-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
     }
 
     .flashcard {
