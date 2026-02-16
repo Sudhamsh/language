@@ -1,10 +1,8 @@
 // Language Quiz Application
 class LanguageQuiz {
     constructor() {
-        // Check URL parameter for language
-        const urlParams = new URLSearchParams(window.location.search);
-        const langParam = urlParams.get('lang');
-        this.currentLanguage = (langParam === 'spanish' || langParam === 'telugu' || langParam === 'hindi' || langParam === 'french') ? langParam : 'telugu';
+        // Check URL parameter for language using centralized helper
+        this.currentLanguage = window.getLanguageFromURL ? window.getLanguageFromURL() : 'telugu';
 
         this.selectedLevel = 1;
         this.numQuestions = 10;
@@ -30,6 +28,11 @@ class LanguageQuiz {
     async init() {
         console.log('Initializing Language Quiz...');
         console.log(`Language from URL: ${this.currentLanguage}`);
+
+        // Render language buttons dynamically
+        if (window.renderLanguageButtons) {
+            window.renderLanguageButtons('#language-selector', this.currentLanguage);
+        }
 
         // Set active language button based on URL parameter
         this.setActiveLanguageButton();

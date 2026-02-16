@@ -4,10 +4,8 @@ class FlashcardApp {
         this.levels = [];
         this.currentLevel = 1;
 
-        // Check URL parameter for language
-        const urlParams = new URLSearchParams(window.location.search);
-        const langParam = urlParams.get('lang');
-        this.currentLanguage = (langParam === 'spanish' || langParam === 'telugu' || langParam === 'hindi' || langParam === 'french') ? langParam : 'telugu';
+        // Check URL parameter for language using centralized helper
+        this.currentLanguage = window.getLanguageFromURL ? window.getLanguageFromURL() : 'telugu';
 
         this.flashcards = [];
         this.filteredCards = [];
@@ -541,6 +539,12 @@ class FlashcardApp {
 
 // Initialize app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    // Render language buttons dynamically
+    if (window.renderLanguageButtons) {
+        const currentLanguage = window.getLanguageFromURL ? window.getLanguageFromURL() : 'telugu';
+        window.renderLanguageButtons('#language-selector', currentLanguage);
+    }
+
     const app = new FlashcardApp();
 
     // Make app globally accessible for debugging
