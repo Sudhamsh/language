@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'">
+    <meta http-equiv="X-Frame-Options" content="DENY">
     <title>FAQ - Language Flashcards</title>
     <link rel="stylesheet" href="style.css">
     <!-- Google Analytics -->
@@ -235,7 +237,7 @@
                         <p>This is a common issue with text-to-speech in browsers. Follow these troubleshooting steps:</p>
 
                         <div class="alert-box info">
-                            <strong>Quick Test:</strong> Open the <a href="test/audio-test.html" target="_blank">Audio Diagnostic Tool</a> to check if your browser supports audio and which voices are available.
+                            <strong>Quick Test:</strong> Open the <a href="test/audio-test.html" target="_blank" rel="noopener noreferrer">Audio Diagnostic Tool</a> to check if your browser supports audio and which voices are available.
                         </div>
 
                         <h3>For macOS Users:</h3>
@@ -343,7 +345,7 @@
                     <div class="faq-question">How do I start learning?</div>
                     <div class="faq-answer">
                         <ol>
-                            <li>Visit <a href="https://sudhamsh.github.io/language/" target="_blank">sudhamsh.github.io/language</a></li>
+                            <li>Visit <a href="https://sudhamsh.github.io/language/" target="_blank" rel="noopener noreferrer">sudhamsh.github.io/language</a></li>
                             <li>Select a language: 🇮🇳 Telugu, 🇪🇸 Spanish, or 🇫🇷 French</li>
                             <li>Choose Level 1 (Basics) or Level 2 (Intermediate)</li>
                             <li>Click on a flashcard to flip and see the translation</li>
@@ -459,9 +461,9 @@
                     <div class="faq-answer">
                         <p>Yes! This is open source. You can:</p>
                         <ul>
-                            <li><a href="https://github.com/Sudhamsh/language/issues/new?template=feature_request.yml" target="_blank">Request a language via GitHub Issues</a></li>
+                            <li><a href="https://github.com/Sudhamsh/language/issues/new?template=feature_request.yml" target="_blank" rel="noopener noreferrer">Request a language via GitHub Issues</a></li>
                             <li>Contribute vocabulary via pull requests</li>
-                            <li>Check the Contributing section in the <a href="https://github.com/Sudhamsh/language#-contributing" target="_blank">README</a></li>
+                            <li>Check the Contributing section in the <a href="https://github.com/Sudhamsh/language#-contributing" target="_blank" rel="noopener noreferrer">README</a></li>
                         </ul>
                     </div>
                 </div>
@@ -469,7 +471,7 @@
                 <div class="faq-item">
                     <div class="faq-question">I found a translation error. How do I report it?</div>
                     <div class="faq-answer">
-                        <p>Please <a href="https://github.com/Sudhamsh/language/issues/new?template=feedback.yml" target="_blank">report it via GitHub Issues</a> or use the "💬 Report Issue / Give Feedback" link in the footer. Include:</p>
+                        <p>Please <a href="https://github.com/Sudhamsh/language/issues/new?template=feedback.yml" target="_blank" rel="noopener noreferrer">report it via GitHub Issues</a> or use the "💬 Report Issue / Give Feedback" link in the footer. Include:</p>
                         <ul>
                             <li>Which language and word</li>
                             <li>What's incorrect</li>
@@ -551,7 +553,7 @@
                             <li>Marking cards as "known" or "learning"</li>
                             <li>Spaced repetition algorithms</li>
                         </ul>
-                        <p>Want this feature? <a href="https://github.com/Sudhamsh/language/issues/new?template=feature_request.yml" target="_blank">Request it on GitHub!</a></p>
+                        <p>Want this feature? <a href="https://github.com/Sudhamsh/language/issues/new?template=feature_request.yml" target="_blank" rel="noopener noreferrer">Request it on GitHub!</a></p>
                     </div>
                 </div>
             </div>
@@ -565,9 +567,9 @@
                     <div class="faq-answer">
                         <p>Use GitHub Issues (no account required for viewing, account needed for posting):</p>
                         <ul>
-                            <li>🐛 <a href="https://github.com/Sudhamsh/language/issues/new?template=bug_report.yml" target="_blank">Report a Bug</a></li>
-                            <li>✨ <a href="https://github.com/Sudhamsh/language/issues/new?template=feature_request.yml" target="_blank">Request a Feature</a></li>
-                            <li>💬 <a href="https://github.com/Sudhamsh/language/issues/new?template=feedback.yml" target="_blank">Share General Feedback</a></li>
+                            <li>🐛 <a href="https://github.com/Sudhamsh/language/issues/new?template=bug_report.yml" target="_blank" rel="noopener noreferrer">Report a Bug</a></li>
+                            <li>✨ <a href="https://github.com/Sudhamsh/language/issues/new?template=feature_request.yml" target="_blank" rel="noopener noreferrer">Request a Feature</a></li>
+                            <li>💬 <a href="https://github.com/Sudhamsh/language/issues/new?template=feedback.yml" target="_blank" rel="noopener noreferrer">Share General Feedback</a></li>
                         </ul>
                         <p>Or click "💬 Report Issue / Give Feedback" in the app footer!</p>
                     </div>
@@ -591,7 +593,7 @@
                             <li>Add features or fix bugs</li>
                             <li>Improve documentation</li>
                         </ul>
-                        <p>Visit the <a href="https://github.com/Sudhamsh/language" target="_blank">GitHub repository</a> to get started!</p>
+                        <p>Visit the <a href="https://github.com/Sudhamsh/language" target="_blank" rel="noopener noreferrer">GitHub repository</a> to get started!</p>
                     </div>
                 </div>
             </div>
@@ -604,13 +606,13 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <p>Still have questions? <a href="https://github.com/Sudhamsh/language/issues/new/choose" target="_blank" style="color: white; text-decoration: underline;">Ask on GitHub</a></p>
+            <p>Still have questions? <a href="https://github.com/Sudhamsh/language/issues/new/choose" target="_blank" rel="noopener noreferrer" style="color: white; text-decoration: underline;">Ask on GitHub</a></p>
             <div class="feedback-section">
-                <a href="https://github.com/Sudhamsh/language/issues/new/choose" target="_blank" class="feedback-link" title="Report bugs, request features, or share feedback">
+                <a href="https://github.com/Sudhamsh/language/issues/new/choose" target="_blank" rel="noopener noreferrer" class="feedback-link" title="Report bugs, request features, or share feedback">
                     💬 Report Issue / Give Feedback
                 </a>
                 <span class="footer-divider">•</span>
-                <a href="https://github.com/Sudhamsh/language" target="_blank" class="github-link" title="View on GitHub">
+                <a href="https://github.com/Sudhamsh/language" target="_blank" rel="noopener noreferrer" class="github-link" title="View on GitHub">
                     ⭐ Star on GitHub
                 </a>
             </div>

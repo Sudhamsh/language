@@ -447,10 +447,19 @@ class LanguageQuiz {
         question.options.forEach((option, index) => {
             const optionDiv = document.createElement('div');
             optionDiv.className = 'answer-option';
-            optionDiv.innerHTML = `
-                <input type="radio" name="answer" id="option-${index}" value="${option}">
-                <label for="option-${index}">${option}</label>
-            `;
+
+            const input = document.createElement('input');
+            input.type = 'radio';
+            input.name = 'answer';
+            input.id = `option-${index}`;
+            input.value = option;
+
+            const label = document.createElement('label');
+            label.setAttribute('for', `option-${index}`);
+            label.textContent = option;
+
+            optionDiv.appendChild(input);
+            optionDiv.appendChild(label);
 
             optionDiv.addEventListener('click', () => {
                 if (!this.answered) {
