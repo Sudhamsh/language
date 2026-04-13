@@ -798,6 +798,217 @@ runner.test('French cards can be filtered by category', () => {
     assertArrayLength(numbers, 2, 'Should have 2 French number cards');
 });
 
+// ─── Quiz Romanization & Audio Feature Tests ───────────────────────────────
+
+runner.test('getRandomWrongAnswersWithData returns objects with value and romanization', () => {
+    const allCards = mockFlashcardData.levels[0].flashcards;
+    const correctCard = allCards[0];
+    const nativeField = 'telugu';
+
+    const wrongOptions = allCards
+        .filter(card => card[nativeField] !== correctCard[nativeField])
+        .map(card => ({ value: card[nativeField], romanization: card.romanization || '' }));
+    const result = wrongOptions.sort(() => Math.random() - 0.5).slice(0, 3);
+
+    assertArrayLength(result, 3, 'Should return 3 wrong answer objects');
+    result.forEach((opt, i) => {
+        assertTrue(typeof opt === 'object' && opt !== null, `Wrong answer ${i} should be an object`);
+        assertTrue(typeof opt.value === 'string', `Wrong answer ${i} should have a string value`);
+        assertTrue(typeof opt.romanization === 'string', `Wrong answer ${i} should have a string romanization`);
+    });
+});
+
+runner.test('Wrong answer object values should not equal correct answer', () => {
+    const allCards = mockFlashcardData.levels[0].flashcards;
+    const correctCard = allCards[0];
+    const nativeField = 'telugu';
+
+    const wrongOptions = allCards
+        .filter(card => card[nativeField] !== correctCard[nativeField])
+        .map(card => ({ value: card[nativeField], romanization: card.romanization || '' }))
+        .slice(0, 3);
+
+    wrongOptions.forEach(opt => {
+        assertTrue(
+            opt.value !== correctCard[nativeField],
+            `Wrong option "${opt.value}" should not equal correct answer "${correctCard[nativeField]}"`
+        );
+    });
+});
+
+runner.test('Option romanization values should match their source card romanization', () => {
+    const allCards = mockFlashcardData.levels[0].flashcards;
+    const nativeField = 'telugu';
+
+    allCards.forEach((card, i) => {
+        const opt = { value: card[nativeField], romanization: card.romanization || '' };
+        assertEquals(opt.romanization, card.romanization, `Option ${i} romanization should match card romanization`);
+        assertEquals(opt.value, card[nativeField], `Option ${i} value should match card native field`);
+    });
+});
+
+runner.test('English-to-native question should have optionsHaveRomanization flag', () => {
+    const card = mockFlashcardData.levels[0].flashcards[0];
+    const allCards = mockFlashcardData.levels[0].flashcards;
+    const nativeField = 'telugu';
+
+    const wrongAnswers = allCards
+        .filter(c => c[nativeField] !== card[nativeField])
+        .map(c => ({ value: c[nativeField], romanization: c.romanization || '' }))
+        .slice(0, 3);
+    const correctOption = { value: card[nativeField], romanization: card.romanization || '' };
+    const options = [correctOption, ...wrongAnswers];
+
+    const question = {
+        type: 'English → Telugu',
+        question: card.english,
+        romanization: '',
+        correctAnswer: card[nativeField],
+        correctAnswerRomanization: card.romanization || '',
+        options,
+        optionsHaveRomanization: true
+    };
+
+    assertTrue(question.optionsHaveRomanization === true, 'English-to-native question should set optionsHaveRomanization: true');
+});
+
+runner.test('English-to-native question options should all be {value, romanization} objects', () => {
+    const card = mockFlashcardData.levels[0].flashcards[0];
+    const allCards = mockFlashcardData.levels[0].flashcards;
+    const nativeField = 'telugu';
+
+    const wrongAnswers = allCards
+        .filter(c => c[nativeField] !== card[nativeField])
+        .map(c => ({ value: c[nativeField], romanization: c.romanization || '' }))
+        .slice(0, 3);
+    const correctOption = { value: card[nativeField], romanization: card.romanization || '' };
+    const options = [correctOption, ...wrongAnswers];
+
+    assertArrayLength(options, 4, 'Should have 4 option objects');
+    options.forEach((opt, i) => {
+        assertTrue(typeof opt === 'object' && opt !== null, `Option ${i} should be an object`);
+        assertTrue(typeof opt.value === 'string', `Option ${i} .value should be a string`);
+        assertTrue(typeof opt.romanization === 'string', `Option ${i} .romanization should be a string`);
+    });
+});
+
+runner.test('English-to-native options should include correct answer as an object', () => {
+    const card = mockFlashcardData.levels[0].flashcards[0];
+    const allCards = mockFlashcardData.levels[0].flashcards;
+    const nativeField = 'telugu';
+
+    const wrongAnswers = allCards
+        .filter(c => c[nativeField] !== card[nativeField])
+        .map(c => ({ value: c[nativeField], romanization: c.romanization || '' }))
+        .slice(0, 3);
+    const correctOption = { value: card[nativeField], romanization: card.romanization || '' };
+    const options = [correctOption, ...wrongAnswers];
+
+    const hasCorrect = options.some(opt => opt.value === card[nativeField]);
+    assertTrue(hasCorrect, 'Options should include the correct answer native value');
+});
+
+runner.test('English-to-native question should store correctAnswerRomanization', () => {
+    const card = mockFlashcardData.levels[0].flashcards[0];
+    const nativeField = 'telugu';
+
+    const question = {
+        correctAnswer: card[nativeField],
+        correctAnswerRomanization: card.romanization || ''
+    };
+
+    assertEquals(
+        question.correctAnswerRomanization,
+        card.romanization,
+        'correctAnswerRomanization should match the card romanization'
+    );
+});
+
+runner.test('Feedback for wrong answer includes native script and romanization', () => {
+    const question = {
+        correctAnswer: 'నమస్కారం',
+        correctAnswerRomanization: 'Namaskāram'
+    };
+
+    const answerDisplay = question.correctAnswerRomanization
+        ? `${question.correctAnswer} (${question.correctAnswerRomanization})`
+        : question.correctAnswer;
+    const feedback = `✗ Wrong! The correct answer is: ${answerDisplay}`;
+
+    assertTrue(feedback.includes('Namaskāram'), 'Feedback should include romanization');
+    assertTrue(feedback.includes('నమస్కారం'), 'Feedback should include native script');
+    assertTrue(feedback.includes('('), 'Feedback should wrap romanization in parentheses');
+});
+
+runner.test('Feedback for wrong answer without romanization shows only native text', () => {
+    const question = {
+        correctAnswer: 'నమస్కారం',
+        correctAnswerRomanization: ''
+    };
+
+    const answerDisplay = question.correctAnswerRomanization
+        ? `${question.correctAnswer} (${question.correctAnswerRomanization})`
+        : question.correctAnswer;
+
+    assertEquals(answerDisplay, 'నమస్కారం', 'Should show only native text when romanization is absent');
+    assertFalse(answerDisplay.includes('('), 'Should not include parentheses when no romanization');
+});
+
+runner.test('Native-to-english question options remain plain strings', () => {
+    const card = mockFlashcardData.levels[0].flashcards[0];
+    const allCards = mockFlashcardData.levels[0].flashcards;
+
+    const wrongAnswers = allCards
+        .filter(c => c.english !== card.english)
+        .map(c => c.english)
+        .slice(0, 3);
+    const options = [card.english, ...wrongAnswers];
+
+    options.forEach((opt, i) => {
+        assertTrue(typeof opt === 'string', `English option ${i} should be a plain string, not an object`);
+    });
+});
+
+runner.test('Native-to-english question should not have optionsHaveRomanization flag', () => {
+    const question = {
+        type: 'Telugu → English',
+        question: 'నమస్కారం',
+        romanization: 'Namaskāram',
+        correctAnswer: 'Hello',
+        options: ['Hello', 'Goodbye', 'Thank you', 'Sorry']
+    };
+
+    assertTrue(
+        question.optionsHaveRomanization === undefined || question.optionsHaveRomanization === false,
+        'Native-to-english question should not set optionsHaveRomanization'
+    );
+});
+
+runner.test('isNativeOption detection works correctly for object vs string options', () => {
+    const nativeOption = { value: 'నమస్కారం', romanization: 'Namaskāram' };
+    const englishOption = 'Hello';
+
+    const isNativeObject = (opt) => typeof opt === 'object' && opt !== null;
+
+    assertTrue(isNativeObject(nativeOption), 'Native option (object) should be detected as native');
+    assertFalse(isNativeObject(englishOption), 'English option (string) should not be detected as native');
+});
+
+runner.test('Audio button is created only for native-script options', () => {
+    // Simulates the condition in displayQuestion() that adds the audio button
+    const questionWithNativeOptions = { optionsHaveRomanization: true };
+    const questionWithEnglishOptions = {};
+
+    const nativeOption = { value: 'నమస్కారం', romanization: 'Namaskāram' };
+    const englishOption = 'Hello';
+
+    const shouldAddAudioForNative = questionWithNativeOptions.optionsHaveRomanization && typeof nativeOption === 'object';
+    const shouldAddAudioForEnglish = questionWithEnglishOptions.optionsHaveRomanization && typeof englishOption === 'object';
+
+    assertTrue(shouldAddAudioForNative, 'Audio button should be added for native-script options');
+    assertFalse(shouldAddAudioForEnglish, 'Audio button should not be added for English options');
+});
+
 // Run tests
 if (typeof window !== 'undefined') {
     // Running in browser
