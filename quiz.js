@@ -385,15 +385,18 @@ class LanguageQuiz {
                 };
             } else {
                 // Show English, ask for native language
-                const wrongAnswers = this.getRandomWrongAnswers(card, level.flashcards, nativeField, 3);
-                const options = this.shuffleArray([card[nativeField], ...wrongAnswers]);
+                const wrongAnswers = this.getRandomWrongAnswersWithData(card, level.flashcards, nativeField, 3);
+                const correctOption = { value: card[nativeField], romanization: card.romanization || '' };
+                const options = this.shuffleArray([correctOption, ...wrongAnswers]);
 
                 return {
                     type: this.getQuestionTypeDisplay(false),
                     question: card.english,
                     romanization: '',
                     correctAnswer: card[nativeField],
-                    options: options
+                    correctAnswerRomanization: card.romanization || '',
+                    options: options,
+                    optionsHaveRomanization: true
                 };
             }
         });
@@ -407,6 +410,15 @@ class LanguageQuiz {
             .map(card => card[field]);
 
         // Shuffle and select random wrong answers
+        const shuffled = wrongOptions.sort(() => Math.random() - 0.5);
+        return shuffled.slice(0, count);
+    }
+
+    getRandomWrongAnswersWithData(correctCard, allCards, nativeField, count) {
+        const wrongOptions = allCards
+            .filter(card => card[nativeField] !== correctCard[nativeField])
+            .map(card => ({ value: card[nativeField], romanization: card.romanization || '' }));
+
         const shuffled = wrongOptions.sort(() => Math.random() - 0.5);
         return shuffled.slice(0, count);
     }
@@ -452,14 +464,43 @@ class LanguageQuiz {
             input.type = 'radio';
             input.name = 'answer';
             input.id = `option-${index}`;
-            input.value = option;
+
+            const isNativeOption = question.optionsHaveRomanization && typeof option === 'object';
+            input.value = isNativeOption ? option.value : option;
 
             const label = document.createElement('label');
             label.setAttribute('for', `option-${index}`);
-            label.textContent = option;
+
+            if (isNativeOption) {
+                const nativeText = document.createElement('span');
+                nativeText.className = 'option-native-text';
+                nativeText.textContent = option.value;
+                label.appendChild(nativeText);
+
+                if (option.romanization) {
+                    const romanText = document.createElement('span');
+                    romanText.className = 'option-romanization';
+                    romanText.textContent = option.romanization;
+                    label.appendChild(romanText);
+                }
+            } else {
+                label.textContent = option;
+            }
 
             optionDiv.appendChild(input);
             optionDiv.appendChild(label);
+
+            if (isNativeOption) {
+                const audioBtn = document.createElement('button');
+                audioBtn.className = 'option-audio-btn';
+                audioBtn.title = 'Listen to pronunciation';
+                audioBtn.textContent = '🔊';
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.speakQuestion(option.value, true);
+                });
+                optionDiv.appendChild(audioBtn);
+            }
 
             optionDiv.addEventListener('click', () => {
                 if (!this.answered) {
@@ -531,9 +572,14 @@ class LanguageQuiz {
         // Show feedback
         const feedback = document.getElementById('feedback');
         feedback.classList.add('show', isCorrect ? 'correct' : 'incorrect');
-        feedback.textContent = isCorrect
-            ? '✓ Correct! Well done!'
-            : `✗ Wrong! The correct answer is: ${question.correctAnswer}`;
+        if (isCorrect) {
+            feedback.textContent = '✓ Correct! Well done!';
+        } else {
+            const answerDisplay = question.correctAnswerRomanization
+                ? `${question.correctAnswer} (${question.correctAnswerRomanization})`
+                : question.correctAnswer;
+            feedback.textContent = `✗ Wrong! The correct answer is: ${answerDisplay}`;
+        }
 
         // Update button text
         document.getElementById('btn-submit').textContent =
