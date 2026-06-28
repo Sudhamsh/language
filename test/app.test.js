@@ -426,6 +426,95 @@ runner.test('Level 2 IDs should be unique', () => {
     }
 });
 
+// Real Data Tests (Level 3 - Telugu)
+runner.test('Level 3 should have 100 flashcards', () => {
+    if (typeof FLASHCARD_DATA !== 'undefined') {
+        const level3 = FLASHCARD_DATA.levels.find(l => l.id === 3);
+        assertTrue(level3 !== undefined, 'Level 3 should exist');
+        assertArrayLength(level3.flashcards, 100, 'Level 3 should have 100 flashcards');
+    }
+});
+
+runner.test('Level 3 should have correct name and description', () => {
+    if (typeof FLASHCARD_DATA !== 'undefined') {
+        const level3 = FLASHCARD_DATA.levels.find(l => l.id === 3);
+        if (level3) {
+            assertEquals(level3.name, 'Level 3 - Advanced', 'Level 3 should have correct name');
+            assertTrue(level3.description.length > 0, 'Level 3 should have a description');
+        }
+    }
+});
+
+runner.test('Level 3 flashcards should have IDs from 201 to 300', () => {
+    if (typeof FLASHCARD_DATA !== 'undefined') {
+        const level3 = FLASHCARD_DATA.levels.find(l => l.id === 3);
+        if (level3 && level3.flashcards.length > 0) {
+            assertEquals(level3.flashcards[0].id, 201, 'First Level 3 card should have ID 201');
+            assertEquals(level3.flashcards[level3.flashcards.length - 1].id, 300, 'Last Level 3 card should have ID 300');
+        }
+    }
+});
+
+runner.test('No duplicate words between Level 3 and earlier levels', () => {
+    if (typeof FLASHCARD_DATA !== 'undefined') {
+        const level3 = FLASHCARD_DATA.levels.find(l => l.id === 3);
+        const earlier = [
+            ...(FLASHCARD_DATA.levels.find(l => l.id === 1)?.flashcards || []),
+            ...(FLASHCARD_DATA.levels.find(l => l.id === 2)?.flashcards || [])
+        ];
+
+        if (level3 && earlier.length > 0) {
+            const earlierWords = new Set(earlier.map(c => c.telugu));
+            const duplicates = level3.flashcards.map(c => c.telugu).filter(word => earlierWords.has(word));
+            assertArrayLength(duplicates, 0, `No duplicate Telugu words should exist. Found: ${duplicates.join(', ')}`);
+        }
+    }
+});
+
+runner.test('No duplicate English translations between Level 3 and earlier levels', () => {
+    if (typeof FLASHCARD_DATA !== 'undefined') {
+        const level3 = FLASHCARD_DATA.levels.find(l => l.id === 3);
+        const earlier = [
+            ...(FLASHCARD_DATA.levels.find(l => l.id === 1)?.flashcards || []),
+            ...(FLASHCARD_DATA.levels.find(l => l.id === 2)?.flashcards || [])
+        ];
+
+        if (level3 && earlier.length > 0) {
+            const earlierEnglish = new Set(earlier.map(c => c.english.toLowerCase()));
+            const duplicates = level3.flashcards.map(c => c.english.toLowerCase()).filter(word => earlierEnglish.has(word));
+            assertArrayLength(duplicates, 0, `No duplicate English words should exist. Found: ${duplicates.join(', ')}`);
+        }
+    }
+});
+
+runner.test('All Level 3 flashcards should have required fields', () => {
+    if (typeof FLASHCARD_DATA !== 'undefined') {
+        const level3 = FLASHCARD_DATA.levels.find(l => l.id === 3);
+
+        if (level3) {
+            level3.flashcards.forEach((card, index) => {
+                assertTrue(card.id !== undefined, `Level 3 card ${index} should have an id`);
+                assertTrue(card.telugu !== undefined, `Level 3 card ${index} should have telugu text`);
+                assertTrue(card.romanization !== undefined, `Level 3 card ${index} should have romanization`);
+                assertTrue(card.english !== undefined, `Level 3 card ${index} should have english translation`);
+                assertTrue(card.category !== undefined, `Level 3 card ${index} should have a category`);
+            });
+        }
+    }
+});
+
+runner.test('Level 3 IDs should be unique', () => {
+    if (typeof FLASHCARD_DATA !== 'undefined') {
+        const level3 = FLASHCARD_DATA.levels.find(l => l.id === 3);
+
+        if (level3) {
+            const ids = level3.flashcards.map(card => card.id);
+            const uniqueIds = new Set(ids);
+            assertEquals(ids.length, uniqueIds.size, 'All Level 3 card IDs should be unique');
+        }
+    }
+});
+
 // Quiz Tests
 runner.test('Quiz should generate correct number of questions', () => {
     const level = mockFlashcardData.levels[0];

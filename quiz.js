@@ -131,6 +131,57 @@ class LanguageQuiz {
         const config = languageConfig[this.currentLanguage];
         document.getElementById('quiz-title').textContent = config.title;
         document.getElementById('quiz-subtitle').textContent = config.subtitle;
+
+        // Re-render level buttons to match the levels available for this language
+        this.renderLevelButtons();
+    }
+
+    // Render level selection buttons dynamically based on the loaded language data
+    renderLevelButtons() {
+        const container = document.getElementById('quiz-level-buttons');
+        if (!container || typeof FLASHCARD_DATA === 'undefined') return;
+
+        container.innerHTML = '';
+
+        const levels = FLASHCARD_DATA.levels;
+
+        // If the previously selected level no longer exists, fall back to the first level
+        if (!levels.some(l => l.id === this.selectedLevel)) {
+            this.selectedLevel = levels[0] ? levels[0].id : 1;
+        }
+
+        levels.forEach(level => {
+            const button = document.createElement('button');
+            button.className = 'quiz-level-btn';
+            button.dataset.level = level.id;
+            if (level.id === this.selectedLevel) {
+                button.classList.add('active');
+            }
+
+            // "Level 1 - Basics" -> title "Level 1", description "Basics"
+            const parts = level.name.split(' - ');
+            const title = parts[0] || `Level ${level.id}`;
+            const desc = parts[1] || '';
+
+            const titleDiv = document.createElement('div');
+            titleDiv.className = 'level-title';
+            titleDiv.textContent = title;
+
+            const descDiv = document.createElement('div');
+            descDiv.className = 'level-desc';
+            descDiv.textContent = desc;
+
+            button.appendChild(titleDiv);
+            button.appendChild(descDiv);
+
+            button.addEventListener('click', (e) => {
+                container.querySelectorAll('.quiz-level-btn').forEach(b => b.classList.remove('active'));
+                e.currentTarget.classList.add('active');
+                this.selectedLevel = parseInt(e.currentTarget.dataset.level);
+            });
+
+            container.appendChild(button);
+        });
     }
 
     // Get the native language field name
@@ -288,14 +339,7 @@ class LanguageQuiz {
             });
         });
 
-        // Level selection
-        document.querySelectorAll('.quiz-level-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                document.querySelectorAll('.quiz-level-btn').forEach(b => b.classList.remove('active'));
-                e.currentTarget.classList.add('active');
-                this.selectedLevel = parseInt(e.currentTarget.dataset.level);
-            });
-        });
+        // Level selection buttons are created (with their own click handlers) in renderLevelButtons()
 
         // Number of questions
         document.getElementById('num-questions').addEventListener('change', (e) => {

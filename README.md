@@ -66,7 +66,7 @@ No build process or dependencies needed! 🎉
 
 ### Flashcards Mode
 1. **Select a language** using the language buttons (🇮🇳 Telugu, 🇪🇸 Spanish, 🇫🇷 French)
-2. **Choose a level** (Level 1 - Basics or Level 2 - Intermediate)
+2. **Choose a level** (e.g. Level 1 - Basics, Level 2 - Intermediate, Level 3 - Advanced for Telugu)
 3. **Filter by category** (optional) to focus on specific topics
 4. **Click the card** to flip and see the translation
 5. **Use navigation buttons** or arrow keys to move between cards
@@ -98,7 +98,7 @@ language/
 ├── style.css             # Main styles
 ├── quiz-style.css        # Quiz-specific styles
 ├── telugu/
-│   └── telugu-data.js    # Telugu vocabulary (200 words)
+│   └── telugu-data.js    # Telugu vocabulary (300 words)
 ├── hindi/
 │   └── hindi-data.js     # Hindi vocabulary (200 words)
 ├── spanish/
@@ -124,11 +124,11 @@ language/
 
 | Language | Level 1 | Level 2 | Level 3 | Total | Categories |
 |----------|---------|---------|---------|-------|------------|
-| 🇮🇳 Telugu  | 100 | 100 | - | 200 | 13 categories |
+| 🇮🇳 Telugu  | 100 | 100 | 100 (Advanced) | **300** | 20 categories |
 | 🇮🇳 Hindi   | 100 | 100 | 100 (Numbers 1-100) | **300** | 14 categories |
 | 🇪🇸 Spanish | 100 | 100 | - | 200 | 14 categories |
 | 🇫🇷 French  | 100 | 100 | - | 200 | 14 categories |
-| **Total** | **400** | **400** | **100** | **900** | - |
+| **Total** | **400** | **400** | **200** | **1000** | - |
 
 ### Categories Include:
 - Greetings & Polite Phrases

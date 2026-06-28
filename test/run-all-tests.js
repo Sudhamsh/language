@@ -18,14 +18,17 @@ const path = require('path');
         eval(teluguCode);
         const teluguData = window.FLASHCARD_DATA;
 
-        if (teluguData.levels.length === 2 &&
+        if (teluguData.levels.length === 3 &&
             teluguData.levels[0].flashcards.length === 100 &&
             teluguData.levels[1].flashcards.length === 100 &&
+            teluguData.levels[2].flashcards.length === 100 &&
             teluguData.levels[0].flashcards[0].id === 1 &&
             teluguData.levels[0].flashcards[99].id === 100 &&
             teluguData.levels[1].flashcards[0].id === 101 &&
-            teluguData.levels[1].flashcards[99].id === 200) {
-            console.log('  ✅ Telugu: 200 words, correct structure');
+            teluguData.levels[1].flashcards[99].id === 200 &&
+            teluguData.levels[2].flashcards[0].id === 201 &&
+            teluguData.levels[2].flashcards[99].id === 300) {
+            console.log('  ✅ Telugu: 300 words, correct structure');
             totalPassed++;
         } else {
             console.log('  ❌ Telugu: Invalid structure');
@@ -129,10 +132,10 @@ const path = require('path');
         console.log('✅ ALL TESTS PASSED!');
         console.log('');
         console.log('📝 Summary:');
-        console.log('   - Telugu: 200 words (Level 1: 100, Level 2: 100)');
+        console.log('   - Telugu: 300 words (Level 1: 100, Level 2: 100, Level 3: 100)');
         console.log('   - Spanish: 200 words (Level 1: 100, Level 2: 100)');
         console.log('   - French: 200 words (Level 1: 100, Level 2: 100)');
-        console.log('   - Total: 600 vocabulary words across 3 languages!');
+        console.log('   - Total: 700 vocabulary words!');
         process.exit(0);
     } else {
         console.log('❌ SOME TESTS FAILED');

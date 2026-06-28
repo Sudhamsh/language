@@ -19,48 +19,38 @@ function validateLanguage(name, path, fieldName) {
 
         const checks = [];
 
-        // Check 2 levels
-        if (data.levels.length === 2) {
-            checks.push('✓ 2 levels');
+        // At least one level
+        if (data.levels.length >= 1) {
+            checks.push(`✓ ${data.levels.length} level(s)`);
         } else {
-            checks.push(`✗ Expected 2 levels, got ${data.levels.length}`);
+            checks.push('✗ Expected at least 1 level, got 0');
             allValid = false;
         }
 
-        // Check Level 1: 100 cards, IDs 1-100
-        const level1 = data.levels[0];
-        if (level1.flashcards.length === 100) {
-            checks.push('✓ Level 1: 100 cards');
-        } else {
-            checks.push(`✗ Level 1: Expected 100 cards, got ${level1.flashcards.length}`);
-            allValid = false;
-        }
+        // Check each level: 100 cards with sequential IDs starting where the previous left off
+        data.levels.forEach((level, index) => {
+            const expectedStart = index * 100 + 1;
+            const expectedEnd = expectedStart + 99;
 
-        if (level1.flashcards[0].id === 1 && level1.flashcards[99].id === 100) {
-            checks.push('✓ Level 1: IDs 1-100');
-        } else {
-            checks.push(`✗ Level 1: Invalid ID range (${level1.flashcards[0].id}-${level1.flashcards[99].id})`);
-            allValid = false;
-        }
+            if (level.flashcards.length === 100) {
+                checks.push(`✓ Level ${index + 1}: 100 cards`);
+            } else {
+                checks.push(`✗ Level ${index + 1}: Expected 100 cards, got ${level.flashcards.length}`);
+                allValid = false;
+            }
 
-        // Check Level 2: 100 cards, IDs 101-200
-        const level2 = data.levels[1];
-        if (level2.flashcards.length === 100) {
-            checks.push('✓ Level 2: 100 cards');
-        } else {
-            checks.push(`✗ Level 2: Expected 100 cards, got ${level2.flashcards.length}`);
-            allValid = false;
-        }
+            const firstId = level.flashcards[0].id;
+            const lastId = level.flashcards[level.flashcards.length - 1].id;
+            if (firstId === expectedStart && lastId === expectedEnd) {
+                checks.push(`✓ Level ${index + 1}: IDs ${expectedStart}-${expectedEnd}`);
+            } else {
+                checks.push(`✗ Level ${index + 1}: Invalid ID range (${firstId}-${lastId}), expected ${expectedStart}-${expectedEnd}`);
+                allValid = false;
+            }
+        });
 
-        if (level2.flashcards[0].id === 101 && level2.flashcards[99].id === 200) {
-            checks.push('✓ Level 2: IDs 101-200');
-        } else {
-            checks.push(`✗ Level 2: Invalid ID range (${level2.flashcards[0].id}-${level2.flashcards[99].id})`);
-            allValid = false;
-        }
-
-        // Check for duplicates
-        const allWords = [...level1.flashcards, ...level2.flashcards].map(c => c[fieldName]);
+        // Check for duplicates across all levels
+        const allWords = data.levels.flatMap(l => l.flashcards).map(c => c[fieldName]);
         const uniqueWords = new Set(allWords);
         if (allWords.length === uniqueWords.size) {
             checks.push('✓ No duplicate words');
@@ -98,7 +88,7 @@ function validateLanguage(name, path, fieldName) {
     }
 }
 
-// Validate all three languages
+// Validate all languages
 validateLanguage('Telugu', 'telugu/telugu-data.js', 'telugu');
 validateLanguage('Spanish', 'spanish/spanish-data.js', 'spanish');
 validateLanguage('French', 'french/french-data.js', 'french');
@@ -110,15 +100,6 @@ console.log('');
 
 if (allValid) {
     console.log('✅ ALL DATA FILES ARE VALID!');
-    console.log('');
-    console.log('📝 Language Support:');
-    console.log('   🇮🇳 Telugu:  200 words (Level 1: 100, Level 2: 100)');
-    console.log('   🇪🇸 Spanish: 200 words (Level 1: 100, Level 2: 100)');
-    console.log('   🇫🇷 French:  200 words (Level 1: 100, Level 2: 100)');
-    console.log('   ─────────────────────────────────────────────────');
-    console.log('   📚 TOTAL:    600 vocabulary words');
-    console.log('');
-    console.log('🎉 French language support successfully added!');
     console.log('');
     console.log('📖 To test the application:');
     console.log('   1. Open index.html in a browser for flashcards');
